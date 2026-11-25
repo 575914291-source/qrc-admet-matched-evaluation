@@ -83,7 +83,6 @@ def allowed(path: Path) -> bool:
         "SUBMISSION_STRATEGY.md",
         "FIGURE_INDEX.md",
         "MINIMUM_REPORTING_CHECKLIST.md",
-        "JCI_SUBMISSION_CHECKLIST.md",
         "ZENODO_DOI_CHECKLIST.md",
         "LICENSE",
         "DATA_LICENSES.md",
