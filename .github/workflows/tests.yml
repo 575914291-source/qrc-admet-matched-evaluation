@@ -29,6 +29,7 @@ jobs:
           python -m src.audit_finite_shot
           python -m src.audit_low_data
           python -m src.audit_external
+          python -m src.analyze_continuous_transfer
           python -m src.audit_noise
           python -m src.audit_tuned_qrc
           python -m src.domain_audit

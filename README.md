@@ -6,6 +6,9 @@ Baselines**.
 
 Repository: <https://github.com/575914291-source/qrc-admet-matched-evaluation>
 
+Frozen submission snapshot:
+<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.0.0>
+
 The study tests whether a fixed five-qubit quantum reservoir adds predictive
 information beyond equal-input, equal-capacity classical nonlinear maps on the
 22 official TDC ADMET endpoints. It includes two classical bases, five
