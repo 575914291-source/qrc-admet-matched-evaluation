@@ -323,7 +323,7 @@ def build_supplement() -> Path:
         "Code repository: https://github.com/575914291-source/"
         "qrc-admet-matched-evaluation. Frozen submission release: "
         "https://github.com/575914291-source/"
-        "qrc-admet-matched-evaluation/releases/tag/v1.4.0.",
+        "qrc-admet-matched-evaluation/releases/tag/v1.5.0.",
     )
 
     document.add_heading("S1 Endpoint composition and analysis hierarchy", level=1)

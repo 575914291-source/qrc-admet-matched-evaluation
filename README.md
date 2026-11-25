@@ -7,7 +7,7 @@ Baselines**.
 Repository: <https://github.com/575914291-source/qrc-admet-matched-evaluation>
 
 Frozen submission snapshot:
-<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.4.0>
+<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.5.0>
 
 The reusable reporting requirements distilled from the study are listed in
 [`MINIMUM_REPORTING_CHECKLIST.md`](MINIMUM_REPORTING_CHECKLIST.md).

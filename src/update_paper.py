@@ -16,7 +16,7 @@ from src.config import PROJECT_ROOT, RESULTS_ROOT, TASKS
 
 
 SOURCE = PROJECT_ROOT / "templates" / "source_manuscript.docx"
-OUTPUT_ROOT = Path(r"D:\论文\qrc_admet\outputs")
+OUTPUT_ROOT = PROJECT_ROOT / "outputs"
 OUTPUT = OUTPUT_ROOT / "论文修订稿_v2_TDC完整实验.docx"
 ASSET_ROOT = RESULTS_ROOT / "manuscript"
 
@@ -577,7 +577,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[68],
-        "TDC官方归档可通过Harvard Dataverse文件4426004获取，SHA-256为bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部hERG数据来自Zenodo 5807719，BBB数据来自B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko骨架重叠、最近邻相似度和理化性质审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，冻结版本为v1.4.0，提交归档另附完整逐split预测和补充材料。复现包还包含五seed scaffold划分、五个随机映射、基座配置、联合门控、有限shots、低数据曲线、外部端点分解与校准、连续标签、独立pIC50回归、简化与电路级噪声、有限参数族、TOST敏感性、统计脚本、环境锁定和图形生成代码。MapLight参考实现及其MIT许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
+        "TDC官方归档可通过Harvard Dataverse文件4426004获取，SHA-256为bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部hERG数据来自Zenodo 5807719，BBB数据来自B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko骨架重叠、最近邻相似度和理化性质审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，冻结版本为v1.5.0，提交归档另附完整逐split预测和补充材料。复现包还包含五seed scaffold划分、五个随机映射、基座配置、联合门控、有限shots、低数据曲线、外部端点分解与校准、连续标签、独立pIC50回归、简化与电路级噪声、有限参数族、TOST敏感性、统计脚本、环境锁定和图形生成代码。MapLight参考实现及其MIT许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
     )
 
     table_1 = document.tables[0]

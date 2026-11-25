@@ -7,11 +7,12 @@ from docx import Document
 from docx.shared import Pt
 from docx.oxml.ns import qn
 
+from src.config import PROJECT_ROOT
 
-SOURCE = Path(r"D:\论文\qrc_admet\outputs\论文修订稿_v2_TDC完整实验.docx")
-OUTPUT = Path(
-    r"D:\论文\qrc_admet\outputs\Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
-)
+
+OUTPUT_ROOT = PROJECT_ROOT / "outputs"
+SOURCE = OUTPUT_ROOT / "论文修订稿_v2_TDC完整实验.docx"
+OUTPUT = OUTPUT_ROOT / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
 
 
 TEXT = {
