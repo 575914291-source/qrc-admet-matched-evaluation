@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 import pandas as pd
+from docx import Document
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,6 +58,33 @@ class ExtendedAnalysisTests(unittest.TestCase):
         }
         actual = {path.name for path in FIGURE_ROOT.glob("*.png")}
         self.assertTrue(expected.issubset(actual))
+
+    def test_jc_submission_package_is_formatted(self):
+        root = ROOT / "outputs" / "JCheminformatics_Submission"
+        expected = {
+            "Manuscript.docx",
+            "Additional_file_1.pdf",
+            "Figure_1.pdf",
+            "Figure_2.pdf",
+            "Figure_3.pdf",
+            "Figure_4.pdf",
+            "Cover_Letter_Draft.docx",
+        }
+        self.assertTrue(expected.issubset({path.name for path in root.iterdir()}))
+        document = Document(root / "Manuscript.docx")
+        self.assertTrue(document.sections[0]._sectPr.xpath("./w:lnNumType"))
+        self.assertGreaterEqual(
+            document.styles["Normal"].paragraph_format.line_spacing,
+            1.9,
+        )
+        shaded = sum(
+            1
+            for table in document.tables
+            for row in table.rows
+            for cell in row.cells
+            if cell._tc.xpath("./w:tcPr/w:shd")
+        )
+        self.assertEqual(shaded, 0)
 
 
 if __name__ == "__main__":

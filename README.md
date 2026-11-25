@@ -75,6 +75,7 @@ python -m src.make_manuscript_assets
 python -m src.build_design_figure
 python -m src.build_extended_tables
 python -m src.build_extended_figures
+python -m src.build_jc_submission
 python -m src.audit_noise
 python -m src.audit_tuned_qrc
 python -m src.domain_audit
@@ -124,6 +125,7 @@ python -m src.build_extended_figures
 python -m src.update_paper
 python -m src.update_paper_en
 python -m src.build_supplement
+python -m src.build_jc_submission
 python -m src.package_submission
 python -m src.update_delivery_checksums
 ```
@@ -163,6 +165,8 @@ runner receives `--overwrite`.
 - `src/build_extended_tables.py` and `src/build_extended_figures.py`: manuscript
   tables and the added publication figures.
 - `src/build_design_figure.py`: study-design schematic.
+- `src/build_jc_submission.py`: journal-formatted manuscript, additional file,
+  separate figure files, and cover-letter draft for Journal of Cheminformatics.
 - `src/audit_*.py`: independent checks of the released result artefacts.
 - `templates/source_manuscript.docx`: source document used by the manuscript
   generator, retained so the submitted DOCX can be rebuilt portably.

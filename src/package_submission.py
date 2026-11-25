@@ -77,6 +77,7 @@ def allowed(path: Path) -> bool:
         "HIGHLIGHTS.md",
         "COVER_LETTER.md",
         "SUBMISSION_STRATEGY.md",
+        "JCI_SUBMISSION_CHECKLIST.md",
         "LICENSE",
         "DATA_LICENSES.md",
         "CITATION.cff",
