@@ -107,6 +107,21 @@ def _normalize_fonts(document: Document) -> None:
             fonts.set(qn("w:cs"), "Times New Roman")
 
 
+def _apply_jc_specific_labels(document: Document) -> None:
+    for paragraph in document.paragraphs:
+        if paragraph.text.strip() == "Data and Code Availability":
+            paragraph.text = "Availability of data and materials"
+        elif paragraph.text.startswith(
+            "The official TDC archive is available as Harvard Dataverse"
+        ):
+            paragraph.text = (
+                paragraph.text.rstrip()
+                + " Additional file 1 contains the supplementary methods, "
+                "extended tables, robustness figures, and independent "
+                "continuous-regression results."
+            )
+
+
 def _write_cover_letter() -> Path:
     source = PROJECT_ROOT / "COVER_LETTER.md"
     text = source.read_text(encoding="utf-8").strip().splitlines()
@@ -145,6 +160,7 @@ def build_submission_package() -> dict[str, object]:
     _remove_table_shading(document)
     _add_continuous_line_numbers(document)
     _apply_submission_spacing(document)
+    _apply_jc_specific_labels(document)
     _normalize_fonts(document)
     document.save(MANUSCRIPT)
 

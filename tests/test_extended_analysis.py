@@ -85,6 +85,10 @@ class ExtendedAnalysisTests(unittest.TestCase):
             if cell._tc.xpath("./w:tcPr/w:shd")
         )
         self.assertEqual(shaded, 0)
+        text = "\n".join(paragraph.text for paragraph in document.paragraphs)
+        self.assertIn("Availability of data and materials", text)
+        self.assertIn("Additional file 1", text)
+        self.assertNotIn("[Author", text)
 
 
 if __name__ == "__main__":
