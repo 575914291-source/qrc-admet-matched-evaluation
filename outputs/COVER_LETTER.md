@@ -34,7 +34,10 @@ multiplicity correction; it did not replicate on B3DB logBB and is reported
 explicitly as a ranking-transfer analysis rather than an independent regression
 cohort. A separate scaffold-disjoint ToxTree pIC50 regression also produced no
 significant QRC advantage after correction across the complete exploratory
-comparison family.
+comparison family. An explicit Qiskit/Aer circuit audit added transpiled gate
+depolarization and readout-flip errors; rank preservation remained high, but
+readout amplitudes contracted substantially and no hardware-robustness claim is
+made.
 
 The manuscript includes public-data provenance, a full experiment audit,
 split-level predictions, and a reproduction package. Versioned code and result

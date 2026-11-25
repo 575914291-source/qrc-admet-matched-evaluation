@@ -58,6 +58,16 @@ MAP_SEEDS = (20261101, 20261102, 20261103, 20261104, 20261105)
 GATE_WEIGHTS = (0.0, 0.25, 0.5, 0.75, 1.0)
 BASES = ("extra_trees", "catboost")
 FAMILIES = ("qrc", "real_orthogonal", "random_fourier")
+CIRCUIT_TASKS = (
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo",
+)
 PRIMARY_FAMILY = "qrc"
 PRIMARY_MATCHED = "real_orthogonal"
 BOOTSTRAP_REPLICATES = 1000

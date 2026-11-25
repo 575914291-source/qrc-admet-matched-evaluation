@@ -1,0 +1,79 @@
+{
+  "base": "catboost",
+  "split_seed": 1,
+  "sample_size_per_task": 32,
+  "tasks": {
+    "bbb_martins": {
+      "kind": "classification",
+      "metric": "AUROC",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": 16,
+      "path": "data\\circuit_noise\\prepared\\bbb_martins.npz"
+    },
+    "herg": {
+      "kind": "classification",
+      "metric": "AUROC",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": 16,
+      "path": "data\\circuit_noise\\prepared\\herg.npz"
+    },
+    "caco2_wang": {
+      "kind": "regression",
+      "metric": "MAE",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": null,
+      "path": "data\\circuit_noise\\prepared\\caco2_wang.npz"
+    },
+    "ld50_zhu": {
+      "kind": "regression",
+      "metric": "MAE",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": null,
+      "path": "data\\circuit_noise\\prepared\\ld50_zhu.npz"
+    },
+    "ppbr_az": {
+      "kind": "regression",
+      "metric": "MAE",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": null,
+      "path": "data\\circuit_noise\\prepared\\ppbr_az.npz"
+    },
+    "dili": {
+      "kind": "classification",
+      "metric": "AUROC",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": 16,
+      "path": "data\\circuit_noise\\prepared\\dili.npz"
+    },
+    "cyp2d6_veith": {
+      "kind": "classification",
+      "metric": "AUPRC",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": 16,
+      "path": "data\\circuit_noise\\prepared\\cyp2d6_veith.npz"
+    },
+    "vdss_lombardo": {
+      "kind": "regression",
+      "metric": "Spearman",
+      "base": "catboost",
+      "split_seed": 1,
+      "sample_size": 32,
+      "positive": null,
+      "path": "data\\circuit_noise\\prepared\\vdss_lombardo.npz"
+    }
+  }
+}

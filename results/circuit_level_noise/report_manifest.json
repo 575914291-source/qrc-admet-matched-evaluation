@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo"
+  ],
+  "profiles": [
+    "ideal_circuit",
+    "noisy_low",
+    "noisy_medium",
+    "noisy_high"
+  ],
+  "states_per_task": 32,
+  "maps": 5,
+  "base_representation": "MapLight-CatBoost PCA",
+  "analysis": "Circuit-level readout fidelity under gate depolarizing and readout bit-flip errors; this is not a hardware experiment."
+}

@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "files": 8,
+  "tasks": [
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo"
+  ],
+  "profiles": [
+    "ideal",
+    "low",
+    "medium",
+    "high"
+  ],
+  "task_records": {
+    "bbb_martins": {
+      "ideal_circuit_rmse": 0.005824592586216039,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "herg": {
+      "ideal_circuit_rmse": 0.006020461336565896,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "caco2_wang": {
+      "ideal_circuit_rmse": 0.0062596817171913744,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "ld50_zhu": {
+      "ideal_circuit_rmse": 0.006490784860209857,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "ppbr_az": {
+      "ideal_circuit_rmse": 0.006346093951389864,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "dili": {
+      "ideal_circuit_rmse": 0.006269319960025806,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "cyp2d6_veith": {
+      "ideal_circuit_rmse": 0.007031423684406329,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    },
+    "vdss_lombardo": {
+      "ideal_circuit_rmse": 0.006308892858724707,
+      "states": 32,
+      "maps": 5,
+      "trotter_reps": 8
+    }
+  },
+  "checks": [
+    "all exact and circuit feature arrays are finite",
+    "all readouts remain bounded in [-1, 1]",
+    "ideal Trotterized circuits reproduce matrix readouts",
+    "five maps and 32 stratified test states are present per task"
+  ],
+  "scope": "Density-matrix Aer simulation with depolarizing gate noise and analytic independent readout flips; no physical hardware."
+}

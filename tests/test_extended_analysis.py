@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import unittest
 from pathlib import Path
 
@@ -55,6 +56,7 @@ class ExtendedAnalysisTests(unittest.TestCase):
             "figure3_external_diagnostics.png",
             "figure4_primary_effects.png",
             "figureS4_external_regression.png",
+            "figureS5_circuit_noise.png",
         }
         actual = {path.name for path in FIGURE_ROOT.glob("*.png")}
         self.assertTrue(expected.issubset(actual))
@@ -89,6 +91,30 @@ class ExtendedAnalysisTests(unittest.TestCase):
         self.assertIn("Availability of data and materials", text)
         self.assertIn("Additional file 1", text)
         self.assertNotIn("[Author", text)
+
+    def test_circuit_level_noise_results_are_complete(self):
+        summary = pd.read_csv(
+            ROOT / "results" / "circuit_level_noise" / "summary.csv"
+        )
+        self.assertEqual(len(summary), 32)
+        self.assertEqual(summary.task.nunique(), 8)
+        self.assertEqual(
+            set(summary.profile),
+            {"ideal_circuit", "noisy_low", "noisy_medium", "noisy_high"},
+        )
+        ideal = summary[summary.profile == "ideal_circuit"]
+        self.assertTrue((ideal.spearman > 0.9995).all())
+        high = summary[summary.profile == "noisy_high"]
+        self.assertTrue((high.signal_slope < 0.5).all())
+        audit = json.loads(
+            (
+                ROOT
+                / "results"
+                / "audit"
+                / "circuit_level_noise_audit.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(audit["status"], "passed")
 
 
 if __name__ == "__main__":

@@ -19,7 +19,8 @@ an external hERG cohort, an external B3DB blood-brain-barrier cohort, and a
 descriptive chemical-space audit. A separate exploratory analysis ranks the
 binary-model outputs against continuous pIC50 and logBB labels available in
 those external sources; it is explicitly not treated as an independently
-trained regression cohort.
+trained regression cohort. A supplementary Qiskit/Aer audit evaluates explicit
+transpiled circuits with gate depolarization and readout-flip errors.
 
 ## What is included
 
@@ -71,6 +72,8 @@ python -m src.analyze_external_diagnostics
 python -m src.analyze_tost_sensitivity
 python -m src.report_external_regression
 python -m src.audit_external_regression
+python -m src.report_circuit_level_noise
+python -m src.audit_circuit_level_noise
 python -m src.make_manuscript_assets
 python -m src.build_design_figure
 python -m src.build_extended_tables
@@ -86,9 +89,9 @@ python -m src.update_delivery_checksums
 These commands verify 220 primary endpoint runs, 80 finite-shot files (240
 results), 80 low-data files (400 fraction results), 20 external runs, 80 noise
 files (240 results), 80 bounded-family-search runs, 10 independent continuous
-regression runs, the chemical-space audit, and the continuous-label transfer
-audit. They require the released result artefacts but not the dense feature
-cache.
+regression runs, 8 circuit-level noise files, the chemical-space audit, and the
+continuous-label transfer audit. They require the released result artefacts but
+not the dense feature cache.
 
 ## Reproduce from raw data
 
@@ -112,6 +115,9 @@ python -m src.analyze_tost_sensitivity
 python -m src.run_external_regression --bases extra_trees catboost --seeds 1 2 3 4 5
 python -m src.report_external_regression
 python -m src.audit_external_regression
+python -m src.prepare_circuit_noise --sample-size 32
+python -m src.report_circuit_level_noise
+python -m src.audit_circuit_level_noise
 python -m src.run_noise --workers 4
 python -m src.audit_noise
 python -m src.run_tuned_qrc --workers 4
@@ -132,6 +138,19 @@ python -m src.update_delivery_checksums
 
 Every stage is resumable. Existing split files are skipped unless the relevant
 runner receives `--overwrite`.
+
+Circuit-level generation uses an optional Qiskit environment because Qiskit 2.6
+requires NumPy 2, whereas the primary benchmark pins NumPy 1.26 for RDKit
+2023.09.6:
+
+```powershell
+python -m venv .venv-qiskit
+.\.venv-qiskit\Scripts\Activate.ps1
+python -m pip install -r requirements-qiskit.txt
+python -m src.run_circuit_level_noise
+```
+
+The committed circuit-level arrays and report can be audited without Qiskit.
 
 ## Main code map
 
@@ -154,6 +173,12 @@ runner receives `--overwrite`.
 - `src/report_external_regression.py` and
   `src/audit_external_regression.py`: paired inference and integrity checks for
   the continuous external cohort.
+- `src/prepare_circuit_noise.py`: fixed CatBoost-PCA test-state sampling for the
+  optional circuit-level audit.
+- `src/run_circuit_level_noise.py`: explicit Qiskit/Aer circuits with
+  Lie-Trotter evolution, gate depolarization, and readout flips.
+- `src/report_circuit_level_noise.py` and
+  `src/audit_circuit_level_noise.py`: readout-fidelity reporting and checks.
 - `src/domain_audit.py`: exact overlap, Murcko-scaffold overlap,
   nearest-neighbour similarity, and descriptive subgroup audit.
 - `src/analyze_chemical_space.py`: RDKit descriptor distributions and
@@ -210,6 +235,12 @@ prospective validation cohorts. The reported inference is paired by test
 scaffold. Exact simulation is used deliberately to isolate circuit
 expressivity; finite-shot and depolarizing analyses are sensitivity checks,
 not physical-hardware validation.
+
+The Qiskit/Aer audit uses transpiled five-qubit circuits, eight Lie-Trotter
+steps, synthetic gate depolarization, and independent readout flips. It tests
+readout fidelity, not hardware behavior. It omits drift, crosstalk, leakage,
+connectivity, and physical scheduling, and does not retrain downstream models
+on circuit-noisy features.
 
 The continuous-label analysis ranks outputs from models trained on binary TDC
 labels. Its hERG component covers the full 293-molecule external cohort, while

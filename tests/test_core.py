@@ -39,6 +39,9 @@ class ReservoirTests(unittest.TestCase):
         orth = quadratic_features(latent, real_orthogonal_readouts(9))
         self.assertTrue(np.isfinite(qrc).all())
         self.assertTrue(np.isfinite(orth).all())
+        readout = qrc_readouts(9)
+        self.assertIsNotNone(readout.hamiltonian)
+        self.assertTrue(np.allclose(readout.hamiltonian, readout.hamiltonian.conj().T))
 
     def test_finite_shot_features_converge(self) -> None:
         latent = np.random.default_rng(12).normal(size=(20, 32))

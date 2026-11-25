@@ -60,6 +60,7 @@ def allowed(path: Path) -> bool:
         "results/external_continuous",
         "results/external_diagnostics",
         "results/external_regression",
+        "results/circuit_level_noise",
         "results/noise",
         "results/tuned_qrc",
         "results/combination",
@@ -67,6 +68,7 @@ def allowed(path: Path) -> bool:
         "data/tdc_official",
         "data/archives",
         "data/external",
+        "data/circuit_noise",
         "outputs",
     }
     if any(text == prefix or text.startswith(prefix + "/") for prefix in top_levels):
@@ -85,6 +87,7 @@ def allowed(path: Path) -> bool:
         "DATA_LICENSES.md",
         "CITATION.cff",
         "requirements.txt",
+        "requirements-qiskit.txt",
         "data/PROVENANCE.md",
         "data/cache/smiles.json",
         "data/cache/molecule_groups.json",

@@ -42,8 +42,8 @@ The final "Availability of data and materials" section should provide:
 - Project name: QRC-ADMET matched evaluation.
 - Project home:
   https://github.com/575914291-source/qrc-admet-matched-evaluation
-- Archived version identifier: GitHub release `v1.1.0` at
-  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.1.0
+- Archived version identifier: GitHub release `v1.3.0` at
+  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.3.0
 - Operating systems: Windows, Linux, or macOS.
 - Programming language: Python 3.11.
 - Dependencies: `requirements.txt`.
@@ -64,7 +64,7 @@ submission.
 4. Completed cover letter.
 
 The journal permits a review PDF in addition to editable source files, but the
-editable DOCX remains mandatory. The current 18-page typeset PDF is a review or
+editable DOCX remains mandatory. The current 17-page typeset PDF is a review or
 preprint version, not the journal-formatted manuscript.
 
 ## Final checks

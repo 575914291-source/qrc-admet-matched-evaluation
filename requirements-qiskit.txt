@@ -1,0 +1,4 @@
+# Optional circuit-level noise environment. Qiskit 2.6 requires NumPy >= 2,
+# while the primary benchmark pins NumPy 1.26 for RDKit 2023.09.6.
+qiskit==2.6.2
+qiskit-aer==0.18.4

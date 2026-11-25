@@ -8,4 +8,5 @@
 - Continuous-label rank transfer produced only an unadjusted CatBoost/hERG candidate signal, with no effect after correction across all exploratory comparisons.
 - External effect decomposition, calibration, chemical-space visualization, and an independent pIC50 regression bound the local signal.
 - A scaffold-disjoint, directly trained ToxTree pIC50 cohort also showed no corrected QRC advantage on either base.
+- Explicit Qiskit/Aer circuits showed strong readout attenuation under gate and readout errors while retaining high feature-rank correlation.
 

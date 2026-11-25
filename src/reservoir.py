@@ -13,6 +13,7 @@ class ReadoutMap:
     seed: int
     matrices: np.ndarray
     unitary: np.ndarray | None = None
+    hamiltonian: np.ndarray | None = None
 
 
 def _pauli_operators(n_qubits: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -98,7 +99,13 @@ def qrc_readouts(
         )
     )
     matrices = 0.5 * (matrices + np.swapaxes(matrices, 1, 2))
-    return ReadoutMap("qrc", seed, matrices, unitary=unitary)
+    return ReadoutMap(
+        "qrc",
+        seed,
+        matrices,
+        unitary=unitary,
+        hamiltonian=hamiltonian,
+    )
 
 
 def real_orthogonal_readouts(seed: int, n_qubits: int = 5) -> ReadoutMap:

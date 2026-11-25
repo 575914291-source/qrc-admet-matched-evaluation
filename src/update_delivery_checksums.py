@@ -40,6 +40,7 @@ FILES = (
     "补充图S1_低数据曲线.pdf",
     "补充图S2_外部端点效应.pdf",
     "补充图S3_模拟噪声敏感性.pdf",
+    "Supplementary_FigureS5_Circuit_Noise.pdf",
 )
 
 

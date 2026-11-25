@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software or the associated benchmark, cite the manuscript and this repository."
 title: "QRC-ADMET matched evaluation"
-abstract: "Code and locked results for a matched evaluation of fixed five-qubit quantum reservoir residuals on 22 TDC ADMET endpoints, including finite-shot, source-dependence, and continuous external-regression analyses."
+abstract: "Code and locked results for a matched evaluation of fixed five-qubit quantum reservoir residuals on 22 TDC ADMET endpoints, including finite-shot, circuit-level Aer noise, source-dependence, and continuous external-regression analyses."
 type: software
 authors:
   - name: "QRC-ADMET contributors"
@@ -17,4 +17,5 @@ keywords:
   - reproducibility
   - Therapeutics Data Commons
   - external validation
+  - circuit-level noise
   - negative results

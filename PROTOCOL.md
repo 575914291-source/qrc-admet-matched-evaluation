@@ -143,6 +143,24 @@ heads are retrained on the noisy features. This is a controlled simulation and
 does not model gate-specific error, readout crosstalk, leakage, or hardware
 connectivity.
 
+A supplementary circuit-level readout audit uses Qiskit 2.6.2 and Aer 0.18.4.
+For each of the same eight representative endpoints, 32 stratified CatBoost-PCA
+test states are sampled with split seed 1. Five reservoir maps are represented
+by explicit five-qubit circuits: 32-dimensional amplitude preparation, an
+eight-step Lie-Trotter evolution of the fixed Hamiltonian, and one all-qubit
+Z-basis measurement. The transpiled circuits have depth 81 and about 136
+operations. Aer density-matrix simulation uses three fixed profiles:
+
+1. low: 1q depolarizing 0.0005, 2q depolarizing 0.005, readout flip 0.005;
+2. medium: 1q depolarizing 0.001, 2q depolarizing 0.010, readout flip 0.010;
+3. high: 1q depolarizing 0.002, 2q depolarizing 0.020, readout flip 0.020.
+
+The audit compares explicit-circuit readouts with the matrix implementation,
+including eight-step Trotter error. It is a feature-fidelity study and does not
+retrain the downstream predictor on circuit-noisy features. It does not model
+leakage, crosstalk, drift, device connectivity, or a hardware measurement
+schedule and is not a physical-hardware experiment.
+
 The bounded reservoir-family search compares five prespecified QRC parameter
 settings against five real-orthogonal candidate groups. Each candidate is a
 five-map ensemble. Selection uses TDC validation only, and the test set is used

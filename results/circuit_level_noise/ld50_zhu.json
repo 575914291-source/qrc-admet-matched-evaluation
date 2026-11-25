@@ -1,0 +1,89 @@
+{
+  "task": "ld50_zhu",
+  "states": 32,
+  "maps": 5,
+  "trotter_reps": 8,
+  "evolution_time": 0.5,
+  "profiles": {
+    "low": {
+      "one_qubit_depolarizing": 0.0005,
+      "two_qubit_depolarizing": 0.005,
+      "readout_flip": 0.005
+    },
+    "medium": {
+      "one_qubit_depolarizing": 0.001,
+      "two_qubit_depolarizing": 0.01,
+      "readout_flip": 0.01
+    },
+    "high": {
+      "one_qubit_depolarizing": 0.002,
+      "two_qubit_depolarizing": 0.02,
+      "readout_flip": 0.02
+    }
+  },
+  "ideal_circuit_rmse_to_exact": 0.006490784860209857,
+  "ideal_circuit_max_error": 0.046909624732525884,
+  "gate_records": [
+    {
+      "map_seed": 20261101,
+      "depth": 81,
+      "size": 136,
+      "operation_counts": {
+        "cx": 26,
+        "u1": 4,
+        "u2": 15,
+        "u3": 49,
+        "rzz": 40
+      }
+    },
+    {
+      "map_seed": 20261102,
+      "depth": 81,
+      "size": 136,
+      "operation_counts": {
+        "cx": 26,
+        "u1": 4,
+        "u2": 15,
+        "u3": 49,
+        "rzz": 40
+      }
+    },
+    {
+      "map_seed": 20261103,
+      "depth": 81,
+      "size": 136,
+      "operation_counts": {
+        "cx": 26,
+        "u1": 4,
+        "u2": 15,
+        "u3": 49,
+        "rzz": 40
+      }
+    },
+    {
+      "map_seed": 20261104,
+      "depth": 81,
+      "size": 136,
+      "operation_counts": {
+        "cx": 26,
+        "u1": 4,
+        "u2": 15,
+        "u3": 49,
+        "rzz": 40
+      }
+    },
+    {
+      "map_seed": 20261105,
+      "depth": 81,
+      "size": 136,
+      "operation_counts": {
+        "cx": 26,
+        "u1": 4,
+        "u2": 15,
+        "u3": 49,
+        "rzz": 40
+      }
+    }
+  ],
+  "elapsed_seconds": 9.206745147705078
+}

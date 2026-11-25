@@ -23,6 +23,7 @@ DOMAIN_ROOT = RESULTS_ROOT / "domain_audit"
 DIAGNOSTIC_ROOT = RESULTS_ROOT / "external_diagnostics"
 REPORT_ROOT = RESULTS_ROOT / "report"
 REGRESSION_ROOT = RESULTS_ROOT / "external_regression"
+CIRCUIT_ROOT = RESULTS_ROOT / "circuit_level_noise"
 
 
 def _sha256(path: Path) -> str:
@@ -190,6 +191,18 @@ def _build_hash_manifest() -> pd.DataFrame:
             "Independent hERG regression",
             REGRESSION_ROOT / "comparisons.csv",
         ),
+        (
+            "Circuit-level noise summary",
+            CIRCUIT_ROOT / "summary.csv",
+        ),
+        (
+            "Circuit-level noise figure",
+            FIGURE_ROOT / "figureS5_circuit_noise.pdf",
+        ),
+        (
+            "Qiskit environment lock",
+            PROJECT_ROOT / "requirements-qiskit.txt",
+        ),
         ("Study-design figure", FIGURE_ROOT / "figure1_design.pdf"),
         ("Chemical-space figure", FIGURE_ROOT / "figure2_chemical_space.pdf"),
         (
@@ -260,6 +273,10 @@ def build_supplement() -> Path:
         REGRESSION_ROOT / "comparisons.csv",
         encoding="utf-8-sig",
     )
+    circuit_results = pd.read_csv(
+        CIRCUIT_ROOT / "summary.csv",
+        encoding="utf-8-sig",
+    )
     hashes = _build_hash_manifest()
 
     document = Document()
@@ -297,8 +314,9 @@ def build_supplement() -> Path:
         "This supplement contains endpoint composition, analysis hierarchy, "
         "prior-study comparison, chemical-space audits, external effect decomposition "
         "and calibration, multiplicity sensitivity, independent continuous regression, "
-        "data provenance, and reproduction assets. It uses the same locked predictions "
-        "and does not introduce label-based model selection.",
+        "circuit-level noise sensitivity, data provenance, and reproduction assets. It "
+        "uses the same locked predictions and does not introduce label-based model "
+        "selection.",
     )
     _paragraph(
         document,
@@ -536,7 +554,6 @@ def build_supplement() -> Path:
         "method. Confidence intervals are shown for AUROC/AUPRC.",
     )
 
-    document.add_page_break()
     calibration_rows = [["Cohort", "Base", "Method", "Mean p", "Observed", "AUROC", "AUPRC", "Brier", "Slope", "Intercept"]]
     for row in calibration.itertuples(index=False):
         calibration_rows.append(
@@ -680,7 +697,79 @@ def build_supplement() -> Path:
         "the matched orthogonal and residual-free base branches.",
     )
 
-    document.add_heading("S7 Release inventory and reproduction", level=1)
+    document.add_heading("S7 Circuit-level Aer noise audit", level=1)
+    _paragraph(
+        document,
+        "The simplified depolarizing sensitivity model was complemented by an explicit "
+        "Qiskit circuit audit. Each state used 32-dimensional amplitude preparation, an "
+        "eight-step Lie-Trotter evolution of the fixed Hamiltonian, and an all-qubit "
+        "Z-basis measurement. The sampled panel covered eight representative endpoints, "
+        "32 stratified CatBoost-PCA test states per endpoint, and five reservoir maps. "
+        "Transpiled circuits had depth 81 and about 136 operations. Aer density-matrix "
+        "simulation included one-qubit and two-qubit depolarizing gate errors plus "
+        "independent readout bit-flip errors. This is a circuit-level simulation, not a "
+        "physical-hardware experiment.",
+    )
+    circuit_table = [[
+        "Error profile",
+        "1q depol.",
+        "2q depol.",
+        "Readout flip",
+        "Norm. RMSE",
+        "Spearman",
+        "Signal slope",
+    ]]
+    profile_labels = {
+        "ideal_circuit": "Ideal circuit",
+        "noisy_low": "Low",
+        "noisy_medium": "Medium",
+        "noisy_high": "High",
+    }
+    profile_values = {
+        "ideal_circuit": ("0", "0", "0"),
+        "noisy_low": ("0.0005", "0.005", "0.005"),
+        "noisy_medium": ("0.001", "0.010", "0.010"),
+        "noisy_high": ("0.002", "0.020", "0.020"),
+    }
+    for profile in ("ideal_circuit", "noisy_low", "noisy_medium", "noisy_high"):
+        subset = circuit_results[circuit_results.profile == profile]
+        one_qubit, two_qubit, readout = profile_values[profile]
+        circuit_table.append(
+            [
+                profile_labels[profile],
+                one_qubit,
+                two_qubit,
+                readout,
+                f"{subset.normalized_rmse.mean():.3f}",
+                f"{subset.spearman.min():.4f}-{subset.spearman.max():.4f}",
+                f"{subset.signal_slope.min():.3f}-{subset.signal_slope.max():.3f}",
+            ]
+        )
+    _add_table(
+        document,
+        circuit_table,
+        [1.05, 0.72, 0.72, 0.8, 0.8, 1.15, 1.1],
+        font_size=7.4,
+    )
+    _caption(
+        document,
+        "Table S11. Circuit-level readout fidelity across eight endpoints and five "
+        "reservoir maps. RMSE is normalized by exact-feature RMS; the Spearman range is "
+        "across endpoint summaries, each computed over 160 map-state observations.",
+    )
+    _figure(
+        document,
+        FIGURE_ROOT / "figureS5_circuit_noise.png",
+        6.2,
+        "Supplementary Figure S5. Circuit-level readout fidelity under transpiled gate and readout errors.",
+    )
+    _caption(
+        document,
+        "Figure S5. Normalized readout RMSE and Spearman correlation under ideal, low, "
+        "medium, and high circuit-level error profiles. Each point is one endpoint.",
+    )
+
+    document.add_heading("S8 Release inventory and reproduction", level=1)
     inventory_rows = [
         ["Artefact", "Unit", "Count"],
         ["Primary endpoint runs", "base x endpoint x split", "220"],
@@ -693,6 +782,7 @@ def build_supplement() -> Path:
         ["Noise results", "noise settings", "240"],
         ["Bounded-family search runs", "result files", "80"],
         ["Independent regression runs", "base x model seed", "10"],
+        ["Circuit-level noise files", "endpoint result files", "8"],
         ["Primary report rows", "metrics_by_seed.csv", "1,760"],
     ]
     _add_table(
@@ -703,7 +793,7 @@ def build_supplement() -> Path:
     )
     _caption(
         document,
-        "Table S11. Released result inventory. Full split-level records are supplied as "
+        "Table S12. Released result inventory. Full split-level records are supplied as "
         "CSV or NPZ files in the GitHub release and submission archive.",
     )
     commands = [
@@ -721,6 +811,10 @@ def build_supplement() -> Path:
         "python -m src.analyze_tost_sensitivity",
         "python -m src.report_external_regression",
         "python -m src.audit_external_regression",
+        "python -m src.prepare_circuit_noise --sample-size 32",
+        "python -m src.run_circuit_level_noise",
+        "python -m src.report_circuit_level_noise",
+        "python -m src.audit_circuit_level_noise",
         "python -m src.build_extended_tables",
         "python -m src.build_extended_figures",
     ]
