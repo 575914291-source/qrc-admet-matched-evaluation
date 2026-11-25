@@ -9,6 +9,9 @@ Repository: <https://github.com/575914291-source/qrc-admet-matched-evaluation>
 Frozen submission snapshot:
 <https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.4.0>
 
+The reusable reporting requirements distilled from the study are listed in
+[`MINIMUM_REPORTING_CHECKLIST.md`](MINIMUM_REPORTING_CHECKLIST.md).
+
 The study tests whether a fixed five-qubit quantum reservoir adds predictive
 information beyond equal-input, equal-capacity classical nonlinear maps on the
 22 official TDC ADMET endpoints. It includes two classical bases, five
@@ -79,6 +82,7 @@ python -m src.build_design_figure
 python -m src.build_extended_tables
 python -m src.build_extended_figures
 python -m src.build_jc_submission
+python -m src.audit_manuscript
 python -m src.audit_noise
 python -m src.audit_tuned_qrc
 python -m src.domain_audit
@@ -131,6 +135,7 @@ python -m src.build_extended_figures
 python -m src.update_paper
 python -m src.update_paper_en
 python -m src.build_supplement
+python -m src.audit_manuscript
 python -m src.build_jc_submission
 python -m src.package_submission
 python -m src.update_delivery_checksums

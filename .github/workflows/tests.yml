@@ -41,6 +41,10 @@ jobs:
           python -m src.build_design_figure
           python -m src.build_extended_tables
           python -m src.build_extended_figures
+          python -m src.update_paper
+          python -m src.update_paper_en
+          python -m src.build_supplement
+          python -m src.audit_manuscript
           python -m src.build_jc_submission
           python -m src.audit_noise
           python -m src.audit_tuned_qrc

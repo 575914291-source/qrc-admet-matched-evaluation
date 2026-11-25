@@ -22,6 +22,7 @@ FILES = (
     "JCheminformatics_Submission/Figure_3.pdf",
     "JCheminformatics_Submission/Figure_4.pdf",
     "JCheminformatics_Submission/Cover_Letter_Draft.docx",
+    "MANUSCRIPT_QA.json",
     "补充材料_qrc_admet_代码与结果_最终.zip",
     "补充材料_qrc_admet_代码与结果_最终.zip.sha256",
     "qrc_admet_reproduction_v1.4.0.zip",

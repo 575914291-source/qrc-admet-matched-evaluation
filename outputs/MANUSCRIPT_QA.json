@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "failures": [],
+  "main": {
+    "paragraphs": 137,
+    "tables": 6,
+    "figures": 4,
+    "abstract_words": 250,
+    "citation_range": [
+      1,
+      31
+    ],
+    "figure_captions": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true
+    },
+    "table_captions": {
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true,
+      "5": true,
+      "6": true
+    },
+    "image_alt_texts": [
+      "Study-design schematic from molecular data and two classical bases through matched quantum, orthogonal, and Fourier branches to scaffold-level evidence; the lower band shows that 15 Pauli readouts form constrained real quadratic features.",
+      "Chemical-space projection and molecular-weight, cLogP, and TPSA distributions for TDC, external hERG, and B3DB molecules.",
+      "External hERG and B3DB effect decomposition and CatBoost calibration curves.",
+      "Endpoint-level paired differences of ungated QRC versus matched orthogonal quadratic features across all 22 TDC ADMET endpoints."
+    ]
+  },
+  "supplement": {
+    "paragraphs": 59,
+    "tables": 12,
+    "figures": 5
+  },
+  "checks": [
+    "English manuscript contains no CJK text",
+    "abstract is within 250 words",
+    "all main figure and table captions are present",
+    "all cited reference numbers fall within the reference list",
+    "all main images have alt text",
+    "no placeholder or explicitly biased wording remains",
+    "no doubled spaces remain in English paragraph text"
+  ]
+}

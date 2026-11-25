@@ -19,16 +19,15 @@ TEXT = {
     1: "A Reproducible Benchmark of Fixed Quantum Reservoir Features on TDC ADMET",
     2: "Abstract",
     3: (
-        "Reported gains from quantum molecular features are difficult to interpret "
+        "Reported gains from quantum reservoir computing (QRC) are difficult to interpret "
         "because matched classical controls, multiple random realizations, strong "
         "base models, and cross-source validation are rarely combined. We establish "
-        "a reproducible matched evaluation workflow on all 22 official TDC ADMET "
+        "a reproducible matched evaluation workflow on all 22 Therapeutics Data Commons (TDC) ADMET "
         "endpoints. We compare exactly "
         "simulated five-qubit amplitude-encoded reservoirs with real-orthogonal "
-        "quadratic maps and random Fourier features on all 22 official TDC ADMET "
-        "endpoints, using Morgan-ExtraTrees and MapLight-CatBoost. Each endpoint uses "
-        "five scaffold splits, and each random family uses five maps before residual "
-        "averaging. Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, "
+        "quadratic maps and random Fourier features, using Morgan-ExtraTrees and "
+        "MapLight-CatBoost. Each endpoint uses five scaffold splits; each random family "
+        "uses five averaged maps. Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, "
         "and better on 3 and worse on 19 CatBoost endpoints. After Holm correction, no "
         "endpoint is significantly better and three are significantly worse. Gating, "
         "joint correction, low-data scaling, finite shots, simulated noise, and a "
@@ -37,12 +36,11 @@ TEXT = {
         "non-overlapping hERG molecules but both bases degrade on 2,317 B3DB BBB "
         "molecules. The hERG difference combines a QRC gain and an orthogonal-branch "
         "decrement relative to the base. Continuous-label ranking and an independent "
-        "pIC50 regression do not survive joint multiplicity correction. An eight-step "
-        "Trotterized Qiskit/Aer circuit audit preserves high readout rank correlation "
-        "under low, medium, and high gate/readout errors but shows substantial amplitude "
-        "attenuation. Scaffold, nearest-neighbour, and physicochemical analyses do not "
-        "support a simple chemical-space explanation. The main contribution is a "
-        "reproducible evaluation workflow. The conclusion is bounded by fixed five-qubit "
+        "pIC50 regression do not survive joint multiplicity correction. A Qiskit/Aer "
+        "circuit audit preserves readout rank correlation under gate and readout errors "
+        "but shows amplitude attenuation. Chemical-space analyses do not identify a simple source "
+        "explanation. The main contribution is a reproducible evaluation workflow. "
+        "The conclusion is bounded by five-qubit "
         "amplitude encoding, 15 Pauli readouts, a linear residual head, and exact "
         "state-vector simulation; it is not a general claim against other encodings, "
         "trainable circuits, larger reservoirs, or physical hardware."
@@ -239,8 +237,9 @@ TEXT = {
     36: "5.1 Overall Results",
     37: (
         "Table 2 reports five-seed mean official metrics for both bases and ungated "
-        "branches. Relative to the fixed real-orthogonal control, QRC was better on 6 and "
-        "worse on 16 ExtraTrees endpoints, and better on 3 and worse on 19 CatBoost "
+        "branches. Relative to the fixed real-orthogonal control, point estimates favoured "
+        "QRC on 6 and the matched control on 16 ExtraTrees endpoints, and favoured QRC on 3 "
+        "and the matched control on 19 CatBoost "
         "endpoints. The corrected CatBoost base itself outperformed ExtraTrees on 21/22 "
         "endpoints; the exception was AUPRC on CYP2C9 substrate. The four endpoints with "
         "the most consistent directional signals in the earlier pilot did not reproduce "
@@ -264,7 +263,9 @@ TEXT = {
     44: (
         "Validation gating set the QRC weight to zero in 47/110 selections on ExtraTrees "
         "and 55/110 selections on CatBoost. Gated QRC versus the identically gated "
-        "orthogonal map was 11 better/11 worse on ExtraTrees and 4 better/17 worse/1 tied "
+        "orthogonal map favoured QRC at 11 endpoints and the orthogonal branch at 11 "
+        "on ExtraTrees; CatBoost favoured QRC at 4, the orthogonal branch at 17, and "
+        "tied at 1 "
         "on CatBoost. Neither pair produced a Holm-significant positive endpoint. "
         "Exploratory equivalence covered 8 and 10 endpoints, respectively, but several of "
         "those results reflect both branches being returned to the base model and are not "
@@ -282,9 +283,10 @@ TEXT = {
     48: "5.3 Additional Comparisons",
     49: "Table 5. Direction counts and Holm-significant counts across endpoints.",
     51: (
-        "QRC versus random Fourier features was also 3 better/19 worse on each base. "
-        "Relative to the residual-free base, QRC was 6 better/16 worse on ExtraTrees and "
-        "4 better/18 worse on CatBoost, with 2 and 5 Holm-significant negative endpoints, "
+        "QRC versus random Fourier features also produced 3 QRC-favouring and 19 "
+        "control-favouring endpoint estimates on each base. Relative to the residual-free "
+        "base, 6/16 ExtraTrees and 4/18 CatBoost endpoint estimates favoured QRC, with "
+        "2 and 5 Holm-significant negative endpoints, "
         "respectively. Metrics with different units were not averaged across endpoints."
     ),
     52: (
@@ -294,8 +296,9 @@ TEXT = {
     ),
     53: (
         "Allowing QRC and the orthogonal branch to enter together, with two scalar "
-        "weights selected on validation, produced 12 better/10 worse versus identically "
-        "gated orthogonal features on ExtraTrees and 6 better/14 worse/2 tied on CatBoost. "
+        "weights selected on validation, produced 12 QRC-favouring/10 control-favouring "
+        "estimates versus identically gated orthogonal features on ExtraTrees and "
+        "6/14 with 2 ties on CatBoost. "
         "No endpoint was Holm-significantly positive. Against the residual-free base, "
         "the combined model was 10 better/12 worse on ExtraTrees, including one positive "
         "and one negative significant endpoint, and 7 better/14 worse/1 tied on CatBoost "
@@ -379,7 +382,8 @@ TEXT = {
     ),
     66: (
         "Across the eight representative endpoints, the validation-selected QRC was "
-        "better/worse on 4/4 endpoints for ExtraTrees and 2/5/1 tied endpoints for "
+        "selected QRC at 4 and the orthogonal search at 4 endpoints for ExtraTrees; "
+        "CatBoost selected QRC at 2, orthogonal search at 5, and tied at 1 "
         "CatBoost relative to the matched orthogonal search. No endpoint was "
         "Holm-significantly positive. The baseline configuration remained the most "
         "frequently selected QRC setting (15/40 on ExtraTrees and 25/40 on CatBoost), "
@@ -423,8 +427,8 @@ TEXT = {
     74: (
         "The benefit of gating mainly comes from stopping harmful residuals, not from "
         "discovering transferable quantum corrections. CatBoost selected zero QRC weight "
-        "in half of all endpoint-split decisions, and 17 endpoints remained worse than "
-        "the identically gated orthogonal branch. Several endpoints had near-zero "
+        "in half of all endpoint-split decisions, and 17 endpoint estimates remained lower "
+        "than the identically gated orthogonal branch. Several endpoints had near-zero "
         "differences within the exploratory equivalence margins, but this is consistent "
         "with the quantum branch being suppressed and cannot replace a test of positive "
         "superiority. Gating is a risk-control rule and not a molecule-level confidence "
@@ -433,8 +437,8 @@ TEXT = {
     75: "6.3 What the Strong Base and External Cohorts Reveal",
     76: (
         "The strong-base experiment is the main difference from the preliminary pilot. "
-        "MapLight-CatBoost outperformed Morgan-ExtraTrees on 21/22 endpoints, while QRC "
-        "performed worse relative to control on the stronger base. Joint gating did not "
+        "MapLight-CatBoost outperformed Morgan-ExtraTrees on 21/22 endpoints, while the "
+        "relative advantage of QRC did not persist on the stronger base. Joint gating did not "
         "produce a stable increment across endpoints, and finite-shot, low-data, and "
         "simulated-noise analyses did not reverse this result. The positive external "
         "hERG signal suggests that a source-specific candidate may remain. Its pIC50 rank "

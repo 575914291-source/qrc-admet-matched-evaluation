@@ -116,6 +116,17 @@ class ExtendedAnalysisTests(unittest.TestCase):
         )
         self.assertEqual(audit["status"], "passed")
 
+    def test_manuscript_audit_passed(self):
+        audit = json.loads(
+            (ROOT / "outputs" / "MANUSCRIPT_QA.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(audit["status"], "passed")
+        self.assertEqual(audit["main"]["tables"], 6)
+        self.assertEqual(audit["main"]["figures"], 4)
+        self.assertEqual(audit["supplement"]["figures"], 5)
+
 
 if __name__ == "__main__":
     unittest.main()
