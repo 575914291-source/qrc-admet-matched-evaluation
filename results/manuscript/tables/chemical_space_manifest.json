@@ -1,0 +1,20 @@
+{
+  "fingerprint": "Morgan radius 2, 1024 bits",
+  "projection": "TruncatedSVD to 20 components, standardization, then two-component PCA",
+  "random_seed": 20261125,
+  "sample_sizes": {
+    "TDC ADMET": 3000,
+    "External hERG": 293,
+    "External B3DB BBB": 500
+  },
+  "descriptor_counts": {
+    "TDC ADMET": 43203,
+    "External hERG": 293,
+    "External B3DB BBB": 2317
+  },
+  "descriptors": [
+    "MolWt",
+    "MolLogP",
+    "TPSA"
+  ]
+}

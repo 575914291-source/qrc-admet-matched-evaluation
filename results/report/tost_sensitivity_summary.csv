@@ -1,0 +1,7 @@
+﻿base,margin_label,equivalent_endpoints,endpoints
+catboost,primary,4,22
+catboost,tight,2,22
+catboost,wide,6,22
+extra_trees,primary,3,22
+extra_trees,tight,1,22
+extra_trees,wide,4,22

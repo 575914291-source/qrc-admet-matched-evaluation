@@ -1,0 +1,7 @@
+﻿analysis_tier,question,scope,inference
+Primary,Does ungated QRC improve over the matched quadratic control?,22 endpoints x 2 bases,Paired scaffold bootstrap and permutation; Holm across 22 endpoints within each base
+Predefined secondary,"How do Fourier features, residual-free bases, gating, and joint QRC-plus-orthogonal corrections compare?",22 endpoints x 2 bases x predefined contrasts,Direction-normalized effects and endpoint-level confidence intervals; Holm within each reported comparison family
+Sensitivity,"Are conclusions stable to training size, finite shots, depolarizing attenuation, or reservoir-family selection?",8 preselected endpoints and bounded candidate families,Direction counts and paired endpoint summaries; interpreted descriptively unless a comparison family is explicitly corrected
+External binary validation,Does the matched comparison transfer to independent hERG and B3DB BBB collections?,"293 hERG and 2,317 B3DB molecules; 2 bases",Paired scaffold permutation/bootstrap; Holm across the external endpoint family; decomposition and calibration are secondary
+Exploratory label transfer,Do binary-model outputs preserve continuous pIC50 or logBB ranking?,hERG pIC50 and 613 B3DB logBB records; 12 contrasts,Holm across all 12 exploratory comparisons
+Supplementary external regression,Does QRC add value when directly trained for ToxTree hERG pIC50?,214 scaffold-disjoint test molecules; 2 bases; 5 model seeds,Paired scaffold bootstrap/permutation; Holm across 12 metric/base/contrast tests

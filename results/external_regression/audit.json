@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "runs": 10,
+  "bases": [
+    "extra_trees",
+    "catboost"
+  ],
+  "model_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "task": "herg_pic50",
+  "target": "PIC50",
+  "sample_counts": {
+    "train": 6895,
+    "valid": 985,
+    "test": 214,
+    "test_scaffolds": 155
+  },
+  "prepared_split_audit": {
+    "status": "passed",
+    "source": "Zenodo 5807719 / ToxTree continuous hERG test collection",
+    "source_path": "data\\external\\hERG_Dataset.csv",
+    "source_sha256": "f028e0dbdc46fd587e3f75e296e06922387e3e5dc7288837d7e0da40ecbcc80b",
+    "target": "PIC50",
+    "split_protocol": "source-defined Dev-set/Test-set; TDC canonical overlap removed; test scaffolds shared with either the external Dev-set or the TDC hERG archive removed; Dev-set split 87.5/12.5 by Bemis-Murcko scaffold",
+    "split_seed": 20261125,
+    "source_rows": 8879,
+    "removed_invalid_or_duplicate": 319,
+    "removed_tdc_canonical_overlap": 389,
+    "external_dev": 7880,
+    "removed_test_scaffold_leakage_external_dev": 61,
+    "removed_test_scaffold_overlap_tdc": 27,
+    "removed_test_scaffold_leakage_total": 77,
+    "external_test": 214,
+    "train": 6895,
+    "valid": 985,
+    "train_scaffolds": 3659,
+    "valid_scaffolds": 411,
+    "test_scaffolds": 155,
+    "canonical_overlap_train_valid": 0,
+    "scaffold_overlap_train_valid": 0,
+    "canonical_overlap_train_test": 0,
+    "scaffold_overlap_train_test": 0
+  },
+  "checks": [
+    "all expected regression runs present",
+    "train/validation/test canonical and scaffold overlaps are absent",
+    "all saved predictions are finite",
+    "gates lie on the frozen grid",
+    "saved test Spearman scores are independently recomputed"
+  ]
+}

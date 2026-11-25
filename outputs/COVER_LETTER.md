@@ -15,6 +15,13 @@ reports joint gating, low-data, finite-shot, simulated-depolarizing, bounded
 reservoir-family search, and external hERG/B3DB BBB analyses under a fixed test
 protocol.
 
+The revised manuscript now includes four main figures: the matched evaluation
+design, chemical-space and applicability-domain context, external effect
+decomposition with calibration, and the 22-endpoint primary-effect forest.
+External AUPRC, Brier score, log loss, multiplicity sensitivity, and an
+independent continuous pIC50 regression are reported as boundary checks rather
+than as evidence of a general quantum advantage.
+
 No endpoint remained significantly better than the matched controls after Holm
 correction. Apparent gains on the weaker ExtraTrees base did not persist on the
 stronger MapLight-CatBoost base. External validation revealed a source-dependent
@@ -25,13 +32,17 @@ studies. An additional exploratory continuous-label analysis found a
 CatBoost-specific hERG ranking signal before, but not after, conservative
 multiplicity correction; it did not replicate on B3DB logBB and is reported
 explicitly as a ranking-transfer analysis rather than an independent regression
-cohort.
+cohort. A separate scaffold-disjoint ToxTree pIC50 regression also produced no
+significant QRC advantage after correction across the complete exploratory
+comparison family.
 
 The manuscript includes public-data provenance, a full experiment audit,
-split-level predictions, and a reproduction package. It has not been published
-or submitted concurrently elsewhere. We believe it fits the journal's interest
-in computational methods, reproducible benchmarks, and rigorous evaluation in
-drug discovery.
+split-level predictions, and a reproduction package. Versioned code and result
+indexes are available at
+https://github.com/575914291-source/qrc-admet-matched-evaluation. It has not
+been published or submitted concurrently elsewhere. We believe it fits the
+journal's interest in computational methods, reproducible benchmarks, and
+rigorous evaluation in drug discovery.
 
 Sincerely,
 

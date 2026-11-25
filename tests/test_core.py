@@ -155,6 +155,23 @@ class ContinuousTransferTests(unittest.TestCase):
             audit["interpretation_limit"],
         )
 
+    def test_external_regression_split_is_scaffold_disjoint(self) -> None:
+        from src.run_external_regression import prepare_regression_frames
+
+        train, valid, test = prepare_regression_frames()
+        self.assertEqual((len(train), len(valid), len(test)), (6895, 985, 214))
+        self.assertEqual(test["scaffold"].nunique(), 155)
+        self.assertFalse(
+            set(train["canonical_smiles"]) & set(valid["canonical_smiles"])
+        )
+        self.assertFalse(
+            set(train["canonical_smiles"]) & set(test["canonical_smiles"])
+        )
+        self.assertFalse(set(valid["canonical_smiles"]) & set(test["canonical_smiles"]))
+        self.assertFalse(set(train["scaffold"]) & set(valid["scaffold"]))
+        self.assertFalse(set(train["scaffold"]) & set(test["scaffold"]))
+        self.assertFalse(set(valid["scaffold"]) & set(test["scaffold"]))
+
 
 if __name__ == "__main__":
     unittest.main()

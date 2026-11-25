@@ -7,7 +7,7 @@ Baselines**.
 Repository: <https://github.com/575914291-source/qrc-admet-matched-evaluation>
 
 Frozen submission snapshot:
-<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.0.0>
+<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.1.0>
 
 The study tests whether a fixed five-qubit quantum reservoir adds predictive
 information beyond equal-input, equal-capacity classical nonlinear maps on the
@@ -32,6 +32,8 @@ trained regression cohort.
   nearest-neighbour similarity audits.
 - Scaffold-clustered continuous-label rank-transfer analysis with Holm
   correction across all exploratory contrasts.
+- Four main figures covering study design, chemical space, external
+  decomposition/calibration, and endpoint-level primary effects.
 - Submission-ready Chinese and English manuscripts and supplementary figures.
 
 The 473 MB dense MapLight feature cache is intentionally excluded from Git.
@@ -64,6 +66,15 @@ python -m src.audit_finite_shot
 python -m src.audit_low_data
 python -m src.audit_external
 python -m src.analyze_continuous_transfer
+python -m src.analyze_chemical_space
+python -m src.analyze_external_diagnostics
+python -m src.analyze_tost_sensitivity
+python -m src.report_external_regression
+python -m src.audit_external_regression
+python -m src.make_manuscript_assets
+python -m src.build_design_figure
+python -m src.build_extended_tables
+python -m src.build_extended_figures
 python -m src.audit_noise
 python -m src.audit_tuned_qrc
 python -m src.domain_audit
@@ -73,9 +84,10 @@ python -m src.update_delivery_checksums
 
 These commands verify 220 primary endpoint runs, 80 finite-shot files (240
 results), 80 low-data files (400 fraction results), 20 external runs, 80 noise
-files (240 results), 80 bounded-family-search runs, the chemical-space audit,
-and the continuous-label transfer audit. They require the released result
-artefacts but not the dense feature cache.
+files (240 results), 80 bounded-family-search runs, 10 independent continuous
+regression runs, the chemical-space audit, and the continuous-label transfer
+audit. They require the released result artefacts but not the dense feature
+cache.
 
 ## Reproduce from raw data
 
@@ -93,12 +105,27 @@ python -m src.run_external_validation --workers 3
 python -m src.report_external
 python -m src.audit_external
 python -m src.analyze_continuous_transfer
+python -m src.analyze_chemical_space
+python -m src.analyze_external_diagnostics
+python -m src.analyze_tost_sensitivity
+python -m src.run_external_regression --bases extra_trees catboost --seeds 1 2 3 4 5
+python -m src.report_external_regression
+python -m src.audit_external_regression
 python -m src.run_noise --workers 4
 python -m src.audit_noise
 python -m src.run_tuned_qrc --workers 4
 python -m src.report_tuned_qrc
 python -m src.audit_tuned_qrc
 python -m src.domain_audit
+python -m src.make_manuscript_assets
+python -m src.build_design_figure
+python -m src.build_extended_tables
+python -m src.build_extended_figures
+python -m src.update_paper
+python -m src.update_paper_en
+python -m src.build_supplement
+python -m src.package_submission
+python -m src.update_delivery_checksums
 ```
 
 Every stage is resumable. Existing split files are skipped unless the relevant
@@ -120,8 +147,22 @@ runner receives `--overwrite`.
 - `src/run_external_validation.py`: external hERG and B3DB evaluation.
 - `src/analyze_continuous_transfer.py`: exploratory rank transfer against
   available external pIC50 and logBB labels.
+- `src/run_external_regression.py`: scaffold-disjoint ToxTree pIC50 regression
+  with fixed TDC model hyperparameters.
+- `src/report_external_regression.py` and
+  `src/audit_external_regression.py`: paired inference and integrity checks for
+  the continuous external cohort.
 - `src/domain_audit.py`: exact overlap, Murcko-scaffold overlap,
   nearest-neighbour similarity, and descriptive subgroup audit.
+- `src/analyze_chemical_space.py`: RDKit descriptor distributions and
+  fingerprint projection for the study cohorts.
+- `src/analyze_external_diagnostics.py`: effect decomposition, AUPRC, Brier,
+  log loss, and calibration for the released external predictions.
+- `src/analyze_tost_sensitivity.py`: TOST counts under tight, primary, and wide
+  equivalence margins.
+- `src/build_extended_tables.py` and `src/build_extended_figures.py`: manuscript
+  tables and the added publication figures.
+- `src/build_design_figure.py`: study-design schematic.
 - `src/audit_*.py`: independent checks of the released result artefacts.
 - `templates/source_manuscript.docx`: source document used by the manuscript
   generator, retained so the submitted DOCX can be rebuilt portably.
@@ -137,6 +178,17 @@ runner receives `--overwrite`.
 
 See [`DATA_LICENSES.md`](DATA_LICENSES.md) and the provenance files under
 [`data/`](data/) before redistributing derived files.
+
+## Figure generation
+
+The study-design figure was initially laid out with the
+`academic-figures` workflow from Scientific Agent Skills and is regenerated in
+this repository by `src/build_design_figure.py`. The remaining figures are
+generated by the local Matplotlib scripts listed above.
+
+> Kassis T, Agarwal V, He Y, Patel D, Brueckner A M. Scientific Agent Skills:
+> A Library of Procedural Knowledge for Research Agents. arXiv:2609.00065,
+> 2026. <https://arxiv.org/abs/2609.00065>
 
 ## Reproduction contract
 

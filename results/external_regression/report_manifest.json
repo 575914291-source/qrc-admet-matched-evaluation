@@ -1,0 +1,13 @@
+{
+  "task": "herg_pic50",
+  "target": "PIC50",
+  "primary_metric": "Spearman",
+  "secondary_metric": "MAE",
+  "bootstrap_replicates": 1000,
+  "permutation_replicates": 1999,
+  "multiplicity": "Holm across all 12 exploratory metric/base/contrast tests",
+  "gate_zero_counts": {
+    "extra_trees": 5,
+    "catboost": 0
+  }
+}

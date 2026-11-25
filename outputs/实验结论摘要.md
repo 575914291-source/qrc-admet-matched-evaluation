@@ -103,6 +103,15 @@ hERG 使用 ToxTree 外部测试集，按 `PIC50 >= 4.5` 二分类，并在删�
 hERG 的 CatBoost 正向信号与 BBB 的跨基座负迁移同时存在，因此外部验证支持
 “来源依赖的候选信号”，不支持普遍可迁移优势。
 
+### 外部效应分解与校准
+
+CatBoost/hERG 的门控 QRC 相对基座为 +0.0285 AUROC，门控正交相对基座为
+−0.0117；因此 QRC−正交的 +0.0402 同时包含 QRC 提升和正交分支下降。
+hERG 的 QRC−正交 AUPRC 为 +0.0304，Brier 和 log-loss 改善为 +0.0038
+与 +0.0363；但校准斜率仅为 0.15–0.26。B3DB 的 QRC−正交 AUPRC 在
+ExtraTrees 与 CatBoost 上分别为 −0.0047 与 −0.0061。完整区间、校准与
+分解见 `results/external_diagnostics/`。
+
 ## 连续标签排序迁移（探索性）
 
 在不重新训练分类模型的情况下，将已有外部预测分别与 hERG `PIC50` 和
@@ -120,6 +129,37 @@ B3DB `logBB` 连续标签计算 Spearman 排序。hERG 连续标签覆盖全部 
 CatBoost/hERG 的连续标签方向与二分类 AUROC 候选信号一致，但在统一多重校正
 后不显著，且未在 BBB 复现。该分析属于二分类输出的排序迁移，不是独立训练
 连续值模型的回归外部验证。
+
+## 独立连续 pIC50 回归
+
+ToxTree 来源 Dev/Test 切分用于一次固定阈值的连续回归敏感性实验。在删除与
+TDC hERG 的规范分子和骨架重叠后，使用 6,895 个训练、985 个验证和 214 个
+测试分子（155 个测试骨架）。模型与分支超参数保持 TDC 协议不变，并使用五个
+模型种子。
+
+未门控 QRC 相对实正交二次映射：
+
+| 指标 | 基座 | 效应（正值有利） | 95% CI | 未校正 p | Holm p（12 项） |
+|---|---|---:|---:|---:|---:|
+| Spearman | ExtraTrees | +0.0229 | [−0.0121, 0.0608] | 0.166 | 1.000 |
+| Spearman | MapLight-CatBoost | +0.0093 | [−0.0168, 0.0325] | 0.470 | 1.000 |
+| MAE 改善 | ExtraTrees | +0.0032 | [−0.0033, 0.0096] | 0.299 | 1.000 |
+| MAE 改善 | MapLight-CatBoost | +0.0046 | [−0.0042, 0.0144] | 0.334 | 1.000 |
+
+12 个指标、基座和对照比较统一校正后没有任何显著结果。该队列独立于 TDC
+标签，但只包含一个连续端点，不能替代多端点、前瞻性的回归验证。
+
+## TOST 容差敏感性
+
+主比较在较紧（0.005；MAE 1%）、主分析（0.01；MAE 2%）和较宽
+（0.02；MAE 4%）容差下，Holm 等价端点数为：
+
+| 基座 | 较紧 | 主分析 | 较宽 |
+|---|---:|---:|---:|
+| ExtraTrees | 1/22 | 3/22 | 4/22 |
+| MapLight-CatBoost | 2/22 | 4/22 | 6/22 |
+
+等价端点数量随容差增加而增加，但没有出现随容差合理变化而反转的显著性模式。
 
 ## 模拟退相干
 
@@ -160,7 +200,11 @@ QRC 对正交界的好/差端点数：
 - PDF：`outputs/论文修订稿_v2_TDC完整实验.pdf`
 - 主结果表：`results/report/endpoint_summary.csv`
 - 端点推断：`results/report/comparisons.csv`
+- 外部效应分解与校准：`results/external_diagnostics/`
 - 连续标签迁移：`results/external_continuous/comparisons.csv`
+- 独立 pIC50 回归：`results/external_regression/comparisons.csv`
+- TOST 敏感性：`results/report/tost_sensitivity.csv`
+- 独立 pIC50 回归：`results/external_regression/comparisons.csv`
 - 逐 split 预测：`results/runs/`
 - 可复现附件：`outputs/补充材料_qrc_admet_代码与结果_最终.zip`
 

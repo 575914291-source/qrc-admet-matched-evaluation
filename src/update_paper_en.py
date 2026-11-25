@@ -19,33 +19,29 @@ TEXT = {
     1: "A Reproducible Benchmark of Fixed Quantum Reservoir Features on TDC ADMET",
     2: "Abstract",
     3: (
-        "Fixed quantum reservoirs produce low-dimensional nonlinear molecular features, "
-        "but their incremental value must be tested against equally randomized classical "
-        "maps and sufficiently strong base models. We evaluate exactly simulated "
-        "five-qubit reservoirs, real-orthogonal quadratic maps, and random Fourier "
-        "features on 22 official TDC ADMET endpoints with Morgan-ExtraTrees and "
-        "MapLight-CatBoost. Each endpoint uses five scaffold train/validation splits, "
-        "and each random family uses five maps averaged before residual gating. "
-        "Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, and better on "
-        "3 and worse on 19 CatBoost endpoints. After Holm correction, no endpoint is "
-        "significantly better, whereas AMES and VDss on ExtraTrees and Solubility on "
-        "CatBoost are significantly worse. Joint QRC-orthogonal gating is 12 better "
-        "and 10 worse on ExtraTrees and 6 better, 14 worse, and 2 tied on CatBoost, "
-        "without a significant positive endpoint. Low-data curves from 5% to 100% show "
-        "no stable advantage. Finite-shot and depolarizing-noise analyses do not reverse "
-        "the result, and a validation-selected search over five reservoir parameter "
-        "families also yields no Holm-positive endpoint. External validation is "
-        "source-dependent: CatBoost improves by "
-        "0.040 AUROC on a non-overlapping hERG collection, while both bases degrade on "
-        "B3DB BBB. An exploratory rank-transfer analysis using available continuous "
-        "labels showed an unadjusted CatBoost-specific hERG pIC50 signal, but it was "
-        "absent after conservative correction across all 12 exploratory comparisons and "
-        "did not replicate for BBB logBB. We find no evidence of robust, transferable "
-        "incremental value from fixed five-qubit reservoir residuals in the tested "
-        "design. This conclusion is bounded by amplitude encoding, a fixed Hamiltonian "
-        "reservoir, 15 Pauli readouts, a linear residual head, and exact state-vector "
-        "simulation; it is not a general claim against other encodings, trainable "
-        "circuits, larger reservoirs, or physical hardware."
+        "Quantum reservoirs can generate low-dimensional nonlinear molecular features, "
+        "but their incremental value must be tested against equally sized classical "
+        "feature families and sufficiently strong base models. We compare exactly "
+        "simulated five-qubit amplitude-encoded reservoirs with real-orthogonal "
+        "quadratic maps and random Fourier features on all 22 official TDC ADMET "
+        "endpoints, using Morgan-ExtraTrees and MapLight-CatBoost. Each endpoint uses "
+        "five scaffold splits, and each random family uses five maps before residual "
+        "averaging. Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, "
+        "and better on 3 and worse on 19 CatBoost endpoints. After Holm correction, no "
+        "endpoint is significantly better and three are significantly worse. Gating, "
+        "joint correction, low-data scaling, finite shots, simulated noise, and a "
+        "bounded reservoir-family search do not produce a cross-base advantage. External "
+        "validation is source-dependent: CatBoost improves by 0.040 AUROC on 293 "
+        "non-overlapping hERG molecules but both bases degrade on 2,317 B3DB BBB "
+        "molecules. The hERG difference combines a QRC gain and an orthogonal-branch "
+        "decrement relative to the base. Continuous-label ranking and an independent "
+        "pIC50 regression do not survive joint multiplicity correction. Scaffold, "
+        "nearest-neighbour, and physicochemical analyses do not support a simple "
+        "chemical-space explanation. The main contribution is a reproducible evaluation "
+        "workflow. The conclusion is bounded by fixed five-qubit amplitude encoding, 15 "
+        "Pauli readouts, a linear residual head, and exact state-vector simulation; it "
+        "is not a general claim against other encodings, trainable circuits, larger "
+        "reservoirs, or physical hardware."
     ),
     4: "Keywords: ADMET; TDC; quantum reservoir; matched classical controls; random realizations; validation gating",
     5: "1 Introduction",
@@ -61,12 +57,16 @@ TEXT = {
     7: (
         "We ask a bounded question. Under the same input, the same 15 readouts, and the "
         "same linear residual head, does a fixed five-qubit reservoir provide an increment "
-        "relative to real-orthogonal quadratic maps and random Fourier features? Does any "
-        "increment appear on both Morgan-ExtraTrees and MapLight-CatBoost? Can validation "
-        "gating reduce the degradation caused by uniformly enabling residuals? To remove "
-        "candidate-count asymmetry, each family uses five independent maps whose residuals "
-        "are averaged. The primary comparison is fixed in advance as QRC versus a "
-        "real-orthogonal quadratic map."
+        "relative to real-orthogonal quadratic maps and random Fourier features across "
+        "the 22 TDC endpoints, two classical bases, and independent external sources? "
+        "Figure 1 summarizes the design. The study makes three contributions. First, it "
+        "formalizes the current QRC and linear residual head as a constrained real "
+        "quadratic feature family and constructs an equal-input, equal-capacity, "
+        "equal-map-budget quadratic control. Second, it evaluates the family across all "
+        "22 endpoints with validation gating and multiple-testing correction. Third, it "
+        "uses low-data, finite-shot, simulated-noise, bounded-family, two-source external, "
+        "continuous-label, independent pIC50 regression, and chemical-space analyses to "
+        "delimit the conclusion."
     ),
     8: "2 Related Work",
     9: "2.1 ADMET Benchmarks and Classical Representations",
@@ -341,18 +341,8 @@ TEXT = {
         "([-0.0065, -0.0006], Holm p=0.016). Joint gating showed the same split: CatBoost "
         "was +0.0298 on hERG and negative with Holm significance on BBB for both bases. "
         "The coexistence of a hERG signal and BBB negative transfer implies source "
-        "dependence rather than a general transferable advantage. To determine whether "
-        "the binary probabilities preserved continuous ranking information, we also "
-        "performed an exploratory transfer analysis without retraining. For CatBoost, "
-        "the gated-QRC minus gated-orthogonal hERG pIC50 Spearman difference was +0.043 "
-        "(95% CI [0.012, 0.072], 198 test scaffolds, 3/5 splits positive, unadjusted "
-        "p=0.020), whereas the ExtraTrees difference was only +0.004. For B3DB logBB, "
-        "which was available for 613/2,317 molecules, the corresponding effects were "
-        "-0.002 and +0.001. After Holm correction across all 12 prespecified exploratory "
-        "comparisons, the smallest p was 0.234. This analysis ranks binary-model outputs "
-        "against continuous labels; it is not an independently trained regression cohort, "
-        "and the B3DB continuous subset is enriched to 86.8% positives. Intervals are "
-        "shown in Supplementary Figure S2."
+        "dependence rather than a general transferable advantage. Full external intervals "
+        "are shown in Supplementary Figure S2."
     ),
     61: "5.6 Simulated Decoherence",
     62: (
@@ -393,7 +383,7 @@ TEXT = {
         "under-tuning explains the null result."
     ),
     68: (
-        "Figure 1. Endpoint-level differences of ungated QRC versus the matched "
+        "Figure 4. Endpoint-level differences of ungated QRC versus the matched "
         "real-orthogonal map. Classification metrics use absolute units, MAE uses a "
         "relative percentage of the reference MAE, and Spearman uses absolute units. "
         "Intervals are 95% scaffold-cluster bootstrap intervals; red indicates Holm "
@@ -441,11 +431,12 @@ TEXT = {
         "performed worse relative to control on the stronger base. Joint gating did not "
         "produce a stable increment across endpoints, and finite-shot, low-data, and "
         "simulated-noise analyses did not reverse this result. The positive external "
-        "hERG signal suggests that a source-specific candidate may remain, and its pIC50 "
-        "rank transfer provides limited corroboration for that local direction. The "
-        "continuous-label result did not survive correction across the complete "
-        "exploratory family, BBB logBB transfer was near zero, and the significant B3DB "
-        "BBB classification degradation rules out a cross-source interpretation. Future "
+        "hERG signal suggests that a source-specific candidate may remain. Its pIC50 rank "
+        "transfer and independent continuous regression point in the same weak direction, "
+        "but the rank transfer did not survive 12-comparison Holm correction and the "
+        "regression confidence intervals crossed zero without any corrected significant "
+        "contrast. BBB logBB transfer was near zero, and significant B3DB BBB "
+        "classification degradation rules out a cross-source interpretation. Future "
         "quantum encodings should be tested directly on a strong base with matched input, "
         "capacity, and candidate budgets. For computer-aided molecular design practice, "
         "fixed amplitude-encoded QRC should not yet be treated as a general ADMET "
@@ -475,7 +466,8 @@ TEXT = {
         "molecules with a novel scaffold. The effect was +0.0196 in the highest nearest-"
         "similarity quartile and +0.0494 in the remaining three quartiles. In contrast, "
         "the BBB effect was negative across shared-scaffold, novel-scaffold, and "
-        "similarity strata. These descriptive strata locate where an effect appears; "
+        "similarity strata. Full source audits and hERG strata are reported in "
+        "Supplementary Tables S5 and S6. These descriptive strata locate where an effect appears; "
         "they do not control source, assay batch, or label definition and cannot establish "
         "a causal chemical mechanism."
     ),
@@ -494,14 +486,14 @@ TEXT = {
         "The hERG point improvement is a candidate signal, not evidence that the quantum "
         "features learned a mechanism of cardiac toxicity. The significant B3DB negative "
         "transfer is not evidence that quantum methods are universally ineffective for "
-        "ADMET. Existing QML-ADMET studies often focus on one or a few endpoints, use "
-        "limited random realizations, and rarely combine equal-input and equal-capacity "
-        "classical controls with independent-source validation. We do not claim equivalence "
-        "across different encodings or training protocols. The contribution is a reusable "
-        "minimum evaluation workflow: prespecify the primary comparator, match candidate "
-        "and map budgets, infer with scaffold clusters, correct across endpoints, interpret "
-        "equivalence separately from superiority, and report both cross-base and "
-        "cross-source results."
+        "ADMET. The QML-ADMET studies reviewed here use different fixed reservoirs, "
+        "Hamiltonian-derived features, quantum-inspired preprocessing, circuit search, or "
+        "jointly trained residuals; their task counts, controls, and external validation "
+        "settings do not support a like-for-like equivalence claim. Supplementary Table "
+        "S4 summarizes the differences. The contribution is a reusable minimum evaluation "
+        "workflow: prespecify the primary comparator, match candidate and map budgets, "
+        "infer with scaffold clusters, correct across endpoints, interpret equivalence "
+        "separately from superiority, and report both cross-base and cross-source results."
     ),
     82: "7 Limitations",
     83: (
@@ -525,9 +517,14 @@ TEXT = {
         "external analysis contains two classification endpoints; hERG uses the "
         "source-defined binary cutoff but still differs in assay source and label "
         "generation. The supplementary continuous-label analysis ranks binary-model "
-        "outputs and is not an independently trained regression evaluation. B3DB logBB "
+        "outputs and is not an independently trained regression evaluation. The separate "
+        "pIC50 regression uses 214 test molecules in 155 scaffolds under a fixed protocol; "
+        "it is scaffold-disjoint but statistically underpowered. B3DB logBB "
         "was available for only 613/2,317 non-overlapping molecules and was strongly "
-        "class-enriched, so it does not represent the full BBB chemical space. Random-map "
+        "class-enriched, so it does not represent the full BBB chemical space. The "
+        "chemical-space figure uses a linear fingerprint projection and three basic "
+        "descriptors, not a complete applicability-domain model, and equivalence counts "
+        "depend on the prespecified margins. Random-map "
         "sensitivity covers five "
         "realizations per family, and hardware cost, decoherence, and connectivity were "
         "not evaluated on physical devices. The present comparison therefore applies only "
@@ -546,12 +543,12 @@ TEXT = {
         "classical control. Joint gating, low-data scaling, finite shots, and simulated "
         "decoherence did not reverse this conclusion. External hERG provided a "
         "CatBoost-specific candidate signal, whereas B3DB BBB showed significant negative "
-        "transfer. Continuous-label rank transfer also showed only an unadjusted "
-        "CatBoost/hERG candidate direction, with no effect after conservative correction "
-        "and no corresponding BBB signal; this is not a substitute for an independent "
-        "regression cohort. Chemical-space strata support a source-dependent local signal "
-        "rather than an identifiable general chemical rule. The main contribution is a "
-        "reproducible QML evaluation workflow. The result is bounded by the tested "
+        "transfer. Continuous-label rank transfer and independent pIC50 regression both "
+        "showed only uncorrected weak CatBoost/hERG directions, with no Holm-significant "
+        "comparison and no corresponding BBB signal. Chemical-space and physicochemical "
+        "strata support a source-dependent local signal rather than an identifiable general "
+        "chemical rule. The main contribution is a reproducible QML evaluation workflow. "
+        "The result is bounded by the tested "
         "five-qubit amplitude-encoded, fixed-Hamiltonian reservoir with 15 Pauli readouts, "
         "a linear residual head, and exact simulation; other encodings, trainable circuits, "
         "larger reservoirs, and physical hardware require independent evaluation."
@@ -564,9 +561,11 @@ TEXT = {
         "rules, deduplication, and overlap audits are included in the reproduction package. "
         "The package also contains processing scripts, five scaffold splits, five random "
         "maps per family, base configurations, all split-level predictions, joint gating, "
-        "finite-shot, low-data, external-endpoint, continuous-label transfer, "
-        "simulated-noise, and chemical-space audit results, statistical scripts, and "
-        "environment locks. The versioned code and result index are available at "
+        "finite-shot, low-data, external-endpoint decomposition and calibration, "
+        "continuous-label transfer, independent pIC50 regression, simulated-noise, "
+        "bounded-family, TOST-sensitivity, and chemical-space audit results, statistical "
+        "scripts, figure-generation code, and environment locks. The versioned code and "
+        "result index are available at "
         "https://github.com/575914291-source/qrc-admet-matched-evaluation; the submission "
         "archive contains complete split-level predictions and supplementary materials. "
         "The MapLight reference and MIT license are retained. Official test labels were "
@@ -574,8 +573,116 @@ TEXT = {
         "map generation, joint weights, or gating."
     ),
     89: "References",
-    121: "Appendix A Full Primary-Comparison Table",
 }
+
+INSERTED_TEXT = {
+    9: (
+        "Figure 1. Matched evaluation design. The two data sources share the two "
+        "classical bases, the 32-dimensional PCA amplitude input, five-map residual "
+        "ensembles, and the same gating budget. The primary control is the fixed "
+        "five-qubit QRC versus a parameter-matched real-orthogonal quadratic map."
+    ),
+    22: (
+        "Supplementary Table S1 reports endpoint sample sizes, official metrics, and "
+        "label summaries. Supplementary Table S2 reports the hierarchy of primary, "
+        "secondary, sensitivity, external, and exploratory analyses. Supplementary "
+        "Table S9 reports TOST counts under tight, primary, and wide margins. Figure 2 "
+        "shows the chemical-space and physicochemical context of the TDC, hERG, and "
+        "B3DB cohorts."
+    ),
+    24: (
+        "Figure 2. Chemical space and applicability-domain context. (A) Morgan radius-2 "
+        "1024-bit fingerprints projected by 20-component truncated SVD, "
+        "standardization, and two-dimensional PCA. TDC and B3DB were randomly sampled "
+        "to 3,000 and 500 unique molecules, respectively; all 293 hERG molecules were "
+        "used. (B-D) Molecular weight, cLogP, and TPSA distributions for all unique TDC, "
+        "hERG, and B3DB molecules. Box plots omit outlier markers for readability."
+    ),
+    31: (
+        "Five qubits support 32 real amplitudes, so the 32-dimensional PCA is the "
+        "smallest complete amplitude input without truncation or padding at this scale. "
+        "The 15 readouts comprise five single-qubit Z expectations and all ten pair-wise "
+        "ZZ expectations. This is not a hardware-capacity claim; it is a closed design "
+        "that permits exact state-vector evaluation, an equal-dimensional classical "
+        "control, and five complete map realizations. For normalized PCA vector v, the "
+        "amplitudes are a_j = v_j / ||v||. The Hamiltonian H and evolution U = "
+        "exp(-iHt) are fixed and not trained on test labels. PCA dimension and readout "
+        "set were held fixed to avoid adding another capacity search to the primary "
+        "benchmark."
+    ),
+    67: (
+        "Figure 3 separates QRC gain from orthogonal-branch degradation using the existing "
+        "predictions. For CatBoost/hERG, gated QRC minus the residual-free base was "
+        "+0.0285 AUROC (95% CI [0.0137, 0.0437]), whereas gated orthogonal minus the "
+        "base was -0.0117 ([-0.0216, -0.0011]); the +0.0402 primary difference therefore "
+        "contains both a QRC gain and an orthogonal decrement. The hERG QRC-minus-"
+        "orthogonal AUPRC difference was +0.0304, with Brier and log-loss improvements "
+        "of +0.0038 and +0.0363. Both hERG branches remained poorly calibrated, with "
+        "calibration slopes of approximately 0.15-0.26. In B3DB, QRC minus orthogonal "
+        "AUPRC was -0.0047 for ExtraTrees and -0.0061 for CatBoost, and Brier and "
+        "log-loss differences did not favour QRC. Full decomposition and calibration "
+        "values are reported in Supplementary Tables S7 and S8. The continuous-label "
+        "rank transfer "
+        "showed an unadjusted CatBoost/hERG pIC50 Spearman difference of +0.043, which "
+        "did not survive Holm correction across 12 comparisons and did not replicate "
+        "for BBB logBB. It is not an independently trained regression evaluation, and "
+        "the B3DB continuous subset is 86.8% positive."
+    ),
+    69: (
+        "Figure 3. External classification decomposition and calibration. (A-B) AUROC "
+        "differences for gated QRC versus base, gated orthogonal versus base, and gated "
+        "QRC versus gated orthogonal; positive values favour the first method. (C-D) "
+        "Five-seed mean CatBoost calibration curves using prediction quintiles; the "
+        "dashed diagonal is perfect calibration. Decomposition explains the primary "
+        "comparison and does not replace the prespecified external AUROC test."
+    ),
+    78: "5.8 Independent Continuous pIC50 Regression",
+    79: (
+        "To avoid treating rank preservation from a binary classifier as continuous-value "
+        "prediction, we added a fixed ToxTree hERG pIC50 regression. After removing TDC "
+        "overlap, the source Dev-set was split by Bemis-Murcko scaffold into 6,895 "
+        "training and 985 validation molecules. The source Test-set was filtered to "
+        "remove TDC overlaps and scaffolds shared with the external Dev-set, retaining "
+        "214 test molecules in 155 scaffolds. QRC, orthogonal quadratic, random Fourier, "
+        "and linear residual heads followed the TDC protocol. External test labels were "
+        "not used to select map seeds, PCA dimension, regularization, or hyperparameters."
+    ),
+    80: (
+        "Five model seeds did not show a confirmed QRC increment. QRC minus orthogonal "
+        "Spearman was +0.0229 on ExtraTrees (95% CI [-0.0121, 0.0608]) and +0.0093 on "
+        "CatBoost ([-0.0168, 0.0325]); QRC minus the CatBoost base was +0.0292 "
+        "([-0.0034, 0.0604]). MAE differences were close to zero. No comparison was "
+        "significant after Holm correction across all 12 metric, base, and contrast "
+        "tests. The cohort is independent of TDC labels but contains only 214 molecules "
+        "and cannot provide a high-power validation on its own. Full results are shown "
+        "in Supplementary Figure S4 and Supplementary Table S10."
+    ),
+    94: (
+        "For computational context, exact state-vector simulation of five qubits is not "
+        "a quantum-speedup demonstration and provides no hardware runtime estimate. The "
+        "scale was chosen to construct an exact, equal-readout quadratic control and to "
+        "avoid confounding circuit expressivity with physical noise. The results do not "
+        "support a quantum runtime advantage and cannot be used to infer the feasibility "
+        "of larger reservoirs, fault-tolerant quantum computing, or a specific hardware "
+        "topology; these are separate experimental questions."
+    ),
+}
+
+
+def _final_paragraph_index(original_index: int) -> int:
+    if original_index < 8:
+        return original_index
+    if original_index < 20:
+        return original_index + 2
+    if original_index < 26:
+        return original_index + 5
+    if original_index < 61:
+        return original_index + 6
+    if original_index < 69:
+        return original_index + 9
+    if original_index < 82:
+        return original_index + 12
+    return original_index + 13
 
 
 HEADERS = {
@@ -597,7 +704,6 @@ HEADERS = {
         "Holm p",
     ],
     3: ["Contrast", "QRC better", "QRC worse", "Holm positive", "Holm negative"],
-    4: ["Endpoint", "Metric", "QRC-Orth", "95% CI", "Raw p", "Holm p", "Holm equiv. p"],
 }
 
 
@@ -623,7 +729,12 @@ def main() -> int:
     shutil.copy2(SOURCE, OUTPUT)
     document = Document(OUTPUT)
     paragraphs = document.paragraphs
-    for index, text in TEXT.items():
+    translated = {
+        _final_paragraph_index(original_index): text
+        for original_index, text in TEXT.items()
+    }
+    translated.update(INSERTED_TEXT)
+    for index, text in translated.items():
         replace_paragraph(paragraphs[index], text)
     for table_index, header in enumerate(HEADERS.values()):
         table = document.tables[table_index]
@@ -634,7 +745,19 @@ def main() -> int:
             run.font.name = "Times New Roman"
             run.font.size = Pt(7.5)
             run.bold = True
-    for paragraph in paragraphs[90:121]:
+    alt_texts = (
+        "Study-design schematic from molecular data and two classical bases through "
+        "matched quantum, orthogonal, and Fourier branches to scaffold-level evidence.",
+        "Chemical-space projection and molecular-weight, cLogP, and TPSA distributions "
+        "for TDC, external hERG, and B3DB molecules.",
+        "External hERG and B3DB effect decomposition and CatBoost calibration curves.",
+        "Endpoint-level paired differences of ungated QRC versus matched orthogonal "
+        "quadratic features across all 22 TDC ADMET endpoints.",
+    )
+    for shape, alt_text in zip(document.inline_shapes, alt_texts, strict=True):
+        shape._inline.docPr.set("descr", alt_text)
+        shape._inline.docPr.set("title", alt_text)
+    for paragraph in paragraphs[103:134]:
         paragraph.text = (
             paragraph.text.replace("arXiv 预印本", "arXiv preprint")
             .replace("bioRxiv 预印本", "bioRxiv preprint")

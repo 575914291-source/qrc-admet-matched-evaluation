@@ -1,75 +1,83 @@
-# Submission strategy
+# JCAMD submission strategy
 
-## Language
+## Target
 
-English is the better route for this paper.
+Primary target: **Journal of Computer-Aided Molecular Design (JCAMD)**,
+Springer.
 
-Chinese EI-indexed journals offer fewer venues whose scope covers both quantum
-machine learning and molecular ADMET prediction. An English manuscript can be
-submitted to a wider set of applied AI, biomedical computing, cheminformatics,
-and reproducible-benchmark venues.
+The manuscript is positioned as a reproducible, matched-control evaluation of
+quantum molecular features for computer-aided molecular design. It is not
+framed as a general test of whether quantum machine learning can work for
+ADMET.
 
-## Positioning
+## Why the fit is credible
 
-The paper should be submitted as a reproducible matched benchmark and negative
-result. It should not be framed as evidence of general quantum advantage.
+- JCAMD regularly publishes validation, benchmarking, and reanalysis papers.
+- Robinson, Glen, and Lee previously used JCAMD to show that evaluation design
+  can change conclusions in bioactivity-model comparisons.
+- The manuscript contributes a prespecified workflow: matched candidate budgets,
+  five random maps per family, two classical bases, scaffold-level inference,
+  Holm correction, TOST interpretation, independent-source validation, and a
+  released reproduction package.
+- The result is deliberately bounded to five-qubit amplitude encoding, a fixed
+  Hamiltonian reservoir, 15 Pauli readouts, a linear residual head, and exact
+  state-vector simulation.
+
+## Reviewer-facing framing
 
 The strongest contribution statement is:
 
-> A multi-base, matched-control audit shows that fixed five-qubit reservoir
-> residuals do not provide robust ADMET gains beyond equal-capacity quadratic
-> random features, while a source-dependent hERG signal and BBB negative transfer
-> delimit where future QRC work may be worth pursuing.
+> A multi-base, matched-control audit found no robust cross-endpoint or
+> cross-source incremental value for the tested fixed quantum-reservoir
+> residuals. A local hERG signal and BBB negative transfer delimit the
+> conclusion and motivate a reusable evaluation protocol for future QML-ADMET
+> studies.
 
-## EI venue screening
+Do not describe QRC as globally inferior. Use the precise statement that the
+tested system showed no robust transferable increment.
 
-Before submission, verify in Engineering Village or the journal's current
-official abstracting-and-indexing page that:
+## Pre-submission status
 
-1. The journal is currently indexed by Ei Compendex.
-2. The scope explicitly includes artificial intelligence, computational biology,
-   biomedical informatics, cheminformatics, or computational drug discovery.
-3. Research articles may use simulation-only studies with independent validation.
-4. Negative results and benchmark papers are accepted as research contributions.
+- English manuscript and PDF are generated and layout-checked.
+- Supplementary Material and PDF are generated.
+- Four main figures cover design, chemical space, external decomposition and
+  calibration, and endpoint-level primary effects.
+- External AUPRC, Brier, log-loss, calibration, TOST sensitivity, and an
+  independent continuous pIC50 regression are included as boundary analyses.
+- Full split-level predictions, statistical tables, audits, figures, and data
+  provenance are included in the reproduction archive.
+- Public code repository:
+  <https://github.com/575914291-source/qrc-admet-matched-evaluation>
+- CI checks include unit tests and independent result audits.
 
-### Current evidence
+## Remaining author-supplied metadata
 
-- **Engineering Applications of Artificial Intelligence** (Elsevier) lists
-  Ei Compendex on its official abstracting-and-indexing page. It is an
-  engineering-AI journal with a high Impact Factor and broad AI scope. The
-  current paper is a credible fit only if the application and matched-control
-  methodology are foregrounded; competition is high.
-- **Computers in Biology and Medicine**, **Chemometrics and Intelligent
-  Laboratory Systems**, and **Journal of Biomedical Informatics** should not yet
-  be treated as confirmed EI targets. Their official publisher insight pages
-  currently list Scopus, SCIE, Medline, SJR, or SNIP, but not Ei Compendex.
-  Third-party pages do list historical or claimed EI coverage, so Engineering
-  Village must be checked directly before submission.
+Before submission, insert:
 
-Plausible venue categories, subject to current indexing verification:
+- full author names, affiliations, ORCID identifiers, and corresponding author;
+- acknowledgements and funding statement;
+- author contributions and competing-interest declaration;
+- any required CRediT taxonomy;
+- final reference-formatting pass against the live JCAMD template;
+- confirmation in the submission system that the subscription route is used
+  and no mandatory APC is selected.
 
-- applied AI or intelligent systems journals with biomedical applications;
-- biomedical computing or bioinformatics journals with methodological tracks;
-- chemometrics and computational drug-discovery journals;
-- reproducible AI or scientific machine-learning journals.
+## Fee position
 
-Avoid venues from unrelated engineering fields merely because they are EI
-indexed. Scope mismatch is the most likely source of desk rejection.
+The journal is hybrid/subscription; the open-access APC is optional. A
+subscription-route submission should avoid that APC, but page, colour, and
+overlength charges must be checked in the live submission system before final
+submission.
 
-The safest initial order is:
+## Files to upload
 
-1. Use the English manuscript to query Engineering Village by ISSN for candidate
-   journals.
-2. Prioritize journals whose official scope explicitly covers AI methods for
-   biomedical or molecular discovery.
-3. Only then apply journal-specific formatting; do not rebuild the paper for an
-   unverified index claim.
+1. `Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx`
+2. `Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.pdf`
+3. `Supplementary_Material_JCAMD.docx`
+4. `Supplementary_Material_JCAMD.pdf`
+5. `补充材料_qrc_admet_代码与结果_最终.zip`
+6. `COVER_LETTER.md` converted to the journal's required format
+7. Cover letter and highlights pasted into the submission form if requested
 
-## Remaining gaps by venue tier
-
-- Specialist EI journal: current evidence is sufficient after English formatting.
-- Stronger computational-chemistry venue: add a larger external regression cohort
-  or hardware-specific noise experiment.
-- General quantum-technology venue: add real quantum hardware evidence or a
-  substantially different reservoir or encoding mechanism.
-
+Use the GitHub link for the continuously versioned code and the ZIP for the
+frozen submission snapshot.

@@ -148,15 +148,51 @@ def replace_main_figure(document: Document) -> None:
     shape = document.inline_shapes[0]
     relationship_id = shape._inline.graphic.graphicData.pic.blipFill.blip.embed
     image_part = document.part.related_parts[relationship_id]
-    image_part._blob = (ASSET_ROOT / "figures" / "forest_main.png").read_bytes()
+    image_part._blob = (
+        ASSET_ROOT / "figures" / "figure4_primary_effects.png"
+    ).read_bytes()
     shape.width = Mm(158)
     shape.height = Mm(169)
+
+
+def find_paragraph(document: Document, prefix: str):
+    for paragraph in document.paragraphs:
+        if " ".join(paragraph.text.split()).startswith(prefix):
+            return paragraph
+    raise KeyError(f"Paragraph not found: {prefix}")
+
+
+def add_picture_before(
+    anchor,
+    image_path: Path,
+    width_inches: float,
+    alt_text: str,
+):
+    paragraph = anchor.insert_paragraph_before()
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    shape = paragraph.add_run().add_picture(
+        str(image_path),
+        width=Inches(width_inches),
+    )
+    shape._inline.docPr.set("descr", alt_text)
+    shape._inline.docPr.set("title", alt_text)
+    return paragraph
+
+
+def add_caption_before(anchor, text: str):
+    paragraph = anchor.insert_paragraph_before(text)
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph.paragraph_format.space_after = Pt(8)
+    for run in paragraph.runs:
+        set_run_font(run, 9.5, bold=False)
+    return paragraph
 
 
 def main() -> int:
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     shutil.copy2(SOURCE, OUTPUT)
     document = Document(OUTPUT)
+    replace_main_figure(document)
     paragraphs = document.paragraphs
 
     endpoint = pd.read_csv(ASSET_ROOT / "tables" / "endpoint_results.csv")
@@ -176,7 +212,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[3],
-        "固定量子储层能够产生低维非线性分子特征，但其增量价值只有在同等随机实现、同容量经典映射和足够强的基座上才能检验。我们在 TDC ADMET 的 22 个官方端点上，分别以 Morgan-ExtraTrees 和多指纹 MapLight-CatBoost 为基座，比较精确模拟的五比特储层、实正交二次映射和随机傅里叶特征。每个端点采用五个骨架训练/验证划分；每个随机族使用五个独立映射，并在残差空间取平均。未门控 QRC 相对固定的实正交二次对照，在 ExtraTrees 上于 6 个端点更好、16 个更差，在 CatBoost 上于 3 个更好、19 个更差。Holm 校正后没有正向显著端点；ExtraTrees 的 AMES 与 VDss、CatBoost 的 Solubility 出现负向显著。联合门控在 ExtraTrees 和 CatBoost 上分别为 12 好/10 差和 6 好/14 差/2 平，均无正向显著端点。八个端点的 5%–100% 低数据曲线没有显示稳定增量；1,024、4,096 和 16,384 shots 以及三档局部 depolarizing 噪声也没有改变主结论。在五个预设储层参数族和五组等价正交界候选之间的验证集选择同样未产生 Holm 正向端点。外部验证呈来源依赖的例外：CatBoost 在 293 个非重叠 hERG 分子的门控 QRC 比正交映射高 0.040 AUROC，但在 2,317 个非重叠 B3DB BBB 分子上两个基座均显著更差。利用外部集连续标签进行的探索性排序迁移中，CatBoost 的 hERG pIC50 出现未校正候选信号，但在 12 个统一比较的 Holm 校正后消失，且在 BBB logBB 上未复现。在五比特、幅度编码、固定哈密顿储层、15 维 Pauli 读出、线性残差头和精确状态向量仿真下，当前证据不支持跨端点、基座和数据来源稳健的量子增量；该结论不构成对其它编码、可训练线路、更大比特数或真实硬件执行的一般否定。",
+        "量子储层可产生低维非线性分子特征，但其增量价值需要用同输入、同容量和足够强的经典对照检验。我们在 TDC ADMET 的 22 个官方端点上，以 Morgan-ExtraTrees 和 MapLight-CatBoost 为基座，比较精确模拟的五比特幅度编码储层、实正交二次映射和随机傅里叶特征。每个端点使用五个骨架划分，每个随机族使用五个独立映射并在残差空间平均。未门控 QRC 相对正交对照在 ExtraTrees 上为 6 个端点更好、16 个更差，在 CatBoost 上为 3 个更好、19 个更差；Holm 校正后没有正向显著端点，而有三个负向显著端点。门控、联合校正、低数据、有限 shots、模拟噪声和有限参数族搜索均未产生跨基座稳定增量。外部验证呈来源依赖：CatBoost 在 293 个非重叠 hERG 分子上比门控正交对照高 0.040 AUROC，但 2,317 个 B3DB BBB 分子在两个基座上均显著更差。hERG 增益同时包含 QRC 相对基座的提升和正交分支相对基座的下降；连续标签排序与独立 pIC50 回归均未通过统一多重校正。骨架、最近邻和理化性质分析不支持简单化学空间解释。本文的主要贡献是一套可复核的量子分子特征评估流程；结论仅适用于当前五比特固定储层、15 维 Pauli 读出、线性残差头和精确状态向量仿真，不能推广为对其它编码、可训练线路、更大储层或真实硬件的一般否定。",
     )
     set_paragraph(
         paragraphs[4],
@@ -188,7 +224,17 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[7],
-        "本文固定一个范围明确的问题：在相同输入、相同 15 维读出和相同线性残差头下，固定五比特储层是否比实正交二次映射和随机傅里叶特征提供增量？这一增量是否同时出现在 Morgan-ExtraTrees 与 MapLight-CatBoost 两个基座上？验证集门控能否减轻统一启用残差造成的退化？为消除随机族候选数量不一致，每族使用五个独立映射，并在残差空间取平均；主比较预先固定为 QRC 对实正交二次映射。",
+        "本文固定一个范围明确的问题：在相同输入、相同 15 维读出和相同线性残差头下，固定五比特储层是否比实正交二次映射和随机傅里叶特征提供增量？这一增量是否同时出现在 Morgan-ExtraTrees 与 MapLight-CatBoost 两个基座、22 个 TDC 端点和独立外部来源上？研究设计见 Figure 1。本文有三项贡献。第一，将当前 QRC 及其线性残差头形式化为受约束的实二次特征族，并构造同输入、同容量、同映射预算的正交二次对照。第二，在 22 个官方端点上联合检验经典基座、验证门控和多重统计校正。第三，用低数据、有限 shots、模拟噪声、有限参数族搜索、双外部队列、连续标签、独立 pIC50 回归和化学空间审计划定结论边界。",
+    )
+    add_picture_before(
+        paragraphs[8],
+        ASSET_ROOT / "figures" / "figure1_design.png",
+        6.6,
+        "研究流程：TDC 和外部数据经两套经典基座、PCA 幅度编码、QRC、实正交二次和随机傅里叶分支进入匹配残差和验证门控。",
+    )
+    add_caption_before(
+        paragraphs[8],
+        "Figure 1　匹配评估流程。两类数据来源共享两套经典基座、32 维 PCA 幅度输入、五个映射的残差集成和相同门控预算；主对照为固定五比特 QRC 与参数匹配的实正交二次映射。",
     )
     set_paragraph(
         paragraphs[10],
@@ -218,6 +264,20 @@ def main() -> int:
         paragraphs[19],
         "主比较使用未舍入预测，先逐 seed 计算官方指标，再取五个 seed 的均值。AUROC、AUPRC 和 Spearman 的差值定义为新方法减参照，MAE 的差值定义为参照减新方法，使正值统一表示改善。以测试骨架为单位进行 1,000 次配对自助重抽样，给出逐端点 95% 区间；以 1,999 次配对骨架置换计算主比较 p 值，并对 22 个端点使用 Holm 校正。[18–20] 另外报告预设小效应容差下的探索性 TOST：AUROC、AUPRC、Spearman 为 0.01 绝对单位，MAE 为基座 MAE 的 2%。TOST 由两个单侧检验构成；只有其90%置信区间完全落在预设等价边界内且等价检验经 Holm 校正后显著，才解释为“在实际容差下未观察到有意义差异”。结果按三类状态报告：Holm 显著的负差表示显著变差，Holm 显著的正差表示显著改善，等价检验显著表示统计等价，其余为未定；等价不表示两种模型具有相同机制或逐分子相同预测。这些容差是基准可解释性边界，不是临床阈值。",
     )
+    add_caption_before(
+        paragraphs[20],
+        "Supplementary Table S1 给出每个端点的样本数、官方指标和标签摘要；Supplementary Table S2 给出主分析、次级分析、敏感性分析和外部验证的多重校正层级。TOST 在较紧、主分析和较宽容差下的端点计数列于 Supplementary Table S9。Figure 2 进一步给出 TDC、hERG 和 B3DB 的化学空间与基础理化性质分布。",
+    )
+    add_picture_before(
+        paragraphs[20],
+        ASSET_ROOT / "figures" / "figure2_chemical_space.png",
+        6.3,
+        "化学空间图：TDC、外部 hERG 和 B3DB 的 Morgan 指纹投影以及分子量、cLogP、TPSA 分布。",
+    )
+    add_caption_before(
+        paragraphs[20],
+        "Figure 2　化学空间与适用域背景。A，Morgan 半径 2、1,024 位指纹经 20 维 TruncatedSVD、标准化和二维 PCA 的投影；TDC 随机抽取 3,000 个唯一分子，B3DB 随机抽取 500 个唯一分子，hERG 使用全部 293 个分子。B–D，全部唯一 TDC、hERG 和 B3DB 分子的分子量、cLogP 与 TPSA 箱线图。箱线不显示离群点，以保持分布可读。",
+    )
     set_paragraph(
         paragraphs[22],
         "Morgan-ExtraTrees 使用半径 2、512 位 Morgan 指纹，128 棵树、最小叶节点样本数 2 和平方根特征子集预算。回归不改变标签尺度，分类输出类别 1 的概率。每次外层验证使用对应 seed 独立训练；最终测试基座在完整外层训练集上重拟合，训练侧折外预测只用于拟合残差头。",
@@ -230,6 +290,12 @@ def main() -> int:
         paragraphs[25],
         "对训练特征拟合标准化和 32 维 PCA，将 PCA 向量归一化后幅度编码到五个量子比特。固定哈密顿量由标准正态抽样的横场、纵场和环形近邻 ZZ 耦合组成，缩放因子分别为 0.4、0.7 和 0.25，演化时间为 0.5；构造后显式验证 Hermitian 性。读取五个单比特 Z 和十个两两 ZZ 期望，形成 15 维特征。线路演化和读出使用精确状态向量模拟；零向量映射到全零计算基态。精确仿真是本阶段刻意采用的受控实验设计：它隔离固定线路、编码和读出的函数表达能力，避免门误差、读出错误、串扰和比特连通性把“储层结构本身的表现”与“硬件缺陷造成的损失”混在一起。有限 shots 和 depolarizing 分析只用于压力测试，不替代真实硬件验证；硬件执行留作后续独立研究。",
     )
+    design_rationale = paragraphs[26].insert_paragraph_before(
+        "5 qubits 对应 32 个实幅度，因此 32 维 PCA 是本规模下唯一不截断或补零的完整幅度输入；15 个读出由 5 个单比特 Z 和 10 个两两 ZZ 期望构成，与每一对量子比特都保留二阶关联。该设置不是量子硬件容量声明，而是在5 qubits可实现精确状态向量、同维经典对照和完整五映射预算的最小闭合设计。令归一化 PCA 向量为 v，则输入幅度 aⱼ=vⱼ/‖v‖；哈密顿量 H 和演化 U=exp(−iHt) 固定，映射参数不通过测试标签训练。本文不调节 PCA 维度或读出集合，以避免在单一主基准中引入额外的容量搜索。",
+        style=paragraphs[25].style,
+    )
+    for run in design_rationale.runs:
+        set_run_font(run, 10.6)
     set_paragraph(
         paragraphs[28],
         "命题 1　对任一组固定的 15 个对角 Pauli 可观测 Dⱼ 和任意固定酉演化 U，归一化 32 维实输入 a 的读出满足 qⱼ(a)=aᵀAⱼa，其中 Aⱼ=Re(U†DⱼU)。因此，任一无截距线性读出组合都可写成 aᵀMa+b，即固定五比特 QRC 加线性残差头属于由至多 15 个实二次型约束的模型族。证明直接由 (Ua)†Dⱼ(Ua) 展开得到。该命题不表示 QRC 与任一实正交映射等价；它限定了在当前编码和读出下，量子结构能够提供的函数类。",
@@ -260,7 +326,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[36],
-        "表 1 给出两套基座及未门控分支的五 seed 平均官方指标。QRC 相对固定实正交二次对照，在 ExtraTrees 上为 6 个端点更好、16 个更差；在 CatBoost 上为 3 个更好、19 个更差。修正后的 CatBoost 基座本身在 21/22 个端点上优于 ExtraTrees，唯一例外是 CYP2C9 substrate 的 AUPRC。先前 pilot 中方向较一致的 BBB、hERG、Caco2 和 LD50 没有复现同样的信号：相对无残差基座，ExtraTrees 上仅 Caco2 与 LD50 为正，CatBoost 上仅 hERG 的点估计微正；相对实正交映射，两个基座均至多有 2/4 个端点为正，均无经多重校正的显著改善。",
+        "表 1 给出两套基座及未门控分支的五 seed 平均官方指标，Figure 4 同时展示端点级差异和区间。QRC 相对固定实正交二次对照，在 ExtraTrees 上为 6 个端点更好、16 个更差；在 CatBoost 上为 3 个更好、19 个更差。修正后的 CatBoost 基座本身在 21/22 个端点上优于 ExtraTrees，唯一例外是 CYP2C9 substrate 的 AUPRC。先前 pilot 中方向较一致的 BBB、hERG、Caco2 和 LD50 没有复现同样的信号：相对无残差基座，ExtraTrees 上仅 Caco2 与 LD50 为正，CatBoost 上仅 hERG 的点估计微正；相对实正交映射，两个基座均至多有 2/4 个端点为正，均无经多重校正的显著改善。",
     )
     set_paragraph(paragraphs[37], "表 1　两个基座及未门控分支的五 seed 平均官方指标")
     set_paragraph(paragraphs[39], "表 2　QRC 相对实正交二次映射的端点级效应与 Holm 校正")
@@ -323,11 +389,27 @@ def main() -> int:
     for run in external_paragraph.runs:
         set_run_font(run, 10.6)
     external_result_paragraph = paragraphs[52].insert_paragraph_before(
-        "在 hERG 外部集上，门控 QRC 相对同规则门控正交界在 ExtraTrees 上高 0.0112 AUROC（95% CI [−0.0029, 0.0246]，Holm p=0.200），在 CatBoost 上高 0.0402（[0.0221, 0.0591]，Holm p=0.002）。在 B3DB BBB 上，同一比较在 ExtraTrees 上为 −0.0046（[−0.0076, −0.0019]，Holm p=0.002），在 CatBoost 上为 −0.0034（[−0.0065, −0.0006]，Holm p=0.016）。联合门控也重复了这一分化：hERG 的 CatBoost 正向差值为 0.0298，而 B3DB 在两个基座均为负且 Holm 显著。hERG 信号与 BBB 负迁移同时存在，说明固定 QRC 的表现依赖外部来源，不能支持普遍可迁移优势。为检查分类概率是否保留连续排序信息，我们在不重新训练模型的情况下补充了探索性迁移分析：CatBoost 门控 QRC 对门控正交映射的 hERG pIC50 Spearman 差为 0.043（95% CI [0.012, 0.072]，198 个测试骨架，3/5 个 split 为正，未校正 p=0.020），ExtraTrees 仅为 0.004；B3DB 的 logBB 子集有 613/2,317 个分子，效应在 ExtraTrees 与 CatBoost 上分别为 −0.002 与 +0.001。对全部 12 个预设探索性比较统一作 Holm 校正后，最小 p=0.234。该分析只检验二分类模型的连续标签排序迁移，不是独立训练的连续值回归队列，且 B3DB 连续标签子集的阳性率为 86.8%，不能代表完整外部集。外部效应区间见补充图 S2。",
+        "在 hERG 外部集上，门控 QRC 相对同规则门控正交界在 ExtraTrees 上高 0.0112 AUROC（95% CI [−0.0029, 0.0246]，Holm p=0.200），在 CatBoost 上高 0.0402（[0.0221, 0.0591]，Holm p=0.002）。在 B3DB BBB 上，同一比较在 ExtraTrees 上为 −0.0046（[−0.0076, −0.0019]，Holm p=0.002），在 CatBoost 上为 −0.0034（[−0.0065, −0.0006]，Holm p=0.016）。联合门控也重复了这一分化：hERG 的 CatBoost 正向差值为 0.0298，而 B3DB 在两个基座均为负且 Holm 显著。hERG 信号与 BBB 负迁移同时存在，说明固定 QRC 的表现依赖外部来源，不能支持普遍可迁移优势。外部效应的完整区间见 Supplementary Figure S2。",
         style=paragraphs[51].style,
     )
     for run in external_result_paragraph.runs:
         set_run_font(run, 10.6)
+    external_diagnostics_paragraph = paragraphs[52].insert_paragraph_before(
+        "为区分 QRC 的增益与正交分支的退化，我们进一步分解已有预测，结果见 Figure 3。CatBoost/hERG 中，门控 QRC 相对无残差基座为 +0.0285 AUROC（95% CI [0.0137, 0.0437]），门控正交相对基座为 −0.0117（[−0.0216, −0.0011]）；因此 +0.0402 的主比较差值同时包含 QRC 提升和正交分支下降。hERG 的 QRC 对正交 AUPRC 差为 +0.0304，Brier 与 log-loss 改善分别为 +0.0038 与 +0.0363；但两分支的校准斜率仅约 0.15–0.26，概率仍明显失校准。B3DB 中 QRC 对正交 AUPRC 在 ExtraTrees 与 CatBoost 上分别为 −0.0047 和 −0.0061，Brier 与 log-loss 亦不支持 QRC。完整分解与校准数值见 Supplementary Table S7 和 S8。连续排序迁移分析显示，CatBoost 的 hERG pIC50 Spearman 差为 +0.043（未校正 p=0.020），但在 12 个比较的 Holm 校正后消失；BBB logBB 未复现。该排序迁移不是独立训练的连续值回归，且 B3DB 子集阳性率为 86.8%。",
+        style=paragraphs[51].style,
+    )
+    for run in external_diagnostics_paragraph.runs:
+        set_run_font(run, 10.6)
+    add_picture_before(
+        paragraphs[52],
+        ASSET_ROOT / "figures" / "figure3_external_diagnostics.png",
+        6.25,
+        "外部验证分解与校准：hERG 和 B3DB 中 QRC、正交分支相对基座的 AUROC 差，以及 CatBoost 五种子平均概率的校准曲线。",
+    )
+    add_caption_before(
+        paragraphs[52],
+        "Figure 3　外部分类的效应分解与校准。A–B，门控 QRC、门控正交相对基座，以及 QRC 相对正交的 AUROC 差；正值表示前者更好。C–D，CatBoost 五种子平均预测概率的五分位校准曲线；虚线为完美校准。分解用于解释主比较，不替代预先规定的外部 AUROC 检验。",
+    )
     noise_heading = paragraphs[52].insert_paragraph_before(
         "5.6 模拟退相干", style=document.styles["Heading 2"]
     )
@@ -360,8 +442,25 @@ def main() -> int:
         set_run_font(run, 10.6)
     set_paragraph(
         paragraphs[53],
-        "图 1　未门控 QRC 相对实正交二次映射的端点级差异。分类指标按绝对单位，MAE 按参照 MAE 的相对百分比，Spearman 按绝对单位分面展示；线段为 95% 骨架聚类自助区间，红色表示 Holm 校正后显著。",
+        "Figure 4　未门控 QRC 相对实正交二次映射的端点级差异。分类指标按绝对单位，MAE 按参照 MAE 的相对百分比，Spearman 按绝对单位分面展示；线段为 95% 骨架聚类自助区间，红色表示 Holm 校正后显著。",
     )
+    discussion_heading = find_paragraph(document, "6 讨论")
+    discussion_heading.insert_paragraph_before(
+        "5.8 独立连续 pIC50 外部回归",
+        style=document.styles["Heading 2"],
+    )
+    regression_paragraph_1 = discussion_heading.insert_paragraph_before(
+        "为避免把二分类概率的连续排序等同于真正的连续值预测，我们补充了固定的 ToxTree hERG pIC50 外部回归。来源 Dev-set 在去除 TDC 重叠后按 Bemis–Murcko 骨架切分为6,895条训练和985条验证记录；来源 Test-set 再去除与 TDC 以及外部训练骨架重叠的分子，保留214条测试记录、155个测试骨架。QRC、正交二次、随机傅里叶和线性残差头沿用TDC主协议，未使用外部测试标签选择映射种子、PCA维度、正则化或超参数。",
+        style=paragraphs[53].style,
+    )
+    regression_paragraph_2 = discussion_heading.insert_paragraph_before(
+        "五个模型种子的连续回归未显示可确认的 QRC 增量。QRC 对正交制的 Spearman 差在ExtraTrees上为+0.0229（95% CI [−0.0121, 0.0608]），在CatBoost上为+0.0093（[−0.0168, 0.0325]）；QRC对CatBoost基座为+0.0292（[−0.0034, 0.0604]）。MAE差异接近零。对12个指标、基座和对照比较统一作Holm校正后，没有任何比较显著。该外部队列独立于TDC标签，但只有214个分子，不能单独提供高功效验证；完整结果见 Supplementary Figure S4 和 Supplementary Table S10。",
+        style=paragraphs[53].style,
+    )
+    for run in regression_paragraph_1.runs:
+        set_run_font(run, 10.6)
+    for run in regression_paragraph_2.runs:
+        set_run_font(run, 10.6)
 
     set_paragraph(
         paragraphs[56],
@@ -377,7 +476,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[61],
-        "强基座实验是本文与先前初步 pilot 的关键差异。多指纹 CatBoost 在 21/22 个端点优于 Morgan-ExtraTrees，但 QRC 在该基座上的相对表现进一步下降。联合门控允许 QRC 与正交分支一起使用，仍未得到跨端点稳定增量；有限采样、低数据曲线和模拟退相干也没有改变该结论。外部 hERG 的 CatBoost 正向结果说明量子分支可能在特定来源上保留候选信号，pIC50 的排序迁移也为这一局部方向提供了有限的旁证；但该连续标签分析未通过统一多重校正，B3DB 的 logBB 迁移接近零，且 BBB 分类的显著负迁移排除了“跨来源稳健”解释。对计算药物设计实践而言，固定幅度编码 QRC 目前不应作为通用 ADMET 描述符；后续若提出新的量子编码，应直接在这类强基座上报告，并保留同输入、同容量、同候选预算的经典对照、真正独立的回归队列和外部来源验证。",
+        "强基座实验是本文与先前初步 pilot 的关键差异。多指纹 CatBoost 在 21/22 个端点优于 Morgan-ExtraTrees，但 QRC 在该基座上的相对表现进一步下降。联合门控允许 QRC 与正交分支一起使用，仍未得到跨端点稳定增量；有限采样、低数据曲线和模拟退相干也没有改变该结论。外部 hERG 的 CatBoost 正向结果说明量子分支可能在特定来源上保留候选信号，pIC50 的排序迁移和独立连续回归都呈现同一弱方向，但前者未通过12项 Holm 校正，后者的95%区间跨零且无任何校正后显著比较。B3DB 的 logBB 迁移接近零，且 BBB 分类的显著负迁移排除了“跨来源稳健”解释。对计算药物设计实践而言，固定幅度编码 QRC 目前不应作为通用 ADMET 描述符；后续若提出新的量子编码，应直接在这类强基座上报告，并保留同输入、同容量、同候选预算的经典对照、真正独立的回归队列和外部来源验证。",
     )
     chemical_heading = paragraphs[62].insert_paragraph_before(
         "6.4 化学空间与数据集来源对信号的影响",
@@ -388,7 +487,7 @@ def main() -> int:
         style=paragraphs[61].style,
     )
     chemical_result_paragraph = paragraphs[62].insert_paragraph_before(
-        "在按上述骨架分组重算已有预测时，CatBoost的hERG门控QRC减正交界在共享骨架子组为−0.0026 AUROC（23个分子），在未见骨架子组为+0.0452（270个）；最近邻相似度最高四分之一子组为+0.0196，其余三个四分位为+0.0494。也就是说，hERG的正向点估计并未集中在与TDC共享骨架的分子上，现有数据不支持“骨架重叠导致hERG增益”的简单解释。BBB的负效应在共享骨架、未见骨架和近邻相似度分层中均存在。上述分层只定位信号出现的化学子集，没有控制来源、测定批次或标签定义，不能据此推断因果化学机理。",
+        "在按上述骨架分组重算已有预测时，CatBoost的hERG门控QRC减正交界在共享骨架子组为−0.0026 AUROC（23个分子），在未见骨架子组为+0.0452（270个）；最近邻相似度最高四分之一子组为+0.0196，其余三个四分位为+0.0494。也就是说，hERG的正向点估计并未集中在与TDC共享骨架的分子上，现有数据不支持“骨架重叠导致hERG增益”的简单解释。BBB的负效应在共享骨架、未见骨架和近邻相似度分层中均存在。完整来源审计与hERG分层见Supplementary Table S5和S6。上述分层只定位信号出现的化学子集，没有控制来源、测定批次或标签定义，不能据此推断因果化学机理。",
         style=paragraphs[61].style,
     )
     chemical_scope_paragraph = paragraphs[62].insert_paragraph_before(
@@ -396,7 +495,11 @@ def main() -> int:
         style=paragraphs[61].style,
     )
     chemical_interpretation_paragraph = paragraphs[62].insert_paragraph_before(
-        "hERG的点估计改善只能作为待验证的候选信号，不能等价为量子特征学到了心脏毒性机理；B3DB的显著负迁移也不能解释为量子方法在ADMET中普遍无效。已有QML-ADMET报告通常聚焦一个或少数端点，采用有限的随机实现，且较少同时提供同输入、同容量经典映射和独立来源验证；本文不与不同编码或训练协议作等价比判，而是提供一套可复用的最低评估流程。其核心要求是预先固定主对照、匹配候选与映射预算、按骨架聚类推断、进行多重检验和等价性解释，并报告跨基座及跨来源结果。",
+        "hERG的点估计改善只能作为待验证的候选信号，不能等价为量子特征学到了心脏毒性机理；B3DB的显著负迁移也不能解释为量子方法在ADMET中普遍无效。本文直接回顾的QML-ADMET研究分别采用固定储层、Hamiltonian衍生特征、量子启发预处理、线路搜索或联合训练残差，任务数量、对照和外部验证设置不同，不能作等价比判；逐项比较见 Supplementary Table S4。本文提供的是一套可复用的最低评估流程：预先固定主对照、匹配候选与映射预算、按骨架聚类推断、进行多重检验和等价性解释，并报告跨基座及跨来源结果。",
+        style=paragraphs[61].style,
+    )
+    computational_scope_paragraph = paragraphs[62].insert_paragraph_before(
+        "计算资源方面，五个量子比特的精确状态向量仿真本身不是量子加速演示，也不提供硬件运行时间估计。本文选择该规模是为了精确构造同输入、同读出数的二次型对照，并避免噪声把线路表达能力与硬件缺陷混杂。当前结果既不支持量子运行优势，也不能用于推断更大量子储层、容错量子计算或特定硬件拓扑的可行性；这些属于不同实验问题。",
         style=paragraphs[61].style,
     )
     for paragraph in (
@@ -404,6 +507,7 @@ def main() -> int:
         chemical_result_paragraph,
         chemical_scope_paragraph,
         chemical_interpretation_paragraph,
+        computational_scope_paragraph,
     ):
         for run in paragraph.runs:
             set_run_font(run, 10.6)
@@ -413,15 +517,15 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[64],
-        "本研究只评估每分子独立输入和一次固定五比特演化。有限采样分析对每个 Pauli 期望独立使用二项分布；噪声分析采用简化局域 depolarizing 模型，没有模拟门错误、泄漏、读出串扰或测量调度复用，也没有检验可训练线路、任务条件幅度编码或不同 PCA 维度。低数据分析只覆盖八个代表端点，较小端点受 96 条最小训练集约束，不能代表所有 ADMET 任务的比例曲线。外部验证的主分析仍只包含两个分类端点；hERG 与 TDC 二分类阈值虽已按来源说明对齐，但仍存在测定来源和标签生成差异。补充的连续标签分析只是把二分类输出用于排序，不是独立训练的连续值回归评估；B3DB 的 logBB 仅在 613/2,317 个非重叠分子上可用，且阳性高度富集，不能代表完整 BBB 化学空间。随机映射仅扩展到每个族五个实现；真实量子硬件上的执行成本、退相干和比特连通性未纳入推断。因此，本文的比较只适用于五比特、幅度编码、固定哈密顿储层、15 维 Pauli 读出、线性残差头和精确仿真组成的当前模型族；不能由此推断其它量子表示或真实硬件同样缺少价值。TDC 官方测试集的重复使用也可能压低对未见化学系列的泛化能力。",
+        "本研究只评估每分子独立输入和一次固定五比特演化。有限采样分析对每个 Pauli 期望独立使用二项分布；噪声分析采用简化局域 depolarizing 模型，没有模拟门错误、泄漏、读出串扰或测量调度复用，也没有检验可训练线路、任务条件幅度编码或不同PCA维度。低数据分析只覆盖八个代表端点，较小端点受96条最小训练集约束，不能代表所有ADMET任务的比例曲线。外部验证的主分析仍只包含两个分类端点；hERG与TDC二分类阈值虽已按来源说明对齐，但仍存在测定来源和标签生成差异。补充的连续标签排序只是把二分类输出用于连续标签，不是独立训练评估；独立pIC50回归使用214条测试记录和155个骨架，虽采用固定协议且无显著泄漏，但统计功效有限。B3DB的logBB仅在613/2,317个非重叠分子上可用，且阳性高度富集，不能代表完整BBB化学空间。化学空间图使用Morgan指纹的线性降维和三个基础描述符，不等于完整适用域模型；TOST计数也依赖预设容差。随机映射仅扩展到每个族五个实现；真实量子硬件上的执行成本、退相干和比特连通性未纳入推断。因此，本文的比较只适用于五比特、幅度编码、固定哈密顿储层、15维Pauli读出、线性残差头和精确仿真组成的当前模型族；不能由此推断其它量子表示或真实硬件同样缺少价值。TDC官方测试集的重复使用也可能压低对未见化学系列的泛化能力。",
     )
     set_paragraph(
         paragraphs[66],
-        "在 TDC ADMET 的 22 个官方端点上，固定五比特储层残差没有表现出相对同容量实正交二次映射的稳定增量；这一结果在 Morgan-ExtraTrees 和更强的 MapLight-CatBoost 基座上均成立。验证门控可以把部分不利残差压回经典基座，但没有产生稳定超越门控经典的证据。外部hERG与B3DB BBB的分歧，以及骨架和近邻相似度分层的结果，将现有证据限定为来源依赖的局部信号，而不是可识别的通用化学规律。连续标签排序迁移同样只在 CatBoost/hERG 的未校正分析中显示候选方向，统一校正后不显著，不能替代独立回归验证。本文的主要贡献是给出一套可复核的QML分子预测评估流程，并把结论限定于五比特幅度编码、固定哈密顿储层、15维Pauli读出、线性残差头和精确仿真的当前设置；其它编码、可训练线路、更大比特数和真实硬件仍需独立评价。",
+        "在TDC ADMET的22个官方端点上，固定五比特储层残差没有表现出相对同容量实正交二次映射的稳定增量；这一结果在Morgan-ExtraTrees和更强的MapLight-CatBoost基座上均成立。验证门控可以把部分不利残差压回经典基座，但没有产生稳定超越门控经典的证据。外部hERG与B3DB BBB的分歧，以及骨架、近邻相似度和理化性质分层的结果，将现有证据限定为来源依赖的局部信号，而不是可识别的通用化学规律。连续标签排序和独立pIC50回归都只在CatBoost/hERG上显示未校正的弱正向方向，统一Holm校正后没有显著比较，不能支持稳定回归增量。本文的主要贡献是给出一套可复核的QML分子预测评估流程，并把结论限定于五比特幅度编码、固定哈密顿储层、15维Pauli读出、线性残差头和精确仿真的当前设置；其它编码、可训练线路、更大比特数和真实硬件仍需独立评价。",
     )
     set_paragraph(
         paragraphs[68],
-        "TDC 官方归档可通过 Harvard Dataverse 文件 4426004 获取，SHA-256 为 bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部 hERG 数据来自 Zenodo 5807719，BBB 数据来自 B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko 骨架重叠和最近邻相似度审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，提交归档另附完整逐 split 预测和补充材料。复现包还包含数据处理、五 seed scaffold 划分、五个随机映射、基座配置、全部逐 split 预测、联合门控、有限 shots、低数据曲线、外部端点结果、连续标签迁移分析、模拟噪声、统计脚本和环境锁定文件。MapLight 参考实现及其 MIT 许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
+        "TDC官方归档可通过Harvard Dataverse文件4426004获取，SHA-256为bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部hERG数据来自Zenodo 5807719，BBB数据来自B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko骨架重叠、最近邻相似度和理化性质审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，冻结版本为v1.1.0，提交归档另附完整逐split预测和补充材料。复现包还包含五seed scaffold划分、五个随机映射、基座配置、联合门控、有限shots、低数据曲线、外部端点分解与校准、连续标签、独立pIC50回归、模拟噪声、有限参数族、TOST敏感性、统计脚本、环境锁定和图形生成代码。MapLight参考实现及其MIT许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
     )
 
     table_1 = document.tables[0]
@@ -529,25 +633,11 @@ def main() -> int:
         )
     fill_table(table_4, rows_4, [2.15, 0.82, 0.82, 0.92, 0.92])
 
-    table_5 = document.tables[4]
-    rows_5 = [["Endpoint", "Metric", "QRC−Orth", "95% CI", "Raw p", "Holm p", "Holm equiv. p"]]
-    for spec in TASKS:
-        row = primary_index.loc[("catboost", spec.name)]
-        rows_5.append(
-            [
-                DISPLAY[spec.name],
-                spec.metric,
-                f"{row.effect_better_positive:+.4f}",
-                f"[{row.ci_low:+.4f}, {row.ci_high:+.4f}]",
-                f"{row.permutation_p:.4f}",
-                f"{row.holm_p:.4f}",
-                f"{row.holm_equivalence_p:.4f}",
-            ]
-        )
-    fill_table(table_5, rows_5, [1.05, 0.55, 0.80, 1.32, 0.62, 0.62, 0.82])
-
-    replace_main_figure(document)
     add_references(document, paragraphs[94])
+    appendix_table = document.tables[4]
+    appendix_table._element.getparent().remove(appendix_table._element)
+    for trailing in (paragraphs[94], paragraphs[95]):
+        trailing._element.getparent().remove(trailing._element)
     document.save(OUTPUT)
     print(OUTPUT)
     return 0

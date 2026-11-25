@@ -30,6 +30,15 @@ jobs:
           python -m src.audit_low_data
           python -m src.audit_external
           python -m src.analyze_continuous_transfer
+          python -m src.analyze_chemical_space
+          python -m src.analyze_external_diagnostics
+          python -m src.analyze_tost_sensitivity
+          python -m src.report_external_regression
+          python -m src.audit_external_regression
+          python -m src.make_manuscript_assets
+          python -m src.build_design_figure
+          python -m src.build_extended_tables
+          python -m src.build_extended_figures
           python -m src.audit_noise
           python -m src.audit_tuned_qrc
           python -m src.domain_audit

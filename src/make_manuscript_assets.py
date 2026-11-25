@@ -269,8 +269,8 @@ def main() -> int:
         "Ungated QRC minus matched real-orthogonal quadratic features",
         fontsize=13,
     )
-    fig.savefig(ASSET_ROOT / "figures" / "forest_main.png", dpi=300)
-    fig.savefig(ASSET_ROOT / "figures" / "forest_main.pdf")
+    fig.savefig(ASSET_ROOT / "figures" / "figure4_primary_effects.png", dpi=300)
+    fig.savefig(ASSET_ROOT / "figures" / "figure4_primary_effects.pdf")
     plt.close(fig)
 
     gate_counts = (

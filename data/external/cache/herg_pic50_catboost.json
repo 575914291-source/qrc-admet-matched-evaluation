@@ -1,0 +1,10 @@
+{
+  "shape": [
+    8094,
+    2563
+  ],
+  "dtype": "float32",
+  "order_hash": "86de183211c55839c3d20cf24ed512a6eb738294ea9005c2be29fe6bc5208510",
+  "base": "catboost",
+  "elapsed_seconds": 22.636683702468872
+}

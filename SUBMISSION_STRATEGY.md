@@ -40,6 +40,10 @@ tested system showed no robust transferable increment.
 
 - English manuscript and PDF are generated and layout-checked.
 - Supplementary Material and PDF are generated.
+- Four main figures cover design, chemical space, external decomposition and
+  calibration, and endpoint-level primary effects.
+- External AUPRC, Brier, log-loss, calibration, TOST sensitivity, and an
+  independent continuous pIC50 regression are included as boundary analyses.
 - Full split-level predictions, statistical tables, audits, figures, and data
   provenance are included in the reproduction archive.
 - Public code repository:

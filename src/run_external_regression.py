@@ -17,7 +17,11 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 
 from src.build_features import _fixed_count_to_array, _reference_runtime
 from src.config import MAP_SEEDS, RESULTS_ROOT
-from src.data import write_json
+from src.data import (
+    SMILES_TO_SCAFFOLD,
+    load_task_frames,
+    write_json,
+)
 from src.external_data import (
     CACHE_ROOT as EXTERNAL_CACHE_ROOT,
     EXTERNAL_ROOT,
@@ -108,8 +112,17 @@ def prepare_regression_frames() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFram
     dev = frame[frame["USED_AS"].eq("Dev-set")].reset_index(drop=True)
     test_before = frame[frame["USED_AS"].eq("Test-set")].reset_index(drop=True)
     dev_scaffolds = set(dev["scaffold"])
-    test_leak = test_before["scaffold"].isin(dev_scaffolds)
-    test = test_before[~test_leak].reset_index(drop=True)
+    tdc_frames = load_task_frames("herg")
+    tdc_scaffolds = {
+        SMILES_TO_SCAFFOLD[smiles]
+        for split in (tdc_frames.train_val, tdc_frames.test)
+        for smiles in split["Drug"].astype(str)
+    }
+    external_dev_leak = test_before["scaffold"].isin(dev_scaffolds)
+    tdc_scaffold_leak = test_before["scaffold"].isin(tdc_scaffolds)
+    test = test_before[
+        ~(external_dev_leak | tdc_scaffold_leak)
+    ].reset_index(drop=True)
     if not test["scaffold"].is_unique:
         # Multiple source-test molecules can share a scaffold; this is allowed.
         pass
@@ -135,15 +148,22 @@ def prepare_regression_frames() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFram
         "target": "PIC50",
         "split_protocol": (
             "source-defined Dev-set/Test-set; TDC canonical overlap removed; "
-            "test scaffolds shared with the external Dev-set removed; Dev-set "
-            "split 87.5/12.5 by Bemis-Murcko scaffold"
+            "test scaffolds shared with either the external Dev-set or the TDC "
+            "hERG archive removed; Dev-set split 87.5/12.5 by Bemis-Murcko "
+            "scaffold"
         ),
         "split_seed": SPLIT_SEED,
         "source_rows": before,
         "removed_invalid_or_duplicate": before - after_deduplication,
         "removed_tdc_canonical_overlap": removed_tdc,
         "external_dev": int(len(dev)),
-        "removed_test_scaffold_leakage": int(test_leak.sum()),
+        "removed_test_scaffold_leakage_external_dev": int(
+            external_dev_leak.sum()
+        ),
+        "removed_test_scaffold_overlap_tdc": int(tdc_scaffold_leak.sum()),
+        "removed_test_scaffold_leakage_total": int(
+            (external_dev_leak | tdc_scaffold_leak).sum()
+        ),
         "external_test": int(len(test)),
         "train": int(len(train)),
         "valid": int(len(valid)),

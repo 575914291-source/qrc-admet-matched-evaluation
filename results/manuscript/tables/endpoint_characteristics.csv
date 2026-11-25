@@ -1,0 +1,23 @@
+﻿endpoint,task_type,metric,n_train_valid,n_test,train_valid_label_summary,test_label_summary
+caco2_wang,regression,MAE,728,182,median -5.09 (IQR -5.71--4.61),median -5.3 (IQR -5.82--4.74)
+hia_hou,classification,AUROC,461,117,88.9% positive,76.9% positive
+pgp_broccatelli,classification,AUROC,973,245,54.1% positive,50.6% positive
+bioavailability_ma,classification,AUROC,512,128,77.1% positive,75.8% positive
+lipophilicity_astrazeneca,regression,MAE,3360,840,median 2.32 (IQR 1.37-3.07),median 2.5 (IQR 1.6-3.24)
+solubility_aqsoldb,regression,MAE,7985,1997,median -2.47 (IQR -4.17--1.07),median -3.2 (IQR -4.71--1.72)
+bbb_martins,classification,AUROC,1624,406,75.3% positive,80.8% positive
+ppbr_az,regression,MAE,2231,559,median 94.7 (IQR 82.4-98.4),median 94.7 (IQR 83-98.5)
+vdss_lombardo,regression,Spearman,904,226,median 1 (IQR 0.3-3.1),median 0.76 (IQR 0.333-1.88)
+cyp2c9_veith,classification,AUPRC,9673,2419,33.9% positive,31.8% positive
+cyp2d6_veith,classification,AUPRC,10504,2626,19.7% positive,16.9% positive
+cyp3a4_veith,classification,AUPRC,9861,2467,40.8% positive,43.9% positive
+cyp2c9_substrate_carbonmangels,classification,AUPRC,534,135,19.3% positive,28.1% positive
+cyp3a4_substrate_carbonmangels,classification,AUROC,535,135,51.6% positive,58.5% positive
+cyp2d6_substrate_carbonmangels,classification,AUPRC,532,135,27.8% positive,31.9% positive
+half_life_obach,regression,Spearman,532,135,median 4.25 (IQR 1.7-11),median 3.9 (IQR 1.8-9.35)
+clearance_hepatocyte_az,regression,Spearman,970,243,median 19 (IQR 6-64),median 18.2 (IQR 5.88-62)
+clearance_microsome_az,regression,Spearman,881,221,median 14.1 (IQR 4-45.7),median 8 (IQR 3-33)
+ld50_zhu,regression,MAE,5907,1478,median 2.32 (IQR 1.82-2.96),median 2.56 (IQR 2.05-3.42)
+herg,classification,AUROC,523,132,67.7% positive,73.5% positive
+ames,classification,AUROC,5821,1457,53.3% positive,59.7% positive
+dili,classification,AUROC,379,96,49.1% positive,52.1% positive

@@ -10,6 +10,15 @@
   binary cutoff described in the ToxTree manuscript.
 - After canonical deduplication and removal of exact TDC hERG overlaps: 293
   external molecules.
+- Supplementary continuous-regression study: source `Dev-set` molecules are
+  used for training and validation after canonical deduplication and removal
+  of exact TDC hERG overlaps. Source `Test-set` molecules are held out, with
+  canonical TDC overlaps and scaffolds shared with the external `Dev-set`
+  removed. Test scaffolds represented anywhere in the TDC hERG archive are
+  removed as a stricter structural-independence check. Final counts are 6,895
+  train, 985 validation, and 214 test molecules (155 test scaffolds). No
+  external labels were used to tune the reservoir seeds, PCA dimension,
+  residual-head penalties, or base-model hyperparameters.
 
 ## Blood-brain barrier
 

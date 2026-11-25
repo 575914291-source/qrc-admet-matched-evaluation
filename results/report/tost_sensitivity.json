@@ -1,0 +1,53 @@
+{
+  "replicates": 1000,
+  "margin_definitions": {
+    "absolute": {
+      "tight": 0.005,
+      "primary": 0.01,
+      "wide": 0.02
+    },
+    "MAE_relative": {
+      "tight": 0.01,
+      "primary": 0.02,
+      "wide": 0.04
+    }
+  },
+  "summary": [
+    {
+      "base": "catboost",
+      "margin_label": "primary",
+      "equivalent_endpoints": 4,
+      "endpoints": 22
+    },
+    {
+      "base": "catboost",
+      "margin_label": "tight",
+      "equivalent_endpoints": 2,
+      "endpoints": 22
+    },
+    {
+      "base": "catboost",
+      "margin_label": "wide",
+      "equivalent_endpoints": 6,
+      "endpoints": 22
+    },
+    {
+      "base": "extra_trees",
+      "margin_label": "primary",
+      "equivalent_endpoints": 3,
+      "endpoints": 22
+    },
+    {
+      "base": "extra_trees",
+      "margin_label": "tight",
+      "equivalent_endpoints": 1,
+      "endpoints": 22
+    },
+    {
+      "base": "extra_trees",
+      "margin_label": "wide",
+      "equivalent_endpoints": 4,
+      "endpoints": 22
+    }
+  ]
+}
