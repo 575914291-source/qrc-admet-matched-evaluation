@@ -1,0 +1,58 @@
+{
+  "base": "extra_trees",
+  "task": "ld50_zhu",
+  "split_seed": 2,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 2,
+      "shots": 1024,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5160506382878008,
+      "test_score": 0.660945068075053,
+      "ideal_qrc_gated_score": 0.660945068075053,
+      "orth_gated_score": 0.660945068075053,
+      "base_score": 0.660945068075053,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    },
+    {
+      "base": "extra_trees",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 2,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5160506382878008,
+      "test_score": 0.660945068075053,
+      "ideal_qrc_gated_score": 0.660945068075053,
+      "orth_gated_score": 0.660945068075053,
+      "base_score": 0.660945068075053,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    },
+    {
+      "base": "extra_trees",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 2,
+      "shots": 16384,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5160506382878008,
+      "test_score": 0.660945068075053,
+      "ideal_qrc_gated_score": 0.660945068075053,
+      "orth_gated_score": 0.660945068075053,
+      "base_score": 0.660945068075053,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    }
+  ]
+}

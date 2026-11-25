@@ -1,0 +1,11 @@
+﻿base,target_fraction,endpoints,qrc_better_ungated,qrc_worse_ungated,qrc_better_gated,qrc_worse_gated
+catboost,0.05,8,1,7,4,3
+catboost,0.1,8,0,8,3,4
+catboost,0.2,8,1,7,4,4
+catboost,0.4,8,0,8,4,4
+catboost,1.0,8,1,7,1,7
+extra_trees,0.05,8,2,6,4,4
+extra_trees,0.1,8,0,8,4,4
+extra_trees,0.2,8,1,7,6,2
+extra_trees,0.4,8,0,8,3,5
+extra_trees,1.0,8,2,6,5,3

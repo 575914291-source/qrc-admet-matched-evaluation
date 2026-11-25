@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software or the associated benchmark, cite the manuscript and this repository."
+title: "QRC-ADMET matched evaluation"
+abstract: "Code and locked results for a matched evaluation of fixed five-qubit quantum reservoir residuals on 22 TDC ADMET endpoints."
+type: software
+authors:
+  - name: "QRC-ADMET contributors"
+year: 2026
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-25"
+repository-code: "https://github.com/575914291-source/qrc-admet-matched-evaluation"
+keywords:
+  - ADMET
+  - quantum reservoir computing
+  - matched controls
+  - reproducibility
+  - Therapeutics Data Commons

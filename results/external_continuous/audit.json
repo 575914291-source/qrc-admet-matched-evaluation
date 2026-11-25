@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "analysis_type": "exploratory_continuous_label_ranking_transfer",
+  "runs": 20,
+  "bootstrap_replicates": 1000,
+  "permutation_replicates": 1999,
+  "multiplicity": "Holm across all 12 pre-specified exploratory contrasts",
+  "tasks": {
+    "herg": {
+      "continuous_label": "PIC50",
+      "retained_external": 293,
+      "continuous_available": 293,
+      "continuous_missing": 0,
+      "continuous_coverage": 1.0,
+      "binary_positive_rate_in_continuous_subset": 0.764505119453925,
+      "continuous_min": 3.49,
+      "continuous_max": 8.82,
+      "continuous_mean": 5.110955631399317
+    },
+    "bbb_martins": {
+      "continuous_label": "logBB",
+      "retained_external": 2317,
+      "continuous_available": 613,
+      "continuous_missing": 1704,
+      "continuous_coverage": 0.2645662494605093,
+      "binary_positive_rate_in_continuous_subset": 0.867862969004894,
+      "continuous_min": -2.69,
+      "continuous_max": 1.7,
+      "continuous_mean": -0.13955954323001638
+    }
+  },
+  "interpretation_limit": "Binary-trained model outputs were ranked against continuous labels. This is not an independently trained regression cohort.",
+  "checks": [
+    "reconstructed continuous-label rows align with saved external predictions",
+    "canonical non-isomeric overlap with TDC is removed",
+    "paired scaffold bootstrap and scaffold permutation are used",
+    "the B3DB continuous subset is reported with coverage and class enrichment"
+  ]
+}

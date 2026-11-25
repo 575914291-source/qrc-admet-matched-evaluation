@@ -1,0 +1,58 @@
+{
+  "base": "extra_trees",
+  "task": "vdss_lombardo",
+  "split_seed": 1,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "kind": "regression",
+      "split_seed": 1,
+      "shots": 1024,
+      "gate_qrc": 0.5,
+      "valid_score": 0.5610370833402688,
+      "test_score": 0.42957758535660556,
+      "ideal_qrc_gated_score": 0.3839251543830553,
+      "orth_gated_score": 0.5100240055954832,
+      "base_score": 0.5107420416046683,
+      "finite_minus_orth_gated": -0.08044642023887766,
+      "finite_minus_base": -0.08116445624806273,
+      "finite_minus_ideal_qrc_gated": 0.04565243097355026
+    },
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "kind": "regression",
+      "split_seed": 1,
+      "shots": 4096,
+      "gate_qrc": 0.75,
+      "valid_score": 0.5660694401642523,
+      "test_score": 0.38523969691239024,
+      "ideal_qrc_gated_score": 0.3839251543830553,
+      "orth_gated_score": 0.5100240055954832,
+      "base_score": 0.5107420416046683,
+      "finite_minus_orth_gated": -0.12478430868309298,
+      "finite_minus_base": -0.12550234469227806,
+      "finite_minus_ideal_qrc_gated": 0.0013145425293349389
+    },
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "kind": "regression",
+      "split_seed": 1,
+      "shots": 16384,
+      "gate_qrc": 0.75,
+      "valid_score": 0.5607126834788881,
+      "test_score": 0.38385483643689583,
+      "ideal_qrc_gated_score": 0.3839251543830553,
+      "orth_gated_score": 0.5100240055954832,
+      "base_score": 0.5107420416046683,
+      "finite_minus_orth_gated": -0.1261691691585874,
+      "finite_minus_base": -0.12688720516777247,
+      "finite_minus_ideal_qrc_gated": -7.031794615947051e-05
+    }
+  ]
+}

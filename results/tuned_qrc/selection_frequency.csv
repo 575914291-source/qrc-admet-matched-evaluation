@@ -1,0 +1,11 @@
+﻿base,qrc_candidate,count
+catboost,baseline,25
+catboost,long,3
+catboost,short,5
+catboost,strong,4
+catboost,weak,3
+extra_trees,baseline,15
+extra_trees,long,7
+extra_trees,short,5
+extra_trees,strong,7
+extra_trees,weak,6

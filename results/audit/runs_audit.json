@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "checked_runs": 220,
+  "expected_runs": 220,
+  "bases": [
+    "extra_trees",
+    "catboost"
+  ],
+  "tasks": 22,
+  "split_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "families": [
+    "qrc",
+    "real_orthogonal",
+    "random_fourier"
+  ],
+  "official_test_rows": 16379,
+  "checks": [
+    "all run files present",
+    "official test labels and row order preserved",
+    "one split shared by all bases",
+    "finite predictions",
+    "classification probabilities bounded",
+    "five random maps per family",
+    "gate weights from the fixed grid",
+    "base metrics independently recomputed"
+  ]
+}

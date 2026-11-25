@@ -1,0 +1,3 @@
+﻿base,endpoints,qrc_better_than_orth,qrc_worse_than_orth,qrc_better_than_base,qrc_worse_than_base
+catboost,8,2,5,2,5
+extra_trees,8,4,4,4,4

@@ -1,0 +1,52 @@
+{
+  "base": "extra_trees",
+  "task": "cyp2d6_veith",
+  "split_seed": 3,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "split_seed": 3,
+      "depolarizing_probability": 0.001,
+      "shots": 4096,
+      "gate_qrc": 0.5,
+      "valid_score": 0.7125621138569032,
+      "test_score": 0.6308297549807226,
+      "orth_gated_score": 0.6321477974015586,
+      "base_score": 0.632154650212346,
+      "noisy_qrc_minus_orth_gated": -0.0013180424208359964,
+      "noisy_qrc_minus_base": -0.0013248952316233797
+    },
+    {
+      "base": "extra_trees",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "split_seed": 3,
+      "depolarizing_probability": 0.005,
+      "shots": 4096,
+      "gate_qrc": 0.25,
+      "valid_score": 0.712418054301855,
+      "test_score": 0.6319794908478021,
+      "orth_gated_score": 0.6321477974015586,
+      "base_score": 0.632154650212346,
+      "noisy_qrc_minus_orth_gated": -0.00016830655375643655,
+      "noisy_qrc_minus_base": -0.00017515936454381986
+    },
+    {
+      "base": "extra_trees",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "split_seed": 3,
+      "depolarizing_probability": 0.01,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.7122357261998754,
+      "test_score": 0.6321477974015586,
+      "orth_gated_score": 0.6321477974015586,
+      "base_score": 0.632154650212346,
+      "noisy_qrc_minus_orth_gated": 0.0,
+      "noisy_qrc_minus_base": -6.852810787383312e-06
+    }
+  ]
+}

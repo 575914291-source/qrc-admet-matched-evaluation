@@ -1,0 +1,52 @@
+{
+  "base": "extra_trees",
+  "task": "vdss_lombardo",
+  "split_seed": 3,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "split_seed": 3,
+      "depolarizing_probability": 0.001,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.2657598197549191,
+      "test_score": 0.49198817845260345,
+      "orth_gated_score": 0.393793335214917,
+      "base_score": 0.49198817845260345,
+      "noisy_qrc_minus_orth_gated": 0.09819484323768646,
+      "noisy_qrc_minus_base": 0.0
+    },
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "split_seed": 3,
+      "depolarizing_probability": 0.005,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.2657598197549191,
+      "test_score": 0.49198817845260345,
+      "orth_gated_score": 0.393793335214917,
+      "base_score": 0.49198817845260345,
+      "noisy_qrc_minus_orth_gated": 0.09819484323768646,
+      "noisy_qrc_minus_base": 0.0
+    },
+    {
+      "base": "extra_trees",
+      "task": "vdss_lombardo",
+      "metric": "Spearman",
+      "split_seed": 3,
+      "depolarizing_probability": 0.01,
+      "shots": 4096,
+      "gate_qrc": 0.25,
+      "valid_score": 0.26658847617990805,
+      "test_score": 0.4383436897853824,
+      "orth_gated_score": 0.393793335214917,
+      "base_score": 0.49198817845260345,
+      "noisy_qrc_minus_orth_gated": 0.04455035457046541,
+      "noisy_qrc_minus_base": -0.053644488667221046
+    }
+  ]
+}

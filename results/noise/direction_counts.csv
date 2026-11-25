@@ -1,0 +1,7 @@
+﻿base,depolarizing_probability,endpoints,qrc_better_than_orth,qrc_worse_than_orth,qrc_better_than_base,qrc_worse_than_base
+catboost,0.001,8,1,7,2,6
+catboost,0.005,8,1,7,2,6
+catboost,0.01,8,1,7,2,6
+extra_trees,0.001,8,5,3,3,5
+extra_trees,0.005,8,5,3,3,5
+extra_trees,0.01,8,5,3,3,5

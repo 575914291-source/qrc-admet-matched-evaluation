@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "files": 80,
+  "noise_results": 240,
+  "tasks": [
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo"
+  ],
+  "noise_levels": [
+    0.001,
+    0.005,
+    0.01
+  ],
+  "shots": 4096,
+  "noise_model": "independent single-qubit depolarizing; Z scaled by lambda, ZZ by lambda^2"
+}

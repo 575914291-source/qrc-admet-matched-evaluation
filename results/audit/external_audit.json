@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "runs": 20,
+  "tasks": [
+    "herg",
+    "bbb_martins"
+  ],
+  "split_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "checks": [
+    "external labels are binary",
+    "all predictions finite and bounded",
+    "all external metrics independently recomputed",
+    "canonical overlap audit recorded by external_data"
+  ]
+}

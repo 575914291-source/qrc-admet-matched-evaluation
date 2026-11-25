@@ -1,0 +1,100 @@
+{
+  "tasks": 22,
+  "records": {
+    "train_val": 65430,
+    "test": 16379
+  },
+  "unique_smiles": 46202,
+  "maplight_sha256": "8fd1cb6adbaf684e222669d17754e1386b0c52dc79893fdd11b70944f88c94fd",
+  "morgan_sha256": "a6713aeba0d9b76a1c52d209a5ccb0ffe4c0fb6b23313bea2d2b357bd62ccc15",
+  "task_rows": {
+    "caco2_wang": {
+      "train_val": 728,
+      "test": 182
+    },
+    "hia_hou": {
+      "train_val": 461,
+      "test": 117
+    },
+    "pgp_broccatelli": {
+      "train_val": 973,
+      "test": 245
+    },
+    "bioavailability_ma": {
+      "train_val": 512,
+      "test": 128
+    },
+    "lipophilicity_astrazeneca": {
+      "train_val": 3360,
+      "test": 840
+    },
+    "solubility_aqsoldb": {
+      "train_val": 7985,
+      "test": 1997
+    },
+    "bbb_martins": {
+      "train_val": 1624,
+      "test": 406
+    },
+    "ppbr_az": {
+      "train_val": 2231,
+      "test": 559
+    },
+    "vdss_lombardo": {
+      "train_val": 904,
+      "test": 226
+    },
+    "cyp2c9_veith": {
+      "train_val": 9673,
+      "test": 2419
+    },
+    "cyp2d6_veith": {
+      "train_val": 10504,
+      "test": 2626
+    },
+    "cyp3a4_veith": {
+      "train_val": 9861,
+      "test": 2467
+    },
+    "cyp2c9_substrate_carbonmangels": {
+      "train_val": 534,
+      "test": 135
+    },
+    "cyp3a4_substrate_carbonmangels": {
+      "train_val": 535,
+      "test": 135
+    },
+    "cyp2d6_substrate_carbonmangels": {
+      "train_val": 532,
+      "test": 135
+    },
+    "half_life_obach": {
+      "train_val": 532,
+      "test": 135
+    },
+    "clearance_hepatocyte_az": {
+      "train_val": 970,
+      "test": 243
+    },
+    "clearance_microsome_az": {
+      "train_val": 881,
+      "test": 221
+    },
+    "ld50_zhu": {
+      "train_val": 5907,
+      "test": 1478
+    },
+    "herg": {
+      "train_val": 523,
+      "test": 132
+    },
+    "ames": {
+      "train_val": 5821,
+      "test": 1457
+    },
+    "dili": {
+      "train_val": 379,
+      "test": 96
+    }
+  }
+}

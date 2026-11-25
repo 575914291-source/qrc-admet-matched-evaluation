@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "files": 80,
+  "shot_results": 240,
+  "tasks": [
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo"
+  ],
+  "shot_budgets": [
+    1024,
+    4096,
+    16384
+  ],
+  "model": "independent binomial sampling per Pauli expectation",
+  "hardware_noise_included": false
+}

@@ -1,0 +1,22 @@
+{
+  "base": "catboost",
+  "task": "bbb_martins",
+  "metric": "AUROC",
+  "split_seed": 1,
+  "n_tdc_train": 1421,
+  "n_tdc_valid": 203,
+  "n_external": 2317,
+  "external_source": "B3DB classification",
+  "qrc_gate": 0.0,
+  "orth_gate": 0.0,
+  "joint_qrc_weight": 0.0,
+  "joint_orth_weight": 0.0,
+  "scores": {
+    "base": 0.762824469591925,
+    "qrc_ungated": 0.7508632643020082,
+    "orth_ungated": 0.76089367983182,
+    "qrc_plus_orth": 0.762824469591925,
+    "qrc_gated": 0.762824469591925,
+    "orth_gated": 0.762824469591925
+  }
+}

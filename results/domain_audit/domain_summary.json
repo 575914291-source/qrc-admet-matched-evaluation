@@ -1,0 +1,60 @@
+{
+  "purpose": "Descriptive chemical-space and source-proximity audit of the two external cohorts. Subgroup model results are exploratory and are not used for model selection or causal attribution.",
+  "tasks": {
+    "herg": {
+      "task": "herg",
+      "source": "ToxTree hERG external test, PubChem/literature",
+      "n_external": 293,
+      "n_positive": 224,
+      "positive_rate": 0.764505119453925,
+      "tdc_positive_rate_all": 0.6885496183206107,
+      "positive_rate_difference": 0.07595550113331428,
+      "n_unique_scaffolds": 198,
+      "n_acyclic": 0,
+      "n_exact_overlap_tdc_all": 0,
+      "n_scaffold_overlap_tdc_all": 27,
+      "pct_scaffold_overlap_tdc_all": 9.215017064846416,
+      "n_scaffold_overlap_tdc_trainval": 23,
+      "pct_scaffold_overlap_tdc_trainval": 7.849829351535837,
+      "nearest_tanimoto_min": 0.14285714285714285,
+      "nearest_tanimoto_q25": 0.20588235294117646,
+      "nearest_tanimoto_median": 0.23404255319148937,
+      "nearest_tanimoto_q75": 0.29545454545454547,
+      "nearest_tanimoto_q90": 0.4225651403996965,
+      "nearest_tanimoto_max": 0.7872340425531915,
+      "fingerprint": "Morgan radius 2, 2048 bits",
+      "scaffold_definition": "Bemis-Murcko, non-isomeric"
+    },
+    "bbb_martins": {
+      "task": "bbb_martins",
+      "source": "B3DB classification",
+      "n_external": 2317,
+      "n_positive": 1132,
+      "positive_rate": 0.48856279671989644,
+      "tdc_positive_rate_all": 0.7640394088669951,
+      "positive_rate_difference": -0.2754766121470986,
+      "n_unique_scaffolds": 1428,
+      "n_acyclic": 143,
+      "n_exact_overlap_tdc_all": 0,
+      "n_scaffold_overlap_tdc_all": 694,
+      "pct_scaffold_overlap_tdc_all": 29.952524816573156,
+      "n_scaffold_overlap_tdc_trainval": 562,
+      "pct_scaffold_overlap_tdc_trainval": 24.255502805351746,
+      "nearest_tanimoto_min": 0.024390243902439025,
+      "nearest_tanimoto_q25": 0.26666666666666666,
+      "nearest_tanimoto_median": 0.34615384615384615,
+      "nearest_tanimoto_q75": 0.5428571428571428,
+      "nearest_tanimoto_q90": 0.7219435117519258,
+      "nearest_tanimoto_max": 1.0,
+      "fingerprint": "Morgan radius 2, 2048 bits",
+      "scaffold_definition": "Bemis-Murcko, non-isomeric"
+    }
+  },
+  "analysis_groups": {
+    "shared_scaffold": "non-acyclic Murcko scaffold present in official TDC train/validation records for the same endpoint",
+    "novel_scaffold": "non-acyclic Murcko scaffold absent from official TDC train/validation records for the same endpoint",
+    "acyclic": "Murcko scaffold is empty",
+    "nearest_similarity_top_quartile": "top 25% of nearest Morgan Tanimoto similarity to TDC train/validation molecules within each external cohort"
+  },
+  "caveat": "Scaffold overlap and nearest-neighbor similarity describe source proximity only. They do not establish a causal chemical mechanism for endpoint-specific prediction differences."
+}

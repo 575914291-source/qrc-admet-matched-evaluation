@@ -1,0 +1,7 @@
+﻿base,shots,endpoints,qrc_better_than_orth,qrc_worse_than_orth,qrc_better_than_base,qrc_worse_than_base,mean_gate
+catboost,1024,8,2,6,2,5,0.30625
+catboost,4096,8,1,7,2,6,0.3
+catboost,16384,8,1,7,2,6,0.30625
+extra_trees,1024,8,5,3,4,4,0.275
+extra_trees,4096,8,5,3,3,5,0.30625
+extra_trees,16384,8,5,3,3,5,0.30624999999999997

@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "runs": 80,
+  "tasks": [
+    "bbb_martins",
+    "herg",
+    "caco2_wang",
+    "ld50_zhu",
+    "ppbr_az",
+    "dili",
+    "cyp2d6_veith",
+    "vdss_lombardo"
+  ],
+  "split_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "qrc_parameter_configs": 5,
+  "orthogonal_candidate_groups": 5,
+  "maps_per_candidate": 5
+}

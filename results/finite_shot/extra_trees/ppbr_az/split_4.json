@@ -1,0 +1,58 @@
+{
+  "base": "extra_trees",
+  "task": "ppbr_az",
+  "split_seed": 4,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 1024,
+      "gate_qrc": 1.0,
+      "valid_score": 10.665232354423459,
+      "test_score": 10.002794739960882,
+      "ideal_qrc_gated_score": 9.986590807106568,
+      "orth_gated_score": 9.990324657073783,
+      "base_score": 10.20987557563741,
+      "finite_minus_orth_gated": -0.0124700828870985,
+      "finite_minus_base": 0.20708083567652835,
+      "finite_minus_ideal_qrc_gated": -0.016203932854313763
+    },
+    {
+      "base": "extra_trees",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 4096,
+      "gate_qrc": 1.0,
+      "valid_score": 10.64987790224937,
+      "test_score": 9.986636997806926,
+      "ideal_qrc_gated_score": 9.986590807106568,
+      "orth_gated_score": 9.990324657073783,
+      "base_score": 10.20987557563741,
+      "finite_minus_orth_gated": 0.003687659266857324,
+      "finite_minus_base": 0.22323857783048418,
+      "finite_minus_ideal_qrc_gated": -4.619070035793982e-05
+    },
+    {
+      "base": "extra_trees",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 16384,
+      "gate_qrc": 1.0,
+      "valid_score": 10.643549366288006,
+      "test_score": 9.987616307480279,
+      "ideal_qrc_gated_score": 9.986590807106568,
+      "orth_gated_score": 9.990324657073783,
+      "base_score": 10.20987557563741,
+      "finite_minus_orth_gated": 0.002708349593504522,
+      "finite_minus_base": 0.22225926815713137,
+      "finite_minus_ideal_qrc_gated": -0.0010255003737107415
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "base": "catboost",
+  "task": "cyp2d6_veith",
+  "split_seed": 5,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "kind": "classification",
+      "split_seed": 5,
+      "shots": 1024,
+      "gate_qrc": 0.75,
+      "valid_score": 0.6753842748673423,
+      "test_score": 0.7059117718079306,
+      "ideal_qrc_gated_score": 0.7062524977347809,
+      "orth_gated_score": 0.704268683871655,
+      "base_score": 0.7046730728500403,
+      "finite_minus_orth_gated": 0.0016430879362756556,
+      "finite_minus_base": 0.0012386989578903052,
+      "finite_minus_ideal_qrc_gated": -0.0003407259268503049
+    },
+    {
+      "base": "catboost",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "kind": "classification",
+      "split_seed": 5,
+      "shots": 4096,
+      "gate_qrc": 0.75,
+      "valid_score": 0.6758483760727773,
+      "test_score": 0.7057566339272316,
+      "ideal_qrc_gated_score": 0.7062524977347809,
+      "orth_gated_score": 0.704268683871655,
+      "base_score": 0.7046730728500403,
+      "finite_minus_orth_gated": 0.00148795005557667,
+      "finite_minus_base": 0.0010835610771913196,
+      "finite_minus_ideal_qrc_gated": -0.0004958638075492905
+    },
+    {
+      "base": "catboost",
+      "task": "cyp2d6_veith",
+      "metric": "AUPRC",
+      "kind": "classification",
+      "split_seed": 5,
+      "shots": 16384,
+      "gate_qrc": 1.0,
+      "valid_score": 0.6758016424374532,
+      "test_score": 0.7062468781260927,
+      "ideal_qrc_gated_score": 0.7062524977347809,
+      "orth_gated_score": 0.704268683871655,
+      "base_score": 0.7046730728500403,
+      "finite_minus_orth_gated": 0.001978194254437682,
+      "finite_minus_base": 0.0015738052760523313,
+      "finite_minus_ideal_qrc_gated": -5.61960868827871e-06
+    }
+  ]
+}

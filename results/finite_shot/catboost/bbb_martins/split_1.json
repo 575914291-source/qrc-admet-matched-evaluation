@@ -1,0 +1,58 @@
+{
+  "base": "catboost",
+  "task": "bbb_martins",
+  "split_seed": 1,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "bbb_martins",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 1,
+      "shots": 1024,
+      "gate_qrc": 0.0,
+      "valid_score": 0.9326530612244898,
+      "test_score": 0.9118198874296435,
+      "ideal_qrc_gated_score": 0.9118198874296435,
+      "orth_gated_score": 0.9118198874296435,
+      "base_score": 0.9118198874296435,
+      "finite_minus_orth_gated": 0.0,
+      "finite_minus_base": 0.0,
+      "finite_minus_ideal_qrc_gated": 0.0
+    },
+    {
+      "base": "catboost",
+      "task": "bbb_martins",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 1,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.9326530612244898,
+      "test_score": 0.9118198874296435,
+      "ideal_qrc_gated_score": 0.9118198874296435,
+      "orth_gated_score": 0.9118198874296435,
+      "base_score": 0.9118198874296435,
+      "finite_minus_orth_gated": 0.0,
+      "finite_minus_base": 0.0,
+      "finite_minus_ideal_qrc_gated": 0.0
+    },
+    {
+      "base": "catboost",
+      "task": "bbb_martins",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 1,
+      "shots": 16384,
+      "gate_qrc": 0.0,
+      "valid_score": 0.9326530612244898,
+      "test_score": 0.9118198874296435,
+      "ideal_qrc_gated_score": 0.9118198874296435,
+      "orth_gated_score": 0.9118198874296435,
+      "base_score": 0.9118198874296435,
+      "finite_minus_orth_gated": 0.0,
+      "finite_minus_base": 0.0,
+      "finite_minus_ideal_qrc_gated": 0.0
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+﻿base,comparison,positive,negative,zero,holm_significant_positive,holm_significant_negative,holm_equivalent
+catboost,augmented_qrc_vs_base,7,14,1,0,0,10
+catboost,augmented_qrc_vs_matched,6,14,2,0,0,12
+catboost,gated_qrc_vs_base,8,13,1,0,0,11
+catboost,gated_qrc_vs_matched,4,17,1,0,0,10
+catboost,qrc_vs_base,4,18,0,0,5,4
+catboost,qrc_vs_fourier,3,19,0,0,1,5
+catboost,qrc_vs_matched,3,19,0,0,1,4
+extra_trees,augmented_qrc_vs_base,10,12,0,1,1,8
+extra_trees,augmented_qrc_vs_matched,12,10,0,0,0,10
+extra_trees,gated_qrc_vs_base,9,13,0,0,1,9
+extra_trees,gated_qrc_vs_matched,11,11,0,0,0,8
+extra_trees,qrc_vs_base,6,16,0,0,2,2
+extra_trees,qrc_vs_fourier,3,19,0,0,1,3
+extra_trees,qrc_vs_matched,6,16,0,0,2,3

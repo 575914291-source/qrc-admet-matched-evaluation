@@ -1,0 +1,58 @@
+{
+  "base": "extra_trees",
+  "task": "herg",
+  "split_seed": 4,
+  "results": [
+    {
+      "base": "extra_trees",
+      "task": "herg",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 4,
+      "shots": 1024,
+      "gate_qrc": 1.0,
+      "valid_score": 0.7863145258103241,
+      "test_score": 0.7867452135493372,
+      "ideal_qrc_gated_score": 0.7979381443298968,
+      "orth_gated_score": 0.8041237113402062,
+      "base_score": 0.8051546391752578,
+      "finite_minus_orth_gated": -0.017378497790868974,
+      "finite_minus_base": -0.018409425625920517,
+      "finite_minus_ideal_qrc_gated": -0.011192930780559607
+    },
+    {
+      "base": "extra_trees",
+      "task": "herg",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 4,
+      "shots": 4096,
+      "gate_qrc": 1.0,
+      "valid_score": 0.7839135654261704,
+      "test_score": 0.787039764359352,
+      "ideal_qrc_gated_score": 0.7979381443298968,
+      "orth_gated_score": 0.8041237113402062,
+      "base_score": 0.8051546391752578,
+      "finite_minus_orth_gated": -0.017083946980854248,
+      "finite_minus_base": -0.01811487481590579,
+      "finite_minus_ideal_qrc_gated": -0.01089837997054488
+    },
+    {
+      "base": "extra_trees",
+      "task": "herg",
+      "metric": "AUROC",
+      "kind": "classification",
+      "split_seed": 4,
+      "shots": 16384,
+      "gate_qrc": 1.0,
+      "valid_score": 0.7851140456182473,
+      "test_score": 0.7843888070692194,
+      "ideal_qrc_gated_score": 0.7979381443298968,
+      "orth_gated_score": 0.8041237113402062,
+      "base_score": 0.8051546391752578,
+      "finite_minus_orth_gated": -0.019734904270986786,
+      "finite_minus_base": -0.02076583210603833,
+      "finite_minus_ideal_qrc_gated": -0.013549337260677419
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "base": "catboost",
+  "task": "ld50_zhu",
+  "split_seed": 4,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 4,
+      "depolarizing_probability": 0.001,
+      "shots": 4096,
+      "gate_qrc": 0.5,
+      "valid_score": 0.5579685572638831,
+      "test_score": 0.6535158922633683,
+      "orth_gated_score": 0.6553065340157466,
+      "base_score": 0.6553065340157466,
+      "noisy_qrc_minus_orth_gated": 0.001790641752378308,
+      "noisy_qrc_minus_base": 0.001790641752378308
+    },
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 4,
+      "depolarizing_probability": 0.005,
+      "shots": 4096,
+      "gate_qrc": 0.5,
+      "valid_score": 0.5579851491033548,
+      "test_score": 0.6533802031786944,
+      "orth_gated_score": 0.6553065340157466,
+      "base_score": 0.6553065340157466,
+      "noisy_qrc_minus_orth_gated": 0.0019263308370521814,
+      "noisy_qrc_minus_base": 0.0019263308370521814
+    },
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 4,
+      "depolarizing_probability": 0.01,
+      "shots": 4096,
+      "gate_qrc": 0.5,
+      "valid_score": 0.558031709640565,
+      "test_score": 0.6532767053017962,
+      "orth_gated_score": 0.6553065340157466,
+      "base_score": 0.6553065340157466,
+      "noisy_qrc_minus_orth_gated": 0.00202982871395041,
+      "noisy_qrc_minus_base": 0.00202982871395041
+    }
+  ]
+}

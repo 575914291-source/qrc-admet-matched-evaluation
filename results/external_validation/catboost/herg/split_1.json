@@ -1,0 +1,22 @@
+{
+  "base": "catboost",
+  "task": "herg",
+  "metric": "AUROC",
+  "split_seed": 1,
+  "n_tdc_train": 457,
+  "n_tdc_valid": 66,
+  "n_external": 293,
+  "external_source": "ToxTree hERG external test, PubChem/literature",
+  "qrc_gate": 1.0,
+  "orth_gate": 0.0,
+  "joint_qrc_weight": 1.0,
+  "joint_orth_weight": 0.0,
+  "scores": {
+    "base": 0.5501423395445135,
+    "qrc_ungated": 0.6455098343685299,
+    "orth_ungated": 0.5578416149068323,
+    "qrc_plus_orth": 0.6455098343685299,
+    "qrc_gated": 0.6455098343685299,
+    "orth_gated": 0.5501423395445135
+  }
+}

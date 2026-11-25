@@ -1,0 +1,58 @@
+{
+  "base": "catboost",
+  "task": "ppbr_az",
+  "split_seed": 4,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 1024,
+      "gate_qrc": 0.0,
+      "valid_score": 7.965416544180089,
+      "test_score": 7.7777967558766,
+      "ideal_qrc_gated_score": 7.7777967558766,
+      "orth_gated_score": 7.7777967558766,
+      "base_score": 7.7777967558766,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    },
+    {
+      "base": "catboost",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 7.965416544180089,
+      "test_score": 7.7777967558766,
+      "ideal_qrc_gated_score": 7.7777967558766,
+      "orth_gated_score": 7.7777967558766,
+      "base_score": 7.7777967558766,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    },
+    {
+      "base": "catboost",
+      "task": "ppbr_az",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 4,
+      "shots": 16384,
+      "gate_qrc": 0.0,
+      "valid_score": 7.965416544180089,
+      "test_score": 7.7777967558766,
+      "ideal_qrc_gated_score": 7.7777967558766,
+      "orth_gated_score": 7.7777967558766,
+      "base_score": 7.7777967558766,
+      "finite_minus_orth_gated": -0.0,
+      "finite_minus_base": -0.0,
+      "finite_minus_ideal_qrc_gated": -0.0
+    }
+  ]
+}

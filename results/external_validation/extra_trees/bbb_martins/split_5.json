@@ -1,0 +1,22 @@
+{
+  "base": "extra_trees",
+  "task": "bbb_martins",
+  "metric": "AUROC",
+  "split_seed": 5,
+  "n_tdc_train": 1421,
+  "n_tdc_valid": 203,
+  "n_external": 2317,
+  "external_source": "B3DB classification",
+  "qrc_gate": 0.5,
+  "orth_gate": 0.5,
+  "joint_qrc_weight": 0.25,
+  "joint_orth_weight": 0.5,
+  "scores": {
+    "base": 0.744419346662492,
+    "qrc_ungated": 0.730441621565207,
+    "orth_ungated": 0.7411392405063292,
+    "qrc_plus_orth": 0.7452900657512189,
+    "qrc_gated": 0.7427368013001149,
+    "orth_gated": 0.7443925094303052
+  }
+}

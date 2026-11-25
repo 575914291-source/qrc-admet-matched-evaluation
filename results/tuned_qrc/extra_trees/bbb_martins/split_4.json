@@ -1,0 +1,89 @@
+{
+  "base": "extra_trees",
+  "task": "bbb_martins",
+  "metric": "AUROC",
+  "split_seed": 4,
+  "qrc_candidate": "weak",
+  "orth_candidate": "group_1",
+  "qrc_gate": 1.0,
+  "orth_gate": 1.0,
+  "qrc_validation_objective": 0.9181299385425813,
+  "orth_validation_objective": 0.9066066725197541,
+  "qrc_test_score": 0.8472091932457785,
+  "orth_test_score": 0.8652282676672921,
+  "base_test_score": 0.8674171357098187,
+  "qrc_minus_orth": -0.018019074421513626,
+  "qrc_minus_base": -0.02020794246404023,
+  "candidate_scores": [
+    {
+      "family": "qrc",
+      "candidate": "baseline",
+      "gate": 1.0,
+      "valid_objective": 0.9169227392449517,
+      "test_score": 0.8520950594121326
+    },
+    {
+      "family": "qrc",
+      "candidate": "weak",
+      "gate": 1.0,
+      "valid_objective": 0.9181299385425813,
+      "test_score": 0.8472091932457785
+    },
+    {
+      "family": "qrc",
+      "candidate": "strong",
+      "gate": 0.75,
+      "valid_objective": 0.9107769973661106,
+      "test_score": 0.8671435272045027
+    },
+    {
+      "family": "qrc",
+      "candidate": "short",
+      "gate": 1.0,
+      "valid_objective": 0.9181299385425813,
+      "test_score": 0.8469746716697937
+    },
+    {
+      "family": "qrc",
+      "candidate": "long",
+      "gate": 1.0,
+      "valid_objective": 0.9111062335381913,
+      "test_score": 0.8624140087554721
+    },
+    {
+      "family": "real_orthogonal",
+      "candidate": "group_1",
+      "gate": 1.0,
+      "valid_objective": 0.9066066725197541,
+      "test_score": 0.8652282676672921
+    },
+    {
+      "family": "real_orthogonal",
+      "candidate": "group_2",
+      "gate": 0.25,
+      "valid_objective": 0.903972783143108,
+      "test_score": 0.8682379612257661
+    },
+    {
+      "family": "real_orthogonal",
+      "candidate": "group_3",
+      "gate": 1.0,
+      "valid_objective": 0.9060579455662862,
+      "test_score": 0.8731629143214509
+    },
+    {
+      "family": "real_orthogonal",
+      "candidate": "group_4",
+      "gate": 0.25,
+      "valid_objective": 0.9045215100965759,
+      "test_score": 0.868042526579112
+    },
+    {
+      "family": "real_orthogonal",
+      "candidate": "group_5",
+      "gate": 1.0,
+      "valid_objective": 0.9061676909569798,
+      "test_score": 0.8690196998123827
+    }
+  ]
+}

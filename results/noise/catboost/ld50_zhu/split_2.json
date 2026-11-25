@@ -1,0 +1,52 @@
+{
+  "base": "catboost",
+  "task": "ld50_zhu",
+  "split_seed": 2,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 2,
+      "depolarizing_probability": 0.001,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5027702552981297,
+      "test_score": 0.631648430898446,
+      "orth_gated_score": 0.6301482462454457,
+      "base_score": 0.631648430898446,
+      "noisy_qrc_minus_orth_gated": -0.0015001846530002805,
+      "noisy_qrc_minus_base": -0.0
+    },
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 2,
+      "depolarizing_probability": 0.005,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5027702552981297,
+      "test_score": 0.631648430898446,
+      "orth_gated_score": 0.6301482462454457,
+      "base_score": 0.631648430898446,
+      "noisy_qrc_minus_orth_gated": -0.0015001846530002805,
+      "noisy_qrc_minus_base": -0.0
+    },
+    {
+      "base": "catboost",
+      "task": "ld50_zhu",
+      "metric": "MAE",
+      "split_seed": 2,
+      "depolarizing_probability": 0.01,
+      "shots": 4096,
+      "gate_qrc": 0.0,
+      "valid_score": 0.5027702552981297,
+      "test_score": 0.631648430898446,
+      "orth_gated_score": 0.6301482462454457,
+      "base_score": 0.631648430898446,
+      "noisy_qrc_minus_orth_gated": -0.0015001846530002805,
+      "noisy_qrc_minus_base": -0.0
+    }
+  ]
+}

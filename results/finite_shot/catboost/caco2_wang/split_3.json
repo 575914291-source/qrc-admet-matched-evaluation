@@ -1,0 +1,58 @@
+{
+  "base": "catboost",
+  "task": "caco2_wang",
+  "split_seed": 3,
+  "results": [
+    {
+      "base": "catboost",
+      "task": "caco2_wang",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 3,
+      "shots": 1024,
+      "gate_qrc": 0.75,
+      "valid_score": 0.36646948100391313,
+      "test_score": 0.31038696519961556,
+      "ideal_qrc_gated_score": 0.3119286849501239,
+      "orth_gated_score": 0.29964151306622216,
+      "base_score": 0.29964151306622216,
+      "finite_minus_orth_gated": -0.010745452133393396,
+      "finite_minus_base": -0.010745452133393396,
+      "finite_minus_ideal_qrc_gated": 0.0015417197505083191
+    },
+    {
+      "base": "catboost",
+      "task": "caco2_wang",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 3,
+      "shots": 4096,
+      "gate_qrc": 0.75,
+      "valid_score": 0.36518573272009447,
+      "test_score": 0.31192868478246333,
+      "ideal_qrc_gated_score": 0.3119286849501239,
+      "orth_gated_score": 0.29964151306622216,
+      "base_score": 0.29964151306622216,
+      "finite_minus_orth_gated": -0.012287171716241163,
+      "finite_minus_base": -0.012287171716241163,
+      "finite_minus_ideal_qrc_gated": 1.6766055210837294e-10
+    },
+    {
+      "base": "catboost",
+      "task": "caco2_wang",
+      "metric": "MAE",
+      "kind": "regression",
+      "split_seed": 3,
+      "shots": 16384,
+      "gate_qrc": 0.75,
+      "valid_score": 0.36580732378139136,
+      "test_score": 0.3119667175199414,
+      "ideal_qrc_gated_score": 0.3119286849501239,
+      "orth_gated_score": 0.29964151306622216,
+      "base_score": 0.29964151306622216,
+      "finite_minus_orth_gated": -0.012325204453719263,
+      "finite_minus_base": -0.012325204453719263,
+      "finite_minus_ideal_qrc_gated": -3.803256981754766e-05
+    }
+  ]
+}
