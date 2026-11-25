@@ -5,7 +5,7 @@ standalone vector PDFs.
 
 | Figure | Topic | Source script | Standalone PDF |
 |---|---|---|---|
-| Figure 1 | Matched evaluation design | `src/build_design_figure.py` | `outputs/Figure1_Study_Design.pdf` |
+| Figure 1 | Matched evaluation design and constrained quadratic readout | `src/build_design_figure.py` | `outputs/Figure1_Study_Design.pdf` |
 | Figure 2 | Chemical space and physicochemical context | `src/analyze_chemical_space.py`, `src/build_extended_figures.py` | `outputs/Figure2_Chemical_Space.pdf` |
 | Figure 3 | External effect decomposition and calibration | `src/analyze_external_diagnostics.py`, `src/build_extended_figures.py` | `outputs/Figure3_External_Validation.pdf` |
 | Figure 4 | Endpoint-level primary effects | `src/make_manuscript_assets.py` | `outputs/Figure4_Primary_Effects.pdf` |

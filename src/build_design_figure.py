@@ -219,6 +219,41 @@ def build_design_figure() -> Path:
         ha="center",
         va="center",
     )
+    theory_band = FancyBboxPatch(
+        (2, 0.6),
+        95,
+        5.2,
+        boxstyle="round,pad=0.15,rounding_size=0.8",
+        facecolor="#F4F4F4",
+        edgecolor="#B8B8B8",
+        linewidth=0.6,
+    )
+    axis.add_patch(theory_band)
+    axis.text(
+        5,
+        3.2,
+        r"$q_j(\mathbf{a})=\mathbf{a}^{\mathsf{T}}A_j\mathbf{a}$",
+        fontsize=8.2,
+        ha="left",
+        va="center",
+    )
+    axis.text(
+        24,
+        3.2,
+        "All 15 Pauli readouts form constrained real quadratic features",
+        fontsize=7.0,
+        ha="left",
+        va="center",
+    )
+    axis.text(
+        5,
+        1.45,
+        "The equal-dimensional orthogonal branch samples a matched quadratic control",
+        fontsize=6.8,
+        ha="left",
+        va="center",
+        color="#333333",
+    )
 
     png = FIGURE_ROOT / "figure1_design.png"
     pdf = FIGURE_ROOT / "figure1_design.pdf"

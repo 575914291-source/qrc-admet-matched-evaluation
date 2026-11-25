@@ -212,7 +212,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[3],
-        "量子储层可产生低维非线性分子特征，但其增量价值需要用同输入、同容量和足够强的经典对照检验。我们在 TDC ADMET 的 22 个官方端点上，以 Morgan-ExtraTrees 和 MapLight-CatBoost 为基座，比较精确模拟的五比特幅度编码储层、实正交二次映射和随机傅里叶特征。每个端点使用五个骨架划分，每个随机族使用五个独立映射并在残差空间平均。未门控 QRC 相对正交对照在 ExtraTrees 上为 6 个端点更好、16 个更差，在 CatBoost 上为 3 个更好、19 个更差；Holm 校正后没有正向显著端点，而有三个负向显著端点。门控、联合校正、低数据、有限 shots、模拟噪声和有限参数族搜索均未产生跨基座稳定增量。外部验证呈来源依赖：CatBoost 在 293 个非重叠 hERG 分子上比门控正交对照高 0.040 AUROC，但 2,317 个 B3DB BBB 分子在两个基座上均显著更差。hERG 增益同时包含 QRC 相对基座的提升和正交分支相对基座的下降；连续标签排序与独立 pIC50 回归均未通过统一多重校正。骨架、最近邻和理化性质分析不支持简单化学空间解释。本文的主要贡献是一套可复核的量子分子特征评估流程；结论仅适用于当前五比特固定储层、15 维 Pauli 读出、线性残差头和精确状态向量仿真，不能推广为对其它编码、可训练线路、更大储层或真实硬件的一般否定。",
+        "量子分子特征的已报告增益常因缺少同容量经典对照、多随机实现、强基座和跨来源验证而难以解释。我们在 TDC ADMET 的 22 个官方端点上建立一套可复现的匹配评估流程，以 Morgan-ExtraTrees 和 MapLight-CatBoost 为基座，比较精确模拟的五比特幅度编码储层、实正交二次映射和随机傅里叶特征。每个端点使用五个骨架划分，每个随机族使用五个独立映射并在残差空间平均。未门控 QRC 相对正交对照在 ExtraTrees 上为 6 个端点更好、16 个更差，在 CatBoost 上为 3 个更好、19 个更差；Holm 校正后没有正向显著端点，而有三个负向显著端点。门控、联合校正、低数据、有限 shots、模拟噪声和有限参数族搜索均未产生跨基座稳定增量。外部验证呈来源依赖：CatBoost 在 293 个非重叠 hERG 分子上比门控正交对照高 0.040 AUROC，但 2,317 个 B3DB BBB 分子在两个基座上均显著更差。hERG 增益同时包含 QRC 相对基座的提升和正交分支相对基座的下降；连续标签排序与独立 pIC50 回归均未通过统一多重校正。骨架、最近邻和理化性质分析不支持简单化学空间解释。本文的主要贡献是一套可复核的量子分子特征评估流程；结论仅适用于当前五比特固定储层、15 维 Pauli 读出、线性残差头和精确状态向量仿真，不能推广为对其它编码、可训练线路、更大储层或真实硬件的一般否定。",
     )
     set_paragraph(
         paragraphs[4],
@@ -230,11 +230,11 @@ def main() -> int:
         paragraphs[8],
         ASSET_ROOT / "figures" / "figure1_design.png",
         6.6,
-        "研究流程：TDC 和外部数据经两套经典基座、PCA 幅度编码、QRC、实正交二次和随机傅里叶分支进入匹配残差和验证门控。",
+        "研究流程：TDC 和外部数据经两套经典基座、PCA 幅度编码、QRC、实正交二次和随机傅里叶分支进入匹配残差和验证门控；底部说明15个Pauli读出属于受限实二次型。",
     )
     add_caption_before(
         paragraphs[8],
-        "Figure 1　匹配评估流程。两类数据来源共享两套经典基座、32 维 PCA 幅度输入、五个映射的残差集成和相同门控预算；主对照为固定五比特 QRC 与参数匹配的实正交二次映射。",
+        "Figure 1　匹配评估流程。两类数据来源共享两套经典基座、32 维 PCA 幅度输入、五个映射的残差集成和相同门控预算；底部给出15个Pauli读出所对应的实二次型 qⱼ(a)=aᵀAⱼa，并说明实正交分支提供同维二次对照。",
     )
     set_paragraph(
         paragraphs[10],
@@ -242,7 +242,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[12],
-        "Beaulieu 等在分子活性数据上研究了固定储层和小样本学习。[8] Benson 等将 Hamiltonian 读数拼接到经典描述符后训练 CatBoost；Mansour 等报告了量子启发预处理在 AqSolDB 上的预测误差。[9,10] QCS-ADME 侧重线路搜索和仿真至硬件变化。[11] Jia 等比较了五比特幅度编码残差与参数匹配的实正交分支，但其编码器和预测头联合训练，任务也不是 ADMET。[12] 在 10 个靶点、48 个有效阈值任务上的近期基准没有发现量子分类器全局占优，只报告了稀疏或结构双峰靶点上的局部候选信号。[27] 2026 年的 Floquet-QRC 工作进一步把序列图事件和驱动储层用于分子预测，但研究的是不同输入与动力学设定。[28] 更广泛的量子机器学习基准研究同样表明，量子实现、非线性结构与经典对照条件必须分开检验。[13]",
+        "Beaulieu 等在分子活性数据上研究了固定储层和小样本学习。[8] Benson 等将 Hamiltonian 读数拼接到经典描述符后训练 CatBoost；Mansour 等报告了量子启发预处理在 AqSolDB 上的预测误差。[9,10] QCS-ADME 侧重线路搜索和仿真至硬件变化。[11] Jia 等比较了五比特幅度编码残差与参数匹配的实正交分支，但其编码器和预测头联合训练，任务也不是 ADMET。[12] 在 10 个靶点、48 个有效阈值任务上的近期基准没有发现量子分类器全局占优，只报告了稀疏或结构双峰靶点上的局部候选信号。[27] 2026 年的 Floquet-QRC 工作进一步把序列图事件和驱动储层用于分子预测，但研究的是不同输入与动力学设定。[28] 更广泛的量子机器学习基准研究同样表明，量子实现、非线性结构与经典对照条件必须分开检验。[13] Table 1汇总了这些研究与本文的关系；它们采用不同任务、量子组件和训练协议，不能用单一分数直接排序。",
     )
     set_paragraph(
         paragraphs[13],
@@ -326,24 +326,24 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[36],
-        "表 1 给出两套基座及未门控分支的五 seed 平均官方指标，Figure 4 同时展示端点级差异和区间。QRC 相对固定实正交二次对照，在 ExtraTrees 上为 6 个端点更好、16 个更差；在 CatBoost 上为 3 个更好、19 个更差。修正后的 CatBoost 基座本身在 21/22 个端点上优于 ExtraTrees，唯一例外是 CYP2C9 substrate 的 AUPRC。先前 pilot 中方向较一致的 BBB、hERG、Caco2 和 LD50 没有复现同样的信号：相对无残差基座，ExtraTrees 上仅 Caco2 与 LD50 为正，CatBoost 上仅 hERG 的点估计微正；相对实正交映射，两个基座均至多有 2/4 个端点为正，均无经多重校正的显著改善。",
+        "表 2 给出两套基座及未门控分支的五 seed 平均官方指标，Figure 4 同时展示端点级差异和区间。QRC 相对固定实正交二次对照，在 ExtraTrees 上为 6 个端点更好、16 个更差；在 CatBoost 上为 3 个更好、19 个更差。修正后的 CatBoost 基座本身在 21/22 个端点上优于 ExtraTrees，唯一例外是 CYP2C9 substrate 的 AUPRC。先前 pilot 中方向较一致的 BBB、hERG、Caco2 和 LD50 没有复现同样的信号：相对无残差基座，ExtraTrees 上仅 Caco2 与 LD50 为正，CatBoost 上仅 hERG 的点估计微正；相对实正交映射，两个基座均至多有 2/4 个端点为正，均无经多重校正的显著改善。",
     )
-    set_paragraph(paragraphs[37], "表 1　两个基座及未门控分支的五 seed 平均官方指标")
-    set_paragraph(paragraphs[39], "表 2　QRC 相对实正交二次映射的端点级效应与 Holm 校正")
+    set_paragraph(paragraphs[37], "表 2　两个基座及未门控分支的五 seed 平均官方指标")
+    set_paragraph(paragraphs[39], "表 3　QRC 相对实正交二次映射的端点级效应与 Holm 校正")
     set_paragraph(
         paragraphs[41],
-        "表 2 的效应已统一为正值表示 QRC 改善，括号内为以测试骨架聚类的 95% 配对自助区间。Holm 校正覆盖每个基座内的 22 个端点。三个 Holm 显著结果均为 QRC 较差：ExtraTrees 的 AMES（AUROC 差 −0.0115，Holm p=0.011）与 VDss（Spearman 差 −0.1127，Holm p=0.042），以及 CatBoost 的 Solubility（MAE 差 −0.0268，Holm p=0.011）。没有正向显著端点。",
+        "表 3 的效应已统一为正值表示 QRC 改善，括号内为以测试骨架聚类的 95% 配对自助区间。Holm 校正覆盖每个基座内的 22 个端点。三个 Holm 显著结果均为 QRC 较差：ExtraTrees 的 AMES（AUROC 差 −0.0115，Holm p=0.011）与 VDss（Spearman 差 −0.1127，Holm p=0.042），以及 CatBoost 的 Solubility（MAE 差 −0.0268，Holm p=0.011）。没有正向显著端点。",
     )
     set_paragraph(
         paragraphs[43],
         "门控把 QRC 权重在 ExtraTrees 的 47/110 次选择、CatBoost 的 55/110 次选择置零。门控后的 QRC 相对同规则门控的实正交映射，在 ExtraTrees 上为 11 好/11 差，在 CatBoost 上为 4 好/17 差/1 平。两者均无 Holm 显著正向端点；等价性分析中分别有 8 和 10 个端点落在预设小效应范围内，但其中不少是两种方法都被验证门控压回基座，因此不能解释为量子分支贡献。",
     )
-    set_paragraph(paragraphs[44], "表 3　验证门控的代表性行为")
+    set_paragraph(paragraphs[44], "表 4　验证门控的代表性行为")
     set_paragraph(
         paragraphs[46],
         "小效应端点说明门控可以限制负迁移，但没有产生新的外推信息。ExtraTrees 的 Half-life 在门控后点估计改善 0.0616，Holm p 仍为 0.94；PPBR 的门控后差值仍为 −0.1531。CatBoost 的 Half-life 五个 seed 均将 QRC 权重置零，门控差异严格为零；Solubility 有三次选择将权重置零，残余差值为 −0.0010。",
     )
-    set_paragraph(paragraphs[48], "表 4　跨端点点估计方向与 Holm 显著计数")
+    set_paragraph(paragraphs[48], "表 5　跨端点点估计方向与 Holm 显著计数")
     set_paragraph(
         paragraphs[50],
         "QRC 相对随机傅里叶特征同样在 ExtraTrees 与 CatBoost 上各为 3 好/19 差。相对无残差基座，QRC 在 ExtraTrees 上为 6 好/16 差，在 CatBoost 上为 4 好/18 差，并分别出现 2 个和 5 个 Holm 显著负向端点。不同端点的指标单位不可直接相加，因此本文不报告跨 AUROC、AUPRC、MAE 和 Spearman 的原始差值均值。",
@@ -495,7 +495,7 @@ def main() -> int:
         style=paragraphs[61].style,
     )
     chemical_interpretation_paragraph = paragraphs[62].insert_paragraph_before(
-        "hERG的点估计改善只能作为待验证的候选信号，不能等价为量子特征学到了心脏毒性机理；B3DB的显著负迁移也不能解释为量子方法在ADMET中普遍无效。本文直接回顾的QML-ADMET研究分别采用固定储层、Hamiltonian衍生特征、量子启发预处理、线路搜索或联合训练残差，任务数量、对照和外部验证设置不同，不能作等价比判；逐项比较见 Supplementary Table S4。本文提供的是一套可复用的最低评估流程：预先固定主对照、匹配候选与映射预算、按骨架聚类推断、进行多重检验和等价性解释，并报告跨基座及跨来源结果。",
+        "hERG的点估计改善只能作为待验证的候选信号，不能等价为量子特征学到了心脏毒性机理；B3DB的显著负迁移也不能解释为量子方法在ADMET中普遍无效。本文直接回顾的QML-ADMET研究分别采用固定储层、Hamiltonian衍生特征、量子启发预处理、线路搜索或联合训练残差，任务数量、对照和外部验证设置不同，不能作等价比判；正文Table 1给出主要对照，扩展表见Supplementary Table S4。本文提供的是一套可复用的最低评估流程：预先固定主对照、匹配候选与映射预算、按骨架聚类推断、进行多重检验和等价性解释，并报告跨基座及跨来源结果。",
         style=paragraphs[61].style,
     )
     computational_scope_paragraph = paragraphs[62].insert_paragraph_before(
@@ -525,7 +525,7 @@ def main() -> int:
     )
     set_paragraph(
         paragraphs[68],
-        "TDC官方归档可通过Harvard Dataverse文件4426004获取，SHA-256为bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部hERG数据来自Zenodo 5807719，BBB数据来自B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko骨架重叠、最近邻相似度和理化性质审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，冻结版本为v1.1.0，提交归档另附完整逐split预测和补充材料。复现包还包含五seed scaffold划分、五个随机映射、基座配置、联合门控、有限shots、低数据曲线、外部端点分解与校准、连续标签、独立pIC50回归、模拟噪声、有限参数族、TOST敏感性、统计脚本、环境锁定和图形生成代码。MapLight参考实现及其MIT许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
+        "TDC官方归档可通过Harvard Dataverse文件4426004获取，SHA-256为bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部hERG数据来自Zenodo 5807719，BBB数据来自B3DB；两者的来源、标签规约、去重、精确结构重叠、Bemis–Murcko骨架重叠、最近邻相似度和理化性质审计随复现包提供。复现代码与结果索引公开于 https://github.com/575914291-source/qrc-admet-matched-evaluation，冻结版本为v1.2.0，提交归档另附完整逐split预测和补充材料。复现包还包含五seed scaffold划分、五个随机映射、基座配置、联合门控、有限shots、低数据曲线、外部端点分解与校准、连续标签、独立pIC50回归、模拟噪声、有限参数族、TOST敏感性、统计脚本、环境锁定和图形生成代码。MapLight参考实现及其MIT许可证一并保留。官方测试标签仅用于锁定配置后的评分，不参与训练、地图生成、联合权重或门控选择。",
     )
 
     table_1 = document.tables[0]
@@ -633,9 +633,75 @@ def main() -> int:
         )
     fill_table(table_4, rows_4, [2.15, 0.82, 0.82, 0.92, 0.92])
 
-    add_references(document, paragraphs[94])
     appendix_table = document.tables[4]
     appendix_table._element.getparent().remove(appendix_table._element)
+    add_references(document, paragraphs[94])
+
+    prior_studies = pd.read_csv(
+        ASSET_ROOT / "tables" / "prior_qml_comparison.csv",
+        encoding="utf-8-sig",
+    )
+    prior_rows = [
+        ["Study", "Molecular setting", "Quantum/control focus", "Relation to this benchmark"],
+        [
+            "Beaulieu 2025",
+            "Activity; small N",
+            "Fixed QRC",
+            "Adds 22 endpoints, two bases, and external tests",
+        ],
+        [
+            "Benson 2026",
+            "10 TDC tasks",
+            "Hamiltonian + CatBoost",
+            "Different hybrid model; matched residual test",
+        ],
+        [
+            "Mansour 2026",
+            "AqSolDB",
+            "MI Hamiltonian + CatBoost",
+            "Polynomial ablation motivates matched quadratic control",
+        ],
+        [
+            "Zheng 2026",
+            "8 class + 4 regression",
+            "Circuit search",
+            "Search versus fixed matched comparison",
+        ],
+        [
+            "Jia 2026",
+            "3 receptor-potency tasks",
+            "Joint encoder + quantum residual",
+            "Orthogonal control showed similar performance",
+        ],
+        [
+            "Garg 2026",
+            "10 targets; 48 tasks",
+            "QSVM and VQC",
+            "No global advantage; local sparse signals",
+        ],
+        [
+            "Wang 2026",
+            "Graph prefixes; gap",
+            "Floquet QRC",
+            "Sequence input and hardware; not ADMET-wide",
+        ],
+    ]
+    prior_table = document.add_table(rows=len(prior_rows), cols=4)
+    fill_table(prior_table, prior_rows, [0.9, 1.4, 1.8, 2.4])
+    for row in prior_table.rows[1:]:
+        for cell in row.cells[1:]:
+            for paragraph in cell.paragraphs:
+                paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    prior_caption = paragraphs[13].insert_paragraph_before(
+        "表 1　代表性 QML 分子性质预测研究与本文评估范围的对照。不同研究在任务、编码和训练协议上不可直接数值等价。"
+    )
+    prior_caption.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    prior_caption.paragraph_format.keep_with_next = True
+    prior_caption.paragraph_format.space_after = Pt(4)
+    for run in prior_caption.runs:
+        set_run_font(run, 9.5)
+    paragraphs[13]._p.addprevious(prior_table._tbl)
+
     for trailing in (paragraphs[94], paragraphs[95]):
         trailing._element.getparent().remove(trailing._element)
     document.save(OUTPUT)

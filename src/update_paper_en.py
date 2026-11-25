@@ -19,9 +19,11 @@ TEXT = {
     1: "A Reproducible Benchmark of Fixed Quantum Reservoir Features on TDC ADMET",
     2: "Abstract",
     3: (
-        "Quantum reservoirs can generate low-dimensional nonlinear molecular features, "
-        "but their incremental value must be tested against equally sized classical "
-        "feature families and sufficiently strong base models. We compare exactly "
+        "Reported gains from quantum molecular features are difficult to interpret "
+        "because matched classical controls, multiple random realizations, strong "
+        "base models, and cross-source validation are rarely combined. We establish "
+        "a reproducible matched evaluation workflow on all 22 official TDC ADMET "
+        "endpoints. We compare exactly "
         "simulated five-qubit amplitude-encoded reservoirs with real-orthogonal "
         "quadratic maps and random Fourier features on all 22 official TDC ADMET "
         "endpoints, using Morgan-ExtraTrees and MapLight-CatBoost. Each endpoint uses "
@@ -92,7 +94,9 @@ TEXT = {
         "48-task potency benchmark found no global advantage for quantum classifiers "
         "over their classical comparators [27]. Floquet-QRC work has also used sequential "
         "graph events and driven reservoirs under a different input and dynamics "
-        "setting [28]."
+        "setting [28]. Table 1 summarizes these studies and their relation to the "
+        "present benchmark; their tasks, quantum components, and training protocols "
+        "do not support a single-score ranking."
     ),
     13: (
         "Our primary control follows directly from the representation. For real "
@@ -214,7 +218,7 @@ TEXT = {
         "prediction and Delta_m(x) the five-map mean residual for family m. The gated "
         "prediction is"
     ),
-    33: (
+    32: (
         "Validation selected a scalar weight from {0, 0.25, 0.5, 0.75, 1} on the endpoint "
         "metric, with ties preferring the smaller weight. Gating was applied to logits for "
         "classification and directly to predictions for regression. QRC and each "
@@ -232,7 +236,7 @@ TEXT = {
     35: "5 Results",
     36: "5.1 Overall Results",
     37: (
-        "Table 1 reports five-seed mean official metrics for both bases and ungated "
+        "Table 2 reports five-seed mean official metrics for both bases and ungated "
         "branches. Relative to the fixed real-orthogonal control, QRC was better on 6 and "
         "worse on 16 ExtraTrees endpoints, and better on 3 and worse on 19 CatBoost "
         "endpoints. The corrected CatBoost base itself outperformed ExtraTrees on 21/22 "
@@ -243,10 +247,10 @@ TEXT = {
         "at most 2/4 were positive on either base, and none survived multiple-testing "
         "correction."
     ),
-    38: "Table 1. Five-seed mean official metrics for both bases and ungated branches.",
-    40: "Table 2. Endpoint effects of QRC versus the matched real-orthogonal map with Holm correction.",
+    38: "Table 2. Five-seed mean official metrics for both bases and ungated branches.",
+    40: "Table 3. Endpoint effects of QRC versus the matched real-orthogonal map with Holm correction.",
     42: (
-        "Effects in Table 2 are direction-normalized so positive values favour QRC; "
+        "Effects in Table 3 are direction-normalized so positive values favour QRC; "
         "brackets show paired 95% scaffold-bootstrap intervals. Holm correction covers "
         "the 22 endpoints within each base. All three Holm-significant results favour the "
         "orthogonal map: AMES on ExtraTrees (AUROC difference -0.0115, Holm p=0.011), "
@@ -264,7 +268,7 @@ TEXT = {
         "those results reflect both branches being returned to the base model and are not "
         "evidence of a quantum contribution."
     ),
-    45: "Table 3. Representative behaviour of validation gating.",
+    45: "Table 4. Representative behaviour of validation gating.",
     47: (
         "The small-effect endpoints show that gating limits negative transfer without "
         "creating new extrapolation ability. On ExtraTrees, Half-life improved by 0.0616 "
@@ -274,7 +278,7 @@ TEXT = {
         "difference of -0.0010."
     ),
     48: "5.3 Additional Comparisons",
-    49: "Table 4. Direction counts and Holm-significant counts across endpoints.",
+    49: "Table 5. Direction counts and Holm-significant counts across endpoints.",
     51: (
         "QRC versus random Fourier features was also 3 better/19 worse on each base. "
         "Relative to the residual-free base, QRC was 6 better/16 worse on ExtraTrees and "
@@ -489,8 +493,9 @@ TEXT = {
         "ADMET. The QML-ADMET studies reviewed here use different fixed reservoirs, "
         "Hamiltonian-derived features, quantum-inspired preprocessing, circuit search, or "
         "jointly trained residuals; their task counts, controls, and external validation "
-        "settings do not support a like-for-like equivalence claim. Supplementary Table "
-        "S4 summarizes the differences. The contribution is a reusable minimum evaluation "
+        "settings do not support a like-for-like equivalence claim. Table 1 summarizes "
+        "the main differences and Supplementary Table S4 provides the expanded comparison. "
+        "The contribution is a reusable minimum evaluation "
         "workflow: prespecify the primary comparator, match candidate and map budgets, "
         "infer with scaffold clusters, correct across endpoints, interpret equivalence "
         "separately from superiority, and report both cross-base and cross-source results."
@@ -580,9 +585,16 @@ INSERTED_TEXT = {
         "Figure 1. Matched evaluation design. The two data sources share the two "
         "classical bases, the 32-dimensional PCA amplitude input, five-map residual "
         "ensembles, and the same gating budget. The primary control is the fixed "
-        "five-qubit QRC versus a parameter-matched real-orthogonal quadratic map."
+        "five-qubit QRC versus a parameter-matched real-orthogonal quadratic map. "
+        "The lower band states that all 15 Pauli readouts form constrained real "
+        "quadratic features q_j(a)=a^T A_j a."
     ),
-    22: (
+    15: (
+        "Table 1. Representative QML molecular-property studies and their relation "
+        "to the present evaluation. Tasks, encodings, and training protocols are not "
+        "numerically equivalent across studies."
+    ),
+    23: (
         "Supplementary Table S1 reports endpoint sample sizes, official metrics, and "
         "label summaries. Supplementary Table S2 reports the hierarchy of primary, "
         "secondary, sensitivity, external, and exploratory analyses. Supplementary "
@@ -590,7 +602,7 @@ INSERTED_TEXT = {
         "shows the chemical-space and physicochemical context of the TDC, hERG, and "
         "B3DB cohorts."
     ),
-    24: (
+    25: (
         "Figure 2. Chemical space and applicability-domain context. (A) Morgan radius-2 "
         "1024-bit fingerprints projected by 20-component truncated SVD, "
         "standardization, and two-dimensional PCA. TDC and B3DB were randomly sampled "
@@ -598,7 +610,7 @@ INSERTED_TEXT = {
         "used. (B-D) Molecular weight, cLogP, and TPSA distributions for all unique TDC, "
         "hERG, and B3DB molecules. Box plots omit outlier markers for readability."
     ),
-    31: (
+    32: (
         "Five qubits support 32 real amplitudes, so the 32-dimensional PCA is the "
         "smallest complete amplitude input without truncation or padding at this scale. "
         "The 15 readouts comprise five single-qubit Z expectations and all ten pair-wise "
@@ -610,7 +622,7 @@ INSERTED_TEXT = {
         "set were held fixed to avoid adding another capacity search to the primary "
         "benchmark."
     ),
-    67: (
+    68: (
         "Figure 3 separates QRC gain from orthogonal-branch degradation using the existing "
         "predictions. For CatBoost/hERG, gated QRC minus the residual-free base was "
         "+0.0285 AUROC (95% CI [0.0137, 0.0437]), whereas gated orthogonal minus the "
@@ -628,7 +640,7 @@ INSERTED_TEXT = {
         "for BBB logBB. It is not an independently trained regression evaluation, and "
         "the B3DB continuous subset is 86.8% positive."
     ),
-    69: (
+    70: (
         "Figure 3. External classification decomposition and calibration. (A-B) AUROC "
         "differences for gated QRC versus base, gated orthogonal versus base, and gated "
         "QRC versus gated orthogonal; positive values favour the first method. (C-D) "
@@ -636,8 +648,8 @@ INSERTED_TEXT = {
         "dashed diagonal is perfect calibration. Decomposition explains the primary "
         "comparison and does not replace the prespecified external AUROC test."
     ),
-    78: "5.8 Independent Continuous pIC50 Regression",
-    79: (
+    79: "5.8 Independent Continuous pIC50 Regression",
+    80: (
         "To avoid treating rank preservation from a binary classifier as continuous-value "
         "prediction, we added a fixed ToxTree hERG pIC50 regression. After removing TDC "
         "overlap, the source Dev-set was split by Bemis-Murcko scaffold into 6,895 "
@@ -647,7 +659,7 @@ INSERTED_TEXT = {
         "and linear residual heads followed the TDC protocol. External test labels were "
         "not used to select map seeds, PCA dimension, regularization, or hyperparameters."
     ),
-    80: (
+    81: (
         "Five model seeds did not show a confirmed QRC increment. QRC minus orthogonal "
         "Spearman was +0.0229 on ExtraTrees (95% CI [-0.0121, 0.0608]) and +0.0093 on "
         "CatBoost ([-0.0168, 0.0325]); QRC minus the CatBoost base was +0.0292 "
@@ -657,7 +669,7 @@ INSERTED_TEXT = {
         "and cannot provide a high-power validation on its own. Full results are shown "
         "in Supplementary Figure S4 and Supplementary Table S10."
     ),
-    94: (
+    95: (
         "For computational context, exact state-vector simulation of five qubits is not "
         "a quantum-speedup demonstration and provides no hardware runtime estimate. The "
         "scale was chosen to construct an exact, equal-readout quadratic control and to "
@@ -670,24 +682,34 @@ INSERTED_TEXT = {
 
 
 def _final_paragraph_index(original_index: int) -> int:
+    if original_index == 32:
+        return 40
     if original_index < 8:
         return original_index
-    if original_index < 20:
+    if original_index < 13:
         return original_index + 2
+    if original_index < 20:
+        return original_index + 3
     if original_index < 26:
-        return original_index + 5
-    if original_index < 61:
         return original_index + 6
+    if original_index < 61:
+        return original_index + 7
     if original_index < 69:
-        return original_index + 9
+        return original_index + 10
     if original_index < 82:
-        return original_index + 12
-    return original_index + 13
+        return original_index + 13
+    return original_index + 14
 
 
 HEADERS = {
-    0: ["Endpoint", "Metric", "ET", "QRC-ET", "Orth-ET", "CB", "QRC-CB", "Orth-CB"],
-    1: [
+    0: [
+        "Study",
+        "Molecular setting",
+        "Quantum/control focus",
+        "Relation to this benchmark",
+    ],
+    1: ["Endpoint", "Metric", "ET", "QRC-ET", "Orth-ET", "CB", "QRC-CB", "Orth-CB"],
+    2: [
         "Endpoint",
         "Metric",
         "ET effect [95% CI]",
@@ -695,7 +717,7 @@ HEADERS = {
         "CB effect [95% CI]",
         "CB Holm p",
     ],
-    2: [
+    3: [
         "Base",
         "Endpoint",
         "Metric",
@@ -703,7 +725,7 @@ HEADERS = {
         "Gated QRC-Orth [95% CI]",
         "Holm p",
     ],
-    3: ["Contrast", "QRC better", "QRC worse", "Holm positive", "Holm negative"],
+    4: ["Contrast", "QRC better", "QRC worse", "Holm positive", "Holm negative"],
 }
 
 
@@ -747,7 +769,9 @@ def main() -> int:
             run.bold = True
     alt_texts = (
         "Study-design schematic from molecular data and two classical bases through "
-        "matched quantum, orthogonal, and Fourier branches to scaffold-level evidence.",
+        "matched quantum, orthogonal, and Fourier branches to scaffold-level evidence; "
+        "the lower band shows that 15 Pauli readouts form constrained real quadratic "
+        "features.",
         "Chemical-space projection and molecular-weight, cLogP, and TPSA distributions "
         "for TDC, external hERG, and B3DB molecules.",
         "External hERG and B3DB effect decomposition and CatBoost calibration curves.",
@@ -757,7 +781,7 @@ def main() -> int:
     for shape, alt_text in zip(document.inline_shapes, alt_texts, strict=True):
         shape._inline.docPr.set("descr", alt_text)
         shape._inline.docPr.set("title", alt_text)
-    for paragraph in paragraphs[103:134]:
+    for paragraph in paragraphs[104:135]:
         paragraph.text = (
             paragraph.text.replace("arXiv 预印本", "arXiv preprint")
             .replace("bioRxiv 预印本", "bioRxiv preprint")
