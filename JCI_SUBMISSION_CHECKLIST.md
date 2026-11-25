@@ -42,8 +42,8 @@ The final "Availability of data and materials" section should provide:
 - Project name: QRC-ADMET matched evaluation.
 - Project home:
   https://github.com/575914291-source/qrc-admet-matched-evaluation
-- Archived version identifier: GitHub release `v1.3.0` at
-  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.3.0
+- Archived version identifier: GitHub release `v1.4.0` at
+  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.4.0
 - Operating systems: Windows, Linux, or macOS.
 - Programming language: Python 3.11.
 - Dependencies: `requirements.txt`.

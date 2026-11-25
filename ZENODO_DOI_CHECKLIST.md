@@ -20,11 +20,11 @@ DOI is the stronger persistent identifier to place in the submitted
 
 ## Manual upload alternative
 
-Upload `qrc_admet_reproduction_v1.3.0.zip` as a software deposit with:
+Upload `qrc_admet_reproduction_v1.4.0.zip` as a software deposit with:
 
 - Title: QRC-ADMET matched evaluation
 - Upload type: Software
-- Version: 1.3.0
+- Version: 1.4.0
 - Licence: MIT for original software
 - Creators: full author names and ORCID identifiers
 - Keywords: ADMET; quantum reservoir computing; matched controls;
@@ -35,7 +35,7 @@ Upload `qrc_admet_reproduction_v1.3.0.zip` as a software deposit with:
 
 > Project name: QRC-ADMET matched evaluation. Project home:
 > https://github.com/575914291-source/qrc-admet-matched-evaluation. Archived
-> version: v1.3.0, DOI: https://doi.org/10.5281/zenodo.XXXXXXX. Operating
+> version: v1.4.0, DOI: https://doi.org/10.5281/zenodo.XXXXXXX. Operating
 > systems: Windows, Linux, or macOS. Programming language: Python 3.11.
 > Dependencies: requirements.txt. Licence: MIT for original code and
 > documentation; upstream data and third-party licences are listed in

@@ -10,6 +10,7 @@ standalone vector PDFs.
 | Figure 3 | External effect decomposition and calibration | `src/analyze_external_diagnostics.py`, `src/build_extended_figures.py` | `outputs/Figure3_External_Validation.pdf` |
 | Figure 4 | Endpoint-level primary effects | `src/make_manuscript_assets.py` | `outputs/Figure4_Primary_Effects.pdf` |
 | Figure S4 | Independent hERG pIC50 regression | `src/report_external_regression.py`, `src/build_extended_figures.py` | `outputs/Supplementary_FigureS4_External_Regression.pdf` |
+| Figure S5 | Qiskit/Aer circuit-level noise audit | `src/report_circuit_level_noise.py` | `outputs/Supplementary_FigureS5_Circuit_Noise.pdf` |
 
 Alt text is stored in the inline shapes of the DOCX manuscripts. Figure 1 was
 initially laid out with the `academic-figures` workflow from Scientific Agent
