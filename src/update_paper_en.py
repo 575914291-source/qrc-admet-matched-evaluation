@@ -703,6 +703,16 @@ INSERTED_TEXT = {
         "of larger reservoirs, fault-tolerant quantum computing, or a specific hardware "
         "topology; these are separate experimental questions."
     ),
+    96: (
+        "To make the conclusions directly reusable, Table 6 converts the matched-control "
+        "principles above into minimum reporting requirements. The table is an evaluation "
+        "checklist for evidence comparability and transfer; it is not a predetermined "
+        "claim about other quantum architectures."
+    ),
+    97: (
+        "Table 6. Minimum matched-evaluation requirements for fixed-circuit QML molecular-"
+        "property studies."
+    ),
 }
 
 
@@ -723,7 +733,7 @@ def _final_paragraph_index(original_index: int) -> int:
         return original_index + 10
     if original_index < 82:
         return original_index + 13
-    return original_index + 14
+    return original_index + 16
 
 
 HEADERS = {
@@ -751,6 +761,7 @@ HEADERS = {
         "Holm p",
     ],
     4: ["Contrast", "QRC better", "QRC worse", "Holm positive", "Holm negative"],
+    5: ["Requirement and implementation", "Primary evidence"],
 }
 
 
@@ -806,7 +817,7 @@ def main() -> int:
     for shape, alt_text in zip(document.inline_shapes, alt_texts, strict=True):
         shape._inline.docPr.set("descr", alt_text)
         shape._inline.docPr.set("title", alt_text)
-    for paragraph in paragraphs[104:135]:
+    for paragraph in paragraphs[106:137]:
         paragraph.text = (
             paragraph.text.replace("arXiv 预印本", "arXiv preprint")
             .replace("bioRxiv 预印本", "bioRxiv preprint")

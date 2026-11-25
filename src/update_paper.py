@@ -511,6 +511,58 @@ def main() -> int:
     ):
         for run in paragraph.runs:
             set_run_font(run, 10.6)
+    benchmark_standard_paragraph = paragraphs[62].insert_paragraph_before(
+        "为使本研究结论可被后续工作直接复核，Table 6将上述对照原则整理为一套最低报告要求。该表不是对其它量子架构的预设结论，而是用于判断任何固定线路QML分子特征研究是否具备可比较、可迁移证据的检查清单。",
+        style=paragraphs[61].style,
+    )
+    for run in benchmark_standard_paragraph.runs:
+        set_run_font(run, 10.6)
+    standard_rows = [
+        ["Requirement and implementation", "Primary evidence"],
+        [
+            "Same 32D input, 15 Pauli readouts, and linear residual head",
+            "Figure 1; Proposition 1; Table 3",
+        ],
+        [
+            "Matched randomness: five independent maps per family and five scaffold splits",
+            "Methods 4.2; Table 3",
+        ],
+        [
+            "Two strong classical bases: Morgan-ExtraTrees and MapLight-CatBoost",
+            "Table 2; Table 3",
+        ],
+        [
+            "Scaffold-clustered inference with Holm and TOST",
+            "Methods 3; Figure 4; Table 5",
+        ],
+        [
+            "Independent sources: ToxTree hERG and B3DB BBB, including continuous-label checks",
+            "Figure 3; Tables S7-S10",
+        ],
+        [
+            "Report all endpoint effects, gate choices, low-data, shots, noise, and family search",
+            "Tables 3-5; Figures S1-S5",
+        ],
+        [
+            "Claim boundaries: exact simulation, circuit-level noise, and hardware are reported separately",
+            "Methods 4.2; Limitations; Figure S5",
+        ],
+    ]
+    standard_table = document.add_table(rows=len(standard_rows), cols=2)
+    fill_table(standard_table, standard_rows, [4.7, 1.8])
+    for row in standard_table.rows[1:]:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    standard_caption = paragraphs[62].insert_paragraph_before(
+        "Table 6　固定线路QML分子特征研究的最低匹配评估要求。"
+    )
+    standard_caption.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    standard_caption.paragraph_format.keep_with_next = True
+    standard_caption.paragraph_format.space_after = Pt(4)
+    for run in standard_caption.runs:
+        set_run_font(run, 9.5)
+    paragraphs[62]._p.addprevious(standard_table._tbl)
     set_paragraph(
         paragraphs[63],
         "公开官方固定测试集支持可复现对照，但可能与历史公共排行榜反复接触，不能作为独立前瞻验证。不同 Murcko 骨架之间仍可能相似，跨实验室、时间和化学系列的外推需要另行评估。精确状态向量仿真是为了隔离线路表达能力而采用的受控设计，不能替代真实硬件上的门误差、读出串扰、连通性和调度验证。预设等价边界用于探索性解释，不代表临床或监管可接受的最小效应。[3–5,21]",
@@ -633,7 +685,11 @@ def main() -> int:
         )
     fill_table(table_4, rows_4, [2.15, 0.82, 0.82, 0.92, 0.92])
 
-    appendix_table = document.tables[4]
+    appendix_table = next(
+        table
+        for table in document.tables
+        if table.rows[0].cells[0].text.strip() == "端点"
+    )
     appendix_table._element.getparent().remove(appendix_table._element)
     add_references(document, paragraphs[94])
 
