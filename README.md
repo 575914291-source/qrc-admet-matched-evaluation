@@ -195,6 +195,8 @@ The committed circuit-level arrays and report can be audited without Qiskit.
 - `src/build_extended_tables.py` and `src/build_extended_figures.py`: manuscript
   tables and the added publication figures.
 - `src/build_design_figure.py`: study-design schematic.
+- `src/audit_manuscript.py`: automated abstract-length, CJK, caption, citation,
+  placeholder, and image-alt-text checks.
 - `src/build_jc_submission.py`: journal-formatted manuscript, additional file,
   separate figure files, and cover-letter draft for Journal of Cheminformatics.
 - `src/audit_*.py`: independent checks of the released result artefacts.
