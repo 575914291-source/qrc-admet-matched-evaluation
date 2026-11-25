@@ -10,7 +10,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = PROJECT_ROOT / "outputs"
 OUTPUT_ZIP = OUTPUT_ROOT / "补充材料_qrc_admet_代码与结果_最终.zip"
-VERSIONED_ZIP = OUTPUT_ROOT / "qrc_admet_reproduction_v1.2.0.zip"
+VERSIONED_ZIP = OUTPUT_ROOT / "qrc_admet_reproduction_v1.3.0.zip"
 
 
 def sha256(path: Path) -> str:
@@ -101,7 +101,7 @@ def main() -> int:
         if path.is_file() and allowed(path) and path != OUTPUT_ZIP
     )
     manifest = {
-        "version": "1.2.0",
+        "version": "1.3.0",
         "files": len(files),
         "source": "TDC ADMET Group / Harvard Dataverse file 4426004",
         "archive_sha256": sha256(
@@ -117,7 +117,7 @@ def main() -> int:
         ),
         "release": (
             "https://github.com/575914291-source/"
-            "qrc-admet-matched-evaluation/releases/tag/v1.2.0"
+            "qrc-admet-matched-evaluation/releases/tag/v1.3.0"
         ),
     }
     manifest_bytes = (
