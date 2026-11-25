@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "calibration_datasets": 900,
+  "effect_decomposition_splits": 220,
+  "selection_aware_runs": 220,
+  "capacity_records": 3300,
+  "cka_records": 660,
+  "source_gradient_summaries": 24,
+  "checks": [
+    "known QRC and classical signals are recovered",
+    "null false-positive rates are at or below 5%",
+    "effect decomposition identity holds on all splits",
+    "selection-aware analysis covers all 220 runs",
+    "capacity diagnostics cover 22 tasks, 2 bases, 5 splits and 5 maps",
+    "external source-gradient analysis covers all quartiles"
+  ]
+}

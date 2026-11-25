@@ -1,9 +1,9 @@
-# Journal of Cheminformatics submission checklist
+# Journal of Computer-Aided Molecular Design submission checklist
 
-The journal guidelines checked on 2026-11-25 require double-line spacing,
-continuous line and page numbering, editable manuscript files, no manual page
-breaks, unshaded tables, separate figure files, and a structured data/software
-availability statement.
+This local preflight package provides editable manuscript files, a separate
+supplement, separate figure files, and a structured data/software availability
+statement. Confirm the current JCAMD web guidelines and file limits in the live
+submission system before uploading.
 
 ## Generate the formatting package
 
@@ -14,7 +14,7 @@ python -m src.build_jc_submission
 ```
 
 The generated files are written to
-`outputs/JCheminformatics_Submission/`:
+`outputs/JCAMD_Submission/`:
 
 - `Manuscript.docx`: editable submission manuscript with continuous line
   numbers, double-spaced body text, no manual page breaks, and unshaded tables.
@@ -42,8 +42,8 @@ The final "Availability of data and materials" section should provide:
 - Project name: QRC-ADMET matched evaluation.
 - Project home:
   https://github.com/575914291-source/qrc-admet-matched-evaluation
-- Archived version identifier: GitHub release `v1.4.0` at
-  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.4.0
+- Archived version identifier: GitHub release `v1.5.1` at
+  https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.5.1
 - Operating systems: Windows, Linux, or macOS.
 - Programming language: Python 3.11.
 - Dependencies: `requirements.txt`.
@@ -63,9 +63,8 @@ submission.
 3. `Figure_1.pdf` to `Figure_4.pdf`.
 4. Completed cover letter.
 
-The journal permits a review PDF in addition to editable source files, but the
-editable DOCX remains mandatory. The current 17-page typeset PDF is a review or
-preprint version, not the journal-formatted manuscript.
+Keep the editable DOCX as the authoritative source and upload the separately
+generated PDF only if the live submission system requests a review document.
 
 ## Final checks
 

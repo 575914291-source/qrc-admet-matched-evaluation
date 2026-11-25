@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "purpose": "Decompose QRC-vs-base changes into matched classical nonlinearity and QRC-specific effects.",
+  "endpoints": 44,
+  "bases": {
+    "catboost": {
+      "positive_qrc_vs_base_endpoints": 4,
+      "apparent_gains_neutralized_by_control": 3,
+      "neutralized_fraction_of_positive_endpoints": 0.75,
+      "qrc_specific_positive_endpoints": 3
+    },
+    "extra_trees": {
+      "positive_qrc_vs_base_endpoints": 6,
+      "apparent_gains_neutralized_by_control": 2,
+      "neutralized_fraction_of_positive_endpoints": 0.3333333333333333,
+      "qrc_specific_positive_endpoints": 6
+    }
+  },
+  "checks": [
+    "decomposition identity holds on every split",
+    "all endpoint and base combinations are present",
+    "effect direction is positive for improvement including MAE"
+  ]
+}

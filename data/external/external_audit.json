@@ -1,7 +1,7 @@
 {
   "herg": {
     "source": "Zenodo 5807719 / ToxTree hERG external test",
-    "source_sha256": "f028e0dbdc46fd587e3f75e296e06922387e3e5dc7288837d7e0da40ecbcc80b",
+    "source_sha256": "cb031f5c230d992a1ec48d7ee46689dfee1a2667edfcba0e84ff9b2845e104cb",
     "label_rule": "PIC50 >= 4.5 (IC50 <= 30 uM)",
     "before_overlap": 488,
     "removed_tdc_overlap": 195,

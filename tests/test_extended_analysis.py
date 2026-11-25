@@ -20,7 +20,7 @@ class ExtendedAnalysisTests(unittest.TestCase):
         prior = pd.read_csv(TABLE_ROOT / "prior_qml_comparison.csv")
         self.assertEqual(len(endpoint), 22)
         self.assertEqual(endpoint.endpoint.nunique(), 22)
-        self.assertEqual(len(hierarchy), 6)
+        self.assertEqual(len(hierarchy), 7)
         self.assertEqual(len(prior), 7)
 
     def test_external_diagnostics_cover_all_cohorts(self):
@@ -62,7 +62,7 @@ class ExtendedAnalysisTests(unittest.TestCase):
         self.assertTrue(expected.issubset(actual))
 
     def test_jc_submission_package_is_formatted(self):
-        root = ROOT / "outputs" / "JCheminformatics_Submission"
+        root = ROOT / "outputs" / "JCAMD_Submission"
         expected = {
             "Manuscript.docx",
             "Additional_file_1.pdf",
@@ -116,6 +116,68 @@ class ExtendedAnalysisTests(unittest.TestCase):
         )
         self.assertEqual(audit["status"], "passed")
 
+    def test_calibration_and_attribution_are_complete(self):
+        calibration = pd.read_csv(
+            ROOT / "results" / "calibration" / "summary.csv",
+            keep_default_na=False,
+            na_values=[""],
+        )
+        self.assertEqual(len(calibration), 6)
+        self.assertTrue(
+            (
+                calibration.loc[
+                    calibration.scenario == "qrc_signal",
+                    "qrc_minus_orthogonal_mean",
+                ]
+                > 0
+            ).all()
+        )
+        self.assertTrue(
+            (
+                calibration.loc[
+                    calibration.scenario == "classical_signal",
+                    "qrc_minus_orthogonal_mean",
+                ]
+                < 0
+            ).all()
+        )
+        null = calibration[calibration.scenario == "null"]
+        self.assertTrue((null.null_false_positive_rate <= 0.05).all())
+
+        effects = pd.read_csv(
+            ROOT / "results" / "effect_decomposition" / "effects_by_split.csv"
+        )
+        self.assertEqual(len(effects), 220)
+        self.assertLess(float(effects.identity_error.abs().max()), 1e-10)
+
+        selection = json.loads(
+            (
+                ROOT / "results" / "map_selection" / "summary.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(selection["runs"], 220)
+
+        capacity = json.loads(
+            (
+                ROOT / "results" / "capacity_diagnostics" / "summary.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(capacity["runs"], 3300)
+
+        gradient = pd.read_csv(
+            ROOT / "results" / "source_gradient" / "summary.csv"
+        )
+        self.assertEqual(len(gradient), 24)
+        audit = json.loads(
+            (
+                ROOT
+                / "results"
+                / "audit"
+                / "extended_evaluation_audit.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(audit["status"], "passed")
+
     def test_manuscript_audit_passed(self):
         audit = json.loads(
             (ROOT / "outputs" / "MANUSCRIPT_QA.json").read_text(
@@ -125,7 +187,8 @@ class ExtendedAnalysisTests(unittest.TestCase):
         self.assertEqual(audit["status"], "passed")
         self.assertEqual(audit["main"]["tables"], 6)
         self.assertEqual(audit["main"]["figures"], 4)
-        self.assertEqual(audit["supplement"]["figures"], 5)
+        self.assertEqual(audit["supplement"]["tables"], 17)
+        self.assertEqual(audit["supplement"]["figures"], 10)
 
 
 if __name__ == "__main__":

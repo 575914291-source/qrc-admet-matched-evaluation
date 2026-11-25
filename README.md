@@ -7,7 +7,7 @@ Baselines**.
 Repository: <https://github.com/575914291-source/qrc-admet-matched-evaluation>
 
 Frozen submission snapshot:
-<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.5.0>
+<https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.5.1>
 
 The reusable reporting requirements distilled from the study are listed in
 [`MINIMUM_REPORTING_CHECKLIST.md`](MINIMUM_REPORTING_CHECKLIST.md).
@@ -38,6 +38,9 @@ transpiled circuits with gate depolarization and readout-flip errors.
   correction across all exploratory contrasts.
 - Four main figures covering study design, chemical space, external
   decomposition/calibration, and endpoint-level primary effects.
+- Five additional analyses covering known-signal calibration, selection-aware
+  map comparison, matched-effect decomposition, feature capacity, and
+  external-source gradients.
 - Submission-ready Chinese and English manuscripts and supplementary figures.
 
 The 473 MB dense MapLight feature cache is intentionally excluded from Git.
@@ -77,6 +80,12 @@ python -m src.report_external_regression
 python -m src.audit_external_regression
 python -m src.report_circuit_level_noise
 python -m src.audit_circuit_level_noise
+python -m src.analyze_calibration
+python -m src.analyze_effect_decomposition
+python -m src.analyze_map_selection
+python -m src.analyze_capacity
+python -m src.analyze_source_gradient
+python -m src.audit_extended_evaluation
 python -m src.make_manuscript_assets
 python -m src.build_design_figure
 python -m src.build_extended_tables
@@ -94,8 +103,10 @@ These commands verify 220 primary endpoint runs, 80 finite-shot files (240
 results), 80 low-data files (400 fraction results), 20 external runs, 80 noise
 files (240 results), 80 bounded-family-search runs, 10 independent continuous
 regression runs, 8 circuit-level noise files, the chemical-space audit, and the
-continuous-label transfer audit. They require the released result artefacts but
-not the dense feature cache.
+continuous-label transfer audit. They also verify 900 synthetic calibration
+datasets, 220 effect-decomposition splits, 220 selection-aware runs, 3,300
+capacity records, 660 CKA records, and 24 external-source-gradient summaries.
+They require the released result artefacts but not the dense feature cache.
 
 ## Reproduce from raw data
 
@@ -127,6 +138,12 @@ python -m src.audit_noise
 python -m src.run_tuned_qrc --workers 4
 python -m src.report_tuned_qrc
 python -m src.audit_tuned_qrc
+python -m src.analyze_calibration
+python -m src.analyze_effect_decomposition
+python -m src.analyze_map_selection
+python -m src.analyze_capacity
+python -m src.analyze_source_gradient
+python -m src.audit_extended_evaluation
 python -m src.domain_audit
 python -m src.make_manuscript_assets
 python -m src.build_design_figure
@@ -178,6 +195,18 @@ The committed circuit-level arrays and report can be audited without Qiskit.
 - `src/report_external_regression.py` and
   `src/audit_external_regression.py`: paired inference and integrity checks for
   the continuous external cohort.
+- `src/analyze_calibration.py`: known-QRC, known-classical, and null
+  calibration of the matched feature-stage evaluation.
+- `src/analyze_effect_decomposition.py`: separates matched classical
+  nonlinearity from QRC-specific endpoint effects.
+- `src/analyze_map_selection.py`: validation-selected versus averaged and
+  selection-matched map comparisons.
+- `src/analyze_capacity.py`: effective rank, conditioning, and linear CKA for
+  all task-base-split combinations.
+- `src/analyze_source_gradient.py`: external effects across nearest-TDC
+  similarity quartiles.
+- `src/audit_extended_evaluation.py`: integrity checks for calibration,
+  decomposition, selection, capacity, and source-gradient outputs.
 - `src/prepare_circuit_noise.py`: fixed CatBoost-PCA test-state sampling for the
   optional circuit-level audit.
 - `src/run_circuit_level_noise.py`: explicit Qiskit/Aer circuits with
@@ -198,7 +227,8 @@ The committed circuit-level arrays and report can be audited without Qiskit.
 - `src/audit_manuscript.py`: automated abstract-length, CJK, caption, citation,
   placeholder, and image-alt-text checks.
 - `src/build_jc_submission.py`: journal-formatted manuscript, additional file,
-  separate figure files, and cover-letter draft for Journal of Cheminformatics.
+  separate figure files, and cover-letter draft for the Journal of
+  Computer-Aided Molecular Design.
 - `src/audit_*.py`: independent checks of the released result artefacts.
 - `templates/source_manuscript.docx`: source document used by the manuscript
   generator, retained so the submitted DOCX can be rebuilt portably.
@@ -207,7 +237,11 @@ The committed circuit-level arrays and report can be audited without Qiskit.
 
 - TDC ADMET archive: Harvard Dataverse file `4426004`, SHA-256
   `bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1`.
-- hERG external collection: Zenodo record `5807719`, CC BY 4.0.
+- hERG external collection: Zenodo record `5807719`, CC BY 4.0. The downloaded
+  CRLF file has SHA-256
+  `f028e0dbdc46fd587e3f75e296e06922387e3e5dc7288837d7e0da40ecbcc80b`;
+  the tracked LF-normalized file has SHA-256
+  `cb031f5c230d992a1ec48d7ee46689dfee1a2667edfcba0e84ff9b2845e104cb`.
 - B3DB: CC0 1.0; the provider licence is retained with the data.
 - MapLight reference implementation: retained in `third_party/` under its MIT
   licence.
@@ -217,11 +251,11 @@ See [`DATA_LICENSES.md`](DATA_LICENSES.md) and the provenance files under
 
 ## Journal submission
 
-The Journal of Cheminformatics-formatted manuscript, additional file, separate
-figures, and cover-letter draft are generated by
+The JCAMD submission manuscript, additional file, separate figures, and
+cover-letter draft are generated by
 `python -m src.build_jc_submission`. Remaining author-specific actions and the
 Zenodo DOI workflow are listed in
-[`JCI_SUBMISSION_CHECKLIST.md`](JCI_SUBMISSION_CHECKLIST.md) and
+[`JCAMD_SUBMISSION_CHECKLIST.md`](JCAMD_SUBMISSION_CHECKLIST.md) and
 [`ZENODO_DOI_CHECKLIST.md`](ZENODO_DOI_CHECKLIST.md).
 
 ## Figure generation

@@ -27,3 +27,20 @@ molecule order are recorded in `data/cache/`.
 The cache is label-free. No competition split files are used for the paper's
 labels or evaluation.
 
+## External validation sources
+
+- hERG: Zenodo record `5807719`, CC BY 4.0. The upstream CRLF download used
+  for the analysis has SHA-256
+  `f028e0dbdc46fd587e3f75e296e06922387e3e5dc7288837d7e0da40ecbcc80b`.
+  Git stores and distributes the same text with LF line endings under
+  `data/external/hERG_Dataset.csv`; its canonical tracked hash is
+  `cb031f5c230d992a1ec48d7ee46689dfee1a2667edfcba0e84ff9b2845e104cb`.
+  The line-ending normalization does not change the parsed records.
+- B3DB: CC0 1.0. The source table at
+  `data/external/B3DB_classification.tsv` has SHA-256
+  `47a160aea1551423ead2aab70b301fb1646aea03cf151fd614eb37c78fa55b82`.
+
+The full hashes in the reproduction manifest refer to the Python-readable
+tracked files. For hERG, the upstream-download and tracked-LF hashes are both
+reported so that provenance remains verifiable across operating systems.
+

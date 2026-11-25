@@ -17,18 +17,18 @@ OUTPUT = OUTPUT_ROOT / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.doc
 
 TEXT = {
     0: "Matched Evaluation of Fixed Quantum Reservoir Residuals on TDC ADMET with Random Realizations and Strong Baselines",
-    1: "A Reproducible Benchmark of Fixed Quantum Reservoir Features on TDC ADMET",
+    1: "A Calibrated Reproducible Benchmark of Fixed Quantum Reservoir Features on TDC ADMET",
     2: "Abstract",
     3: (
-        "Reported gains from quantum reservoir computing (QRC) are difficult to interpret "
+        "Reported QRC gains are difficult to interpret "
         "because matched classical controls, multiple random realizations, strong "
         "base models, and cross-source validation are rarely combined. We establish "
-        "a reproducible matched evaluation workflow on all 22 Therapeutics Data Commons (TDC) ADMET "
+        "a calibrated reproducible matched evaluation workflow on all 22 Therapeutics Data Commons (TDC) ADMET "
         "endpoints. We compare exactly "
         "simulated five-qubit amplitude-encoded reservoirs with real-orthogonal "
         "quadratic maps and random Fourier features, using Morgan-ExtraTrees and "
-        "MapLight-CatBoost. Each endpoint uses five scaffold splits; each random family "
-        "uses five averaged maps. Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, "
+        "MapLight-CatBoost. Five scaffold splits and five averaged maps per family control randomness. "
+        "Ungated QRC is better on 6 and worse on 16 ExtraTrees endpoints, "
         "and better on 3 and worse on 19 CatBoost endpoints. After Holm correction, no "
         "endpoint is significantly better and three are significantly worse. Gating, "
         "joint correction, low-data scaling, finite shots, simulated noise, and a "
@@ -37,10 +37,11 @@ TEXT = {
         "non-overlapping hERG molecules but both bases degrade on 2,317 B3DB BBB "
         "molecules. The hERG difference combines a QRC gain and an orthogonal-branch "
         "decrement relative to the base. Continuous-label ranking and an independent "
-        "pIC50 regression do not survive joint multiplicity correction. A Qiskit/Aer "
-        "circuit audit preserves readout rank correlation under gate and readout errors "
-        "but shows amplitude attenuation. Chemical-space analyses do not identify a simple source "
-        "explanation. The main contribution is a reproducible evaluation workflow. "
+        "pIC50 regression do not survive joint multiplicity correction. Known-signal "
+        "calibration recovered QRC and classical targets, with null false-positive "
+        "rates of 2.0-4.7%. A Qiskit/Aer audit preserved rank under errors but "
+        "attenuated amplitudes. Chemical-space analyses show no simple source effect. "
+        "The main contribution is a calibrated evaluation workflow. "
         "The conclusion is bounded by five-qubit "
         "amplitude encoding, 15 Pauli readouts, a linear residual head, and exact "
         "state-vector simulation; it is not a general claim against other encodings, "

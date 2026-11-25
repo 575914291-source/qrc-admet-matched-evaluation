@@ -2,7 +2,7 @@
   "status": "passed",
   "source": "Zenodo 5807719 / ToxTree continuous hERG test collection",
   "source_path": "data\\external\\hERG_Dataset.csv",
-  "source_sha256": "f028e0dbdc46fd587e3f75e296e06922387e3e5dc7288837d7e0da40ecbcc80b",
+  "source_sha256": "cb031f5c230d992a1ec48d7ee46689dfee1a2667edfcba0e84ff9b2845e104cb",
   "target": "PIC50",
   "split_protocol": "source-defined Dev-set/Test-set; TDC canonical overlap removed; test scaffolds shared with either the external Dev-set or the TDC hERG archive removed; Dev-set split 87.5/12.5 by Bemis-Murcko scaffold",
   "split_seed": 20261125,

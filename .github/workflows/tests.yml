@@ -37,6 +37,12 @@ jobs:
           python -m src.audit_external_regression
           python -m src.report_circuit_level_noise
           python -m src.audit_circuit_level_noise
+          python -m src.analyze_calibration
+          python -m src.analyze_effect_decomposition
+          python -m src.analyze_map_selection
+          python -m src.analyze_capacity
+          python -m src.analyze_source_gradient
+          python -m src.audit_extended_evaluation
           python -m src.make_manuscript_assets
           python -m src.build_design_figure
           python -m src.build_extended_tables

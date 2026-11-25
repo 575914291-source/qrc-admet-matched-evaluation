@@ -15,4 +15,5 @@ work/
 .firecrawl/
 outputs/*.zip
 outputs/*.zip.sha256
+outputs/相似论文下载/
 

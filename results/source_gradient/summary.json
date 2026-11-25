@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "purpose": "Stratify external QRC-specific effects by nearest-TDC chemical similarity and scaffold overlap.",
+  "tasks": [
+    "herg",
+    "bbb_martins"
+  ],
+  "bases": [
+    "extra_trees",
+    "catboost"
+  ],
+  "rows": 120,
+  "quartile_sizes": {
+    "herg": {
+      "0": 74,
+      "1": 73,
+      "2": 73,
+      "3": 73
+    },
+    "bbb_martins": {
+      "0": 587,
+      "1": 575,
+      "2": 576,
+      "3": 579
+    }
+  }
+}

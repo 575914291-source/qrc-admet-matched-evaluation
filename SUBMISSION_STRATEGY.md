@@ -44,10 +44,18 @@ tested system showed no robust transferable increment.
   calibration, and endpoint-level primary effects.
 - External AUPRC, Brier, log-loss, calibration, TOST sensitivity, and an
   independent continuous pIC50 regression are included as boundary analyses.
+- Known-QRC, known-classical, and null calibration show that the matched
+  evaluation recovers expected signals while keeping null false-positive rates
+  near 5%.
+- Selection-aware map comparisons, matched-effect decomposition, effective-rank
+  and CKA diagnostics, and nearest-TDC source gradients delimit the local
+  hERG signal.
 - Full split-level predictions, statistical tables, audits, figures, and data
   provenance are included in the reproduction archive.
 - Public code repository:
   <https://github.com/575914291-source/qrc-admet-matched-evaluation>
+- Frozen code and result release:
+  <https://github.com/575914291-source/qrc-admet-matched-evaluation/releases/tag/v1.5.1>
 - CI checks include unit tests and independent result audits.
 
 ## Remaining author-supplied metadata

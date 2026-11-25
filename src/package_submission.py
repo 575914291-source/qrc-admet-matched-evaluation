@@ -10,7 +10,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = PROJECT_ROOT / "outputs"
 OUTPUT_ZIP = OUTPUT_ROOT / "补充材料_qrc_admet_代码与结果_最终.zip"
-VERSIONED_ZIP = OUTPUT_ROOT / "qrc_admet_reproduction_v1.5.0.zip"
+VERSIONED_ZIP = OUTPUT_ROOT / "qrc_admet_reproduction_v1.5.1.zip"
 
 
 def sha256(path: Path) -> str:
@@ -32,7 +32,13 @@ def allowed(path: Path) -> bool:
     }
     if text in stale_figures:
         return False
-    if text.startswith("outputs/JCheminformatics_Submission/"):
+    if text.startswith(
+        (
+            "outputs/JCheminformatics_Submission/",
+            "outputs/JCAMD_Submission/",
+            "outputs/相似论文下载/",
+        )
+    ):
         return False
     if "__pycache__" in text or text.endswith(".pyc"):
         return False
@@ -61,6 +67,11 @@ def allowed(path: Path) -> bool:
         "results/external_diagnostics",
         "results/external_regression",
         "results/circuit_level_noise",
+        "results/calibration",
+        "results/effect_decomposition",
+        "results/map_selection",
+        "results/capacity_diagnostics",
+        "results/source_gradient",
         "results/noise",
         "results/tuned_qrc",
         "results/combination",
@@ -105,7 +116,7 @@ def main() -> int:
         if path.is_file() and allowed(path) and path != OUTPUT_ZIP
     )
     manifest = {
-        "version": "1.5.0",
+        "version": "1.5.1",
         "files": len(files),
         "source": "TDC ADMET Group / Harvard Dataverse file 4426004",
         "archive_sha256": sha256(
@@ -121,7 +132,7 @@ def main() -> int:
         ),
         "release": (
             "https://github.com/575914291-source/"
-            "qrc-admet-matched-evaluation/releases/tag/v1.5.0"
+            "qrc-admet-matched-evaluation/releases/tag/v1.5.1"
         ),
     }
     manifest_bytes = (

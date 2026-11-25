@@ -88,6 +88,21 @@ def build_analysis_hierarchy() -> pd.DataFrame:
             ),
         },
         {
+            "analysis_tier": "Evaluation calibration",
+            "question": (
+                "Can the matched workflow recover known QRC/classical signals "
+                "and control null false positives?"
+            ),
+            "scope": (
+                "hERG, B3DB BBB, and solubility; 2 bases; 5 split seeds; "
+                "known QRC, known classical, and null targets"
+            ),
+            "inference": (
+                "Synthetic known-answer calibration only; not a biological "
+                "endpoint or model-selection analysis"
+            ),
+        },
+        {
             "analysis_tier": "External binary validation",
             "question": (
                 "Does the matched comparison transfer to independent hERG and "

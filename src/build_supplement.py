@@ -24,6 +24,11 @@ DIAGNOSTIC_ROOT = RESULTS_ROOT / "external_diagnostics"
 REPORT_ROOT = RESULTS_ROOT / "report"
 REGRESSION_ROOT = RESULTS_ROOT / "external_regression"
 CIRCUIT_ROOT = RESULTS_ROOT / "circuit_level_noise"
+CALIBRATION_ROOT = RESULTS_ROOT / "calibration"
+DECOMPOSITION_ROOT = RESULTS_ROOT / "effect_decomposition"
+SELECTION_ROOT = RESULTS_ROOT / "map_selection"
+CAPACITY_ROOT = RESULTS_ROOT / "capacity_diagnostics"
+SOURCE_GRADIENT_ROOT = RESULTS_ROOT / "source_gradient"
 
 
 def _sha256(path: Path) -> str:
@@ -196,6 +201,30 @@ def _build_hash_manifest() -> pd.DataFrame:
             CIRCUIT_ROOT / "summary.csv",
         ),
         (
+            "Benchmark calibration summary",
+            CALIBRATION_ROOT / "summary.csv",
+        ),
+        (
+            "Selection-aware map summary",
+            SELECTION_ROOT / "endpoint_summary.csv",
+        ),
+        (
+            "Matched-effect decomposition",
+            DECOMPOSITION_ROOT / "endpoint_summary.csv",
+        ),
+        (
+            "Feature-capacity summary",
+            CAPACITY_ROOT / "feature_summary.csv",
+        ),
+        (
+            "Representation CKA summary",
+            CAPACITY_ROOT / "cka_summary.csv",
+        ),
+        (
+            "External source-gradient summary",
+            SOURCE_GRADIENT_ROOT / "summary.csv",
+        ),
+        (
             "Circuit-level noise figure",
             FIGURE_ROOT / "figureS5_circuit_noise.pdf",
         ),
@@ -216,6 +245,26 @@ def _build_hash_manifest() -> pd.DataFrame:
         (
             "Independent-regression figure",
             FIGURE_ROOT / "figureS4_external_regression.pdf",
+        ),
+        (
+            "Benchmark calibration",
+            CALIBRATION_ROOT / "calibration.pdf",
+        ),
+        (
+            "Map selection diagnostics",
+            SELECTION_ROOT / "map_selection.pdf",
+        ),
+        (
+            "Effect decomposition",
+            DECOMPOSITION_ROOT / "effect_decomposition.pdf",
+        ),
+        (
+            "Capacity diagnostics",
+            CAPACITY_ROOT / "capacity_diagnostics.pdf",
+        ),
+        (
+            "External source gradient",
+            SOURCE_GRADIENT_ROOT / "source_gradient.pdf",
         ),
     ]
     rows = [
@@ -277,6 +326,32 @@ def build_supplement() -> Path:
         CIRCUIT_ROOT / "summary.csv",
         encoding="utf-8-sig",
     )
+    benchmark_calibration = pd.read_csv(
+        CALIBRATION_ROOT / "summary.csv",
+        encoding="utf-8-sig",
+        keep_default_na=False,
+        na_values=[""],
+    )
+    selection_summary = pd.read_csv(
+        SELECTION_ROOT / "endpoint_summary.csv",
+        encoding="utf-8-sig",
+    )
+    decomposition_summary = pd.read_csv(
+        DECOMPOSITION_ROOT / "endpoint_summary.csv",
+        encoding="utf-8-sig",
+    )
+    capacity_summary = pd.read_csv(
+        CAPACITY_ROOT / "feature_summary.csv",
+        encoding="utf-8-sig",
+    )
+    cka_summary = pd.read_csv(
+        CAPACITY_ROOT / "cka_summary.csv",
+        encoding="utf-8-sig",
+    )
+    source_gradient = pd.read_csv(
+        SOURCE_GRADIENT_ROOT / "summary.csv",
+        encoding="utf-8-sig",
+    )
     hashes = _build_hash_manifest()
 
     document = Document()
@@ -314,16 +389,18 @@ def build_supplement() -> Path:
         "This supplement contains endpoint composition, analysis hierarchy, "
         "prior-study comparison, chemical-space audits, external effect decomposition "
         "and calibration, multiplicity sensitivity, independent continuous regression, "
-        "circuit-level noise sensitivity, data provenance, and reproduction assets. It "
-        "uses the same locked predictions and does not introduce label-based model "
-        "selection.",
+        "circuit-level noise sensitivity, known-signal benchmark calibration, map "
+        "selection diagnostics, matched-effect decomposition, representation capacity, "
+        "external-source gradients, data provenance, and reproduction assets. It uses "
+        "the same locked predictions for inferential analyses and synthetic targets "
+        "only for the explicitly labelled calibration experiment.",
     )
     _paragraph(
         document,
         "Code repository: https://github.com/575914291-source/"
         "qrc-admet-matched-evaluation. Frozen submission release: "
         "https://github.com/575914291-source/"
-        "qrc-admet-matched-evaluation/releases/tag/v1.5.0.",
+        "qrc-admet-matched-evaluation/releases/tag/v1.5.1.",
     )
 
     document.add_heading("S1 Endpoint composition and analysis hierarchy", level=1)
@@ -395,7 +472,9 @@ def build_supplement() -> Path:
     _caption(
         document,
         "Table S3. Data and analysis asset hashes. Full SHA-256 values are in "
-        "Supplementary_File_Hashes.csv.",
+        "Supplementary_File_Hashes.csv. hERG is hashed after the tracked LF "
+        "normalization; the upstream CRLF hash is reported in the external-data "
+        "provenance file.",
     )
 
     document.add_heading("S2 Relation to prior QML-ADMET studies", level=1)
@@ -769,7 +848,258 @@ def build_supplement() -> Path:
         "medium, and high circuit-level error profiles. Each point is one endpoint.",
     )
 
-    document.add_heading("S8 Release inventory and reproduction", level=1)
+    document.add_heading("S8 Benchmark calibration and map selection", level=1)
+    _paragraph(
+        document,
+        "The feature-stage calibration used real molecular PCA inputs from hERG, "
+        "B3DB BBB, and AqSolDB solubility with both classical bases. Known QRC and "
+        "known real-orthogonal quadratic targets were generated from the five-map "
+        "mean representation, while null targets were independent of the molecular "
+        "features. The same five-map, linear-readout procedure was used for all "
+        "three families. Ten synthetic targets were evaluated per split seed, "
+        "giving 150 datasets per scenario and base. This experiment tests whether "
+        "the matched workflow can recover a known source and control false "
+        "positives; it is not a biological validation cohort.",
+    )
+    calibration_rows = [[
+        "Scenario",
+        "Base",
+        "N",
+        "QRC-orth mean",
+        "SD",
+        "Correct source",
+        "Null FPR",
+    ]]
+    scenario_labels = {
+        "qrc_signal": "Known QRC",
+        "classical_signal": "Known orthogonal",
+        "null": "Null",
+    }
+    for row in benchmark_calibration.sort_values(
+        ["scenario", "base"]
+    ).itertuples(index=False):
+        calibration_rows.append(
+            [
+                scenario_labels[row.scenario],
+                "ExtraTrees" if row.base == "extra_trees" else "CatBoost",
+                f"{int(row.n):,}",
+                f"{row.qrc_minus_orthogonal_mean:+.3f}",
+                f"{row.qrc_minus_orthogonal_sd:.3f}",
+                (
+                    f"{100 * row.correct_selection_rate:.1f}%"
+                    if np.isfinite(row.correct_selection_rate)
+                    else "-"
+                ),
+                (
+                    f"{100 * row.null_false_positive_rate:.1f}%"
+                    if np.isfinite(row.null_false_positive_rate)
+                    else "-"
+                ),
+            ]
+        )
+    _add_table(
+        document,
+        calibration_rows,
+        [1.25, 0.9, 0.5, 0.9, 0.55, 0.9, 0.75],
+        font_size=7.6,
+    )
+    _caption(
+        document,
+        "Table S12. Known-signal calibration for the matched feature evaluation. "
+        "QRC-orth is oriented so positive values favour QRC. Correct source is the "
+        "fraction in which the generating family ranked first; null FPR is the "
+        "fraction with a two-sided paired permutation p < 0.05.",
+    )
+    _figure(
+        document,
+        CALIBRATION_ROOT / "calibration.png",
+        6.2,
+        "Supplementary Figure S6. Known-signal recovery and null calibration for the matched evaluation.",
+    )
+    _caption(
+        document,
+        "Figure S6. Known QRC, known classical, and null calibration for "
+        "ExtraTrees and CatBoost. Box plots show QRC-minus-orthogonal effects; the "
+        "right panel shows correct source recovery and null false-positive rates.",
+    )
+
+    selection_rows = [["Base", "QRC selected > QRC mean", "QRC selected > orthogonal selected"]]
+    for base, subset in selection_summary.groupby("base"):
+        selection_rows.append(
+            [
+                "ExtraTrees" if base == "extra_trees" else "CatBoost",
+                f"{int((subset['qrc_selected_minus_mean'] > 0).sum())}/{len(subset)}",
+                f"{int((subset['qrc_selected_vs_orth_selected'] > 0).sum())}/{len(subset)}",
+            ]
+        )
+    _add_table(
+        document,
+        selection_rows,
+        [1.25, 2.2, 2.55],
+        font_size=8.2,
+    )
+    _caption(
+        document,
+        "Table S13. Selection-aware map evaluation. The best map was selected on "
+        "validation data and evaluated on the fixed test set. Counts are endpoints "
+        "with a positive mean paired difference across five split seeds.",
+    )
+    _figure(
+        document,
+        SELECTION_ROOT / "map_selection.png",
+        6.2,
+        "Supplementary Figure S7. Validation-selected QRC and orthogonal map effects on the fixed test set.",
+    )
+    _caption(
+        document,
+        "Figure S7. Validation-selected QRC minus validation-selected orthogonal "
+        "test effect for all 22 endpoints and both classical bases.",
+    )
+
+    document.add_heading("S9 Matched-effect decomposition and capacity diagnostics", level=1)
+    _paragraph(
+        document,
+        "For every endpoint and base, the total QRC-versus-base effect was split "
+        "into the effect obtained by the matched real-orthogonal quadratic control "
+        "and the remaining QRC-specific effect. The decomposition identity was "
+        "checked on all split-level records. This separates gains from adding "
+        "ordinary quadratic features from gains attributable to the selected "
+        "reservoir geometry.",
+    )
+    decomposition_rows = [["Base", "Positive QRC/base", "Neutralized by control", "QRC-specific positive"]]
+    for base, subset in decomposition_summary.groupby("base"):
+        positive = subset[subset["qrc_vs_base_mean"] > 0]
+        neutralized = positive[positive["qrc_specific_mean"] <= 0]
+        decomposition_rows.append(
+            [
+                "ExtraTrees" if base == "extra_trees" else "CatBoost",
+                f"{len(positive)}/{len(subset)}",
+                f"{len(neutralized)}/{len(positive) if len(positive) else 0}",
+                f"{int((subset['qrc_specific_mean'] > 0).sum())}/{len(subset)}",
+            ]
+        )
+    _add_table(
+        document,
+        decomposition_rows,
+        [1.15, 1.55, 1.7, 1.75],
+        font_size=8.1,
+    )
+    _caption(
+        document,
+        "Table S14. Matched-effect decomposition. Neutralized endpoints have a "
+        "positive QRC-versus-base mean effect but a non-positive QRC-specific "
+        "effect after subtracting the matched orthogonal contribution.",
+    )
+    _figure(
+        document,
+        DECOMPOSITION_ROOT / "effect_decomposition.png",
+        6.2,
+        "Supplementary Figure S8. Matched classical quadratic effect versus QRC-specific effect across ADMET endpoints.",
+    )
+    _caption(
+        document,
+        "Figure S8. Endpoint-level decomposition of QRC-versus-base effects into "
+        "matched classical nonlinearity and QRC-specific components.",
+    )
+
+    capacity_rows = [[
+        "Base",
+        "Family",
+        "Train rank",
+        "Test rank",
+        "Test condition",
+    ]]
+    capacity_labels = {
+        "qrc": "QRC",
+        "real_orthogonal": "Orthogonal",
+        "random_fourier": "Fourier",
+    }
+    for row in capacity_summary.sort_values(["base", "family"]).itertuples(index=False):
+        capacity_rows.append(
+            [
+                "ExtraTrees" if row.base == "extra_trees" else "CatBoost",
+                capacity_labels[row.family],
+                f"{row.train_effective_rank_mean:.2f}",
+                f"{row.test_effective_rank_mean:.2f}",
+                f"{row.test_condition_mean:.2f}",
+            ]
+        )
+    _add_table(
+        document,
+        capacity_rows,
+        [1.1, 1.2, 0.95, 0.95, 1.15],
+        font_size=7.8,
+    )
+    _caption(
+        document,
+        "Table S15. Feature-capacity diagnostics across all 220 task-base-split "
+        "combinations and five maps per family. Effective rank is computed after "
+        "train-only standardization; condition numbers are evaluated on held-out "
+        "test features.",
+    )
+    _figure(
+        document,
+        CAPACITY_ROOT / "capacity_diagnostics.png",
+        6.2,
+        "Supplementary Figure S9. Feature effective rank condition number and centered kernel alignment for matched representations.",
+    )
+    _caption(
+        document,
+        "Figure S9. Test-set effective rank, condition number, and linear centered "
+        "kernel alignment for QRC, orthogonal, and Fourier feature families.",
+    )
+
+    document.add_heading("S10 External-source similarity gradients", level=1)
+    _paragraph(
+        document,
+        "External QRC-specific AUROC effects were stratified by quartiles of "
+        "nearest Morgan-Tanimoto similarity to the TDC training/validation set. "
+        "Intervals use the five model splits and are descriptive. They are intended "
+        "to test whether a local external signal follows a simple chemical-space "
+        "proximity trend, not to define a deployment threshold.",
+    )
+    source_rows = [["Cohort", "Base", "Quartile", "N", "Median sim.", "QRC-orth [95% interval]"]]
+    for row in source_gradient[
+        source_gradient["similarity_group"].isin(["Q1", "Q2", "Q3", "Q4"])
+    ].itertuples(index=False):
+        source_rows.append(
+            [
+                "hERG" if row.task == "herg" else "B3DB BBB",
+                "ExtraTrees" if row.base == "extra_trees" else "CatBoost",
+                row.similarity_group,
+                f"{int(row.n):,}",
+                f"{row.similarity_median:.3f}",
+                (
+                    f"{row.qrc_specific_mean:+.3f} "
+                    f"[{row.ci_low:+.3f}, {row.ci_high:+.3f}]"
+                ),
+            ]
+        )
+    _add_table(
+        document,
+        source_rows,
+        [0.9, 0.9, 0.65, 0.5, 0.8, 1.9],
+        font_size=7.1,
+    )
+    _caption(
+        document,
+        "Table S16. External QRC-specific AUROC by nearest-TDC similarity "
+        "quartile. Q1 is the lowest-similarity quartile and Q4 the highest. "
+        "Intervals are descriptive split-level 95% intervals.",
+    )
+    _figure(
+        document,
+        SOURCE_GRADIENT_ROOT / "source_gradient.png",
+        6.2,
+        "Supplementary Figure S10. QRC-specific external effects across nearest-TDC similarity quartiles.",
+    )
+    _caption(
+        document,
+        "Figure S10. QRC-specific external AUROC across nearest-TDC similarity "
+        "quartiles for hERG and B3DB BBB.",
+    )
+
+    document.add_heading("S11 Release inventory and reproduction", level=1)
     inventory_rows = [
         ["Artefact", "Unit", "Count"],
         ["Primary endpoint runs", "base x endpoint x split", "220"],
@@ -783,6 +1113,11 @@ def build_supplement() -> Path:
         ["Bounded-family search runs", "result files", "80"],
         ["Independent regression runs", "base x model seed", "10"],
         ["Circuit-level noise files", "endpoint result files", "8"],
+        ["Benchmark calibration datasets", "scenario x base", "900"],
+        ["Selection-aware runs", "task-base-split", "220"],
+        ["Effect decomposition splits", "task-base-split", "220"],
+        ["Capacity diagnostics", "task-base-split x map x family", "3,300"],
+        ["Source-gradient records", "cohort x base x group x split", "120"],
         ["Primary report rows", "metrics_by_seed.csv", "1,760"],
     ]
     _add_table(
@@ -793,7 +1128,7 @@ def build_supplement() -> Path:
     )
     _caption(
         document,
-        "Table S12. Released result inventory. Full split-level records are supplied as "
+        "Table S17. Released result inventory. Full split-level records are supplied as "
         "CSV or NPZ files in the GitHub release and submission archive.",
     )
     commands = [
@@ -815,6 +1150,12 @@ def build_supplement() -> Path:
         "python -m src.run_circuit_level_noise",
         "python -m src.report_circuit_level_noise",
         "python -m src.audit_circuit_level_noise",
+        "python -m src.analyze_calibration",
+        "python -m src.analyze_effect_decomposition",
+        "python -m src.analyze_map_selection",
+        "python -m src.analyze_capacity",
+        "python -m src.analyze_source_gradient",
+        "python -m src.audit_extended_evaluation",
         "python -m src.build_extended_tables",
         "python -m src.build_extended_figures",
     ]

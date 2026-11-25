@@ -5,3 +5,5 @@
 *.png binary
 *.jpg binary
 *.zip binary
+data/external/hERG_Dataset.csv text eol=lf
+data/external/B3DB_classification.tsv text eol=lf

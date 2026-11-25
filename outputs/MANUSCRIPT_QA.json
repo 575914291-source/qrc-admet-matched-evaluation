@@ -2,10 +2,10 @@
   "status": "passed",
   "failures": [],
   "main": {
-    "paragraphs": 137,
+    "paragraphs": 145,
     "tables": 6,
     "figures": 4,
-    "abstract_words": 250,
+    "abstract_words": 249,
     "citation_range": [
       1,
       31
@@ -32,9 +32,9 @@
     ]
   },
   "supplement": {
-    "paragraphs": 59,
-    "tables": 12,
-    "figures": 5
+    "paragraphs": 86,
+    "tables": 17,
+    "figures": 10
   },
   "checks": [
     "English manuscript contains no CJK text",

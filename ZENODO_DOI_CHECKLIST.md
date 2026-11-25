@@ -1,9 +1,9 @@
 # Zenodo DOI checklist
 
-Journal of Cheminformatics recommends an archived software identifier for the
-code and outputs supporting the paper. The GitHub tag is useful, but a Zenodo
-DOI is the stronger persistent identifier to place in the submitted
-"Availability of data and materials" section.
+The Journal of Computer-Aided Molecular Design submission includes an archived
+software identifier for the code and outputs supporting the paper. The GitHub
+tag is useful, but a Zenodo DOI is the stronger persistent identifier to place
+in the submitted "Availability of data and materials" section.
 
 ## Preferred GitHub integration
 
@@ -20,11 +20,11 @@ DOI is the stronger persistent identifier to place in the submitted
 
 ## Manual upload alternative
 
-Upload `qrc_admet_reproduction_v1.5.0.zip` as a software deposit with:
+Upload `qrc_admet_reproduction_v1.5.1.zip` as a software deposit with:
 
 - Title: QRC-ADMET matched evaluation
 - Upload type: Software
-- Version: 1.5.0
+- Version: 1.5.1
 - Licence: MIT for original software
 - Creators: full author names and ORCID identifiers
 - Keywords: ADMET; quantum reservoir computing; matched controls;
@@ -35,7 +35,7 @@ Upload `qrc_admet_reproduction_v1.5.0.zip` as a software deposit with:
 
 > Project name: QRC-ADMET matched evaluation. Project home:
 > https://github.com/575914291-source/qrc-admet-matched-evaluation. Archived
-> version: v1.5.0, DOI: https://doi.org/10.5281/zenodo.XXXXXXX. Operating
+> version: v1.5.1, DOI: https://doi.org/10.5281/zenodo.XXXXXXX. Operating
 > systems: Windows, Linux, or macOS. Programming language: Python 3.11.
 > Dependencies: requirements.txt. Licence: MIT for original code and
 > documentation; upstream data and third-party licences are listed in

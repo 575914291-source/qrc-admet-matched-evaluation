@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "runs": 220,
+  "maps_per_family": 5,
+  "method": "Select the best map on validation data, evaluate the selected map on the fixed test set, and compare it with the five-map mean and with selection-matched orthogonal control.",
+  "endpoint_counts": {
+    "extra_trees": {
+      "qrc_selected_better_than_orth": 13,
+      "qrc_selected_better_than_qrc_mean": 9
+    },
+    "catboost": {
+      "qrc_selected_better_than_orth": 12,
+      "qrc_selected_better_than_qrc_mean": 6
+    }
+  }
+}

@@ -22,6 +22,13 @@ External AUPRC, Brier score, log loss, multiplicity sensitivity, and an
 independent continuous pIC50 regression are reported as boundary checks rather
 than as evidence of a general quantum advantage.
 
+The revised manuscript now also includes a known-signal benchmark calibration:
+the matched workflow recovered synthetic QRC-specific and classical quadratic
+targets in at least 99.3% of simulations, while null false-positive rates were
+2.0-4.7%. Selection-aware map comparison, matched-effect decomposition,
+effective-rank and CKA diagnostics, and nearest-TDC similarity gradients are
+provided as supplementary analyses.
+
 No endpoint remained significantly better than the matched controls after Holm
 correction. Apparent gains on the weaker ExtraTrees base did not persist on the
 stronger MapLight-CatBoost base. External validation revealed a source-dependent

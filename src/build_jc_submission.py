@@ -15,7 +15,7 @@ from src.config import PROJECT_ROOT
 OUTPUT_ROOT = PROJECT_ROOT / "outputs"
 SOURCE = OUTPUT_ROOT / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
 SUPPLEMENT = OUTPUT_ROOT / "Supplementary_Material_JCAMD.pdf"
-SUBMISSION_ROOT = OUTPUT_ROOT / "JCheminformatics_Submission"
+SUBMISSION_ROOT = OUTPUT_ROOT / "JCAMD_Submission"
 MANUSCRIPT = SUBMISSION_ROOT / "Manuscript.docx"
 
 FIGURES = {
