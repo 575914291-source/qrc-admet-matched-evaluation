@@ -131,6 +131,17 @@ def main() -> int:
             "zh": "Final_Manuscript_ZH.docx",
         },
         "revision_report": "Final_Revision_Report.docx",
+        "submission_variants": {
+            "jcamd_master_en": (
+                "Submission_Variants/JCAMD_Master/JCAMD_Master_EN.docx"
+            ),
+            "jcamd_master_zh": (
+                "Submission_Variants/JCAMD_Master/JCAMD_Master_ZH.docx"
+            ),
+            "jcim_en": "Submission_Variants/JCIM/JCIM_Manuscript_EN.docx",
+            "jcim_zh": "Submission_Variants/JCIM/JCIM_Manuscript_ZH.docx",
+            "qmi_plan": "Submission_Variants/QMI/QMI_Migration_Plan.md",
+        },
         "repository": (
             "https://github.com/575914291-source/"
             "qrc-admet-matched-evaluation"

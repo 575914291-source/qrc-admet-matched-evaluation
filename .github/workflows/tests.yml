@@ -48,6 +48,7 @@ jobs:
           python -m src.refine_manuscript_full
           python -m src.finalize_bilingual_manuscript
           python -m src.build_final_revision_report
+          python -m src.build_submission_variants
           python -m src.build_supplement
           python -m src.audit_manuscript
           python -m src.build_jc_submission

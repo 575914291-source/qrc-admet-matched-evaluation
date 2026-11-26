@@ -16,6 +16,7 @@ work/
 .tmp_*/
 outputs/*.zip
 outputs/*.zip.sha256
+outputs/~$*
 outputs/相似论文下载/
 outputs/Bilingual_Manuscript_2026-11-26/~$*
 outputs/Bilingual_Manuscript_2026-11-26/QRC_ADMET_Manuscript_Revised_*.docx

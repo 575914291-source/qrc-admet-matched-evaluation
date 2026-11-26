@@ -301,6 +301,47 @@ class ExtendedAnalysisTests(unittest.TestCase):
         changes = json.loads(changes_path.read_text(encoding="utf-8"))
         self.assertEqual(changes["change_count"], len(changes["changes"]))
 
+    def test_submission_variants_preserve_jcamd_master(self):
+        variants = ROOT / "outputs" / "Submission_Variants"
+        jcim = variants / "JCIM"
+        jcamd = variants / "JCAMD_Master"
+        qmi_plan = variants / "QMI" / "QMI_Migration_Plan.md"
+
+        expected_jcim = {
+            "JCIM_Manuscript_EN.docx",
+            "JCIM_Manuscript_EN.md",
+            "JCIM_Manuscript_ZH.docx",
+            "JCIM_Manuscript_ZH.md",
+            "JCIM_Cover_Letter.docx",
+            "JCIM_Submission_Notes.md",
+        }
+        self.assertTrue(expected_jcim.issubset({path.name for path in jcim.iterdir()}))
+        self.assertTrue((jcamd / "JCAMD_Master_EN.docx").exists())
+        self.assertTrue((jcamd / "JCAMD_Master_ZH.docx").exists())
+        self.assertTrue(qmi_plan.exists())
+
+        english = Document(jcim / "JCIM_Manuscript_EN.docx")
+        chinese = Document(jcim / "JCIM_Manuscript_ZH.docx")
+        self.assertIn("for TDC ADMET Prediction", english.paragraphs[0].text)
+        self.assertIn("QSAR", english.paragraphs[4].text)
+        self.assertIn("化学信息学", chinese.paragraphs[4].text)
+        self.assertEqual(len(english.paragraphs), 171)
+        self.assertEqual(len(chinese.paragraphs), 171)
+        self.assertIn(
+            "Interpretation and Reuse in Molecular Property Modeling",
+            "\n".join(p.text for p in english.paragraphs),
+        )
+
+        plan = qmi_plan.read_text(encoding="utf-8")
+        for heading in (
+            "## 1. Target identity",
+            "## 2. Section migration from the JCIM version",
+            "## 3. Abstract blueprint",
+            "## 6. Recommended strengthening without rerunning the full benchmark",
+            "## 7. Reuse and compliance",
+        ):
+            self.assertIn(heading, plan)
+
 
 if __name__ == "__main__":
     unittest.main()

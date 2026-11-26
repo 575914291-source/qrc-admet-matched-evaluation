@@ -41,6 +41,9 @@ def _normalize(
 def main() -> None:
     _normalize(OUTPUT_ROOT / "Final_Manuscript_EN.md", language="en")
     _normalize(OUTPUT_ROOT / "Final_Manuscript_ZH.md", language="zh-CN")
+    jcim_root = OUTPUT_ROOT / "Submission_Variants" / "JCIM"
+    _normalize(jcim_root / "JCIM_Manuscript_EN.md", language="en")
+    _normalize(jcim_root / "JCIM_Manuscript_ZH.md", language="zh-CN")
 
 
 if __name__ == "__main__":
