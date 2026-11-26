@@ -2,14 +2,17 @@
   "status": "passed",
   "failures": [],
   "main": {
-    "paragraphs": 145,
+    "paragraphs": 171,
     "tables": 6,
     "figures": 4,
-    "abstract_words": 249,
+    "abstract_words": 250,
     "citation_range": [
       1,
-      31
+      45
     ],
+    "reference_count": 45,
+    "missing_references": [],
+    "uncited_references": [],
     "figure_captions": {
       "1": true,
       "2": true,

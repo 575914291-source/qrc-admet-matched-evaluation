@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
+from collections import Counter
 from pathlib import Path
 
 import pandas as pd
@@ -189,6 +191,115 @@ class ExtendedAnalysisTests(unittest.TestCase):
         self.assertEqual(audit["main"]["figures"], 4)
         self.assertEqual(audit["supplement"]["tables"], 17)
         self.assertEqual(audit["supplement"]["figures"], 10)
+
+    def test_revised_manuscript_and_report_are_complete(self):
+        revised = ROOT / "outputs" / (
+            "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET_REVISED.docx"
+        )
+        report = ROOT / "outputs" / "Manuscript_Revision_Before_After.md"
+        full_markdown = ROOT / "outputs" / "Revised_Manuscript_Full.md"
+        self.assertTrue(revised.exists())
+        self.assertTrue(report.exists())
+        self.assertTrue(full_markdown.exists())
+        document = Document(revised)
+        text = "\n".join(paragraph.text for paragraph in document.paragraphs)
+        self.assertLessEqual(len(document.paragraphs[3].text.split()), 250)
+        self.assertNotRegex(text, r"[\u3400-\u9fff]")
+        self.assertNotIn("，", text)
+        self.assertNotIn("  ", text)
+        self.assertIn("5.9 Circuit-Level Aer Audit", text)
+        self.assertIn("5.10 Benchmark Calibration and Source Diagnostics", text)
+        self.assertIn("6.5 Interpretation and Reuse", text)
+        report_text = report.read_text(encoding="utf-8")
+        self.assertIn("## 七项检查结果", report_text)
+        self.assertIn("## 代表性上下文前后对照", report_text)
+        self.assertIn("未把句式变化当作作者身份证据", report_text)
+
+    def test_final_bilingual_manuscripts_are_complete(self):
+        english_path = ROOT / "outputs" / "Final_Manuscript_EN.docx"
+        chinese_path = ROOT / "outputs" / "Final_Manuscript_ZH.docx"
+        english_md = ROOT / "outputs" / "Final_Manuscript_EN.md"
+        chinese_md = ROOT / "outputs" / "Final_Manuscript_ZH.md"
+        for path in (english_path, chinese_path, english_md, chinese_md):
+            self.assertTrue(path.exists(), path)
+        report_path = ROOT / "outputs" / "Final_Revision_Report.docx"
+        report_md = ROOT / "outputs" / "Final_Revision_Report.md"
+        changes_path = ROOT / "outputs" / "Bilingual_Revision_Changes.json"
+        for path in (report_path, report_md, changes_path):
+            self.assertTrue(path.exists(), path)
+
+        english = Document(english_path)
+        chinese = Document(chinese_path)
+        self.assertEqual(len(english.paragraphs), len(chinese.paragraphs))
+        for document in (english, chinese):
+            self.assertEqual(len(document.tables), 6)
+            self.assertEqual(len(document.inline_shapes), 4)
+            self.assertEqual(
+                sum(
+                    len(
+                        paragraph._p.xpath(
+                            './/*[local-name()="oMath" or '
+                            'local-name()="oMathPara"]'
+                        )
+                    )
+                    for paragraph in document.paragraphs
+                ),
+                4,
+            )
+
+        english_text = "\n".join(p.text for p in english.paragraphs)
+        chinese_text = "\n".join(p.text for p in chinese.paragraphs)
+        self.assertLessEqual(len(english.paragraphs[3].text.split()), 250)
+        self.assertNotRegex(english_text, r"[\u3400-\u9fff]")
+        self.assertNotIn("therefore", english_text.lower())
+        self.assertNotIn("equal-capacity", english_text.lower())
+        self.assertNotIn("0.0205", english_text)
+        self.assertNotIn("approximately 72", english_text)
+        self.assertIn("5.9 Circuit-Level Aer Audit", english_text)
+        self.assertIn(
+            "5.10 Benchmark Calibration and Source Diagnostics",
+            english_text,
+        )
+        self.assertIn("6.5 Interpretation and Reuse", english_text)
+        for heading in (
+            "5.9 电路级 Aer 审计",
+            "5.10 基准校准与来源诊断",
+            "6.5 解释与复用",
+        ):
+            self.assertIn(heading, chinese_text)
+        for stale in ("联合校正", "有限 shots", "Hermiticity"):
+            self.assertNotIn(stale, chinese_text)
+
+        number_pattern = re.compile(
+            r"(?<![A-Za-z])[-+]?\d+(?:[.,]\d+)*(?:%|/[A-Za-z0-9]+)?"
+        )
+        for english_table, chinese_table in zip(
+            english.tables, chinese.tables
+        ):
+            self.assertEqual(
+                (len(english_table.rows), len(english_table.columns)),
+                (len(chinese_table.rows), len(chinese_table.columns)),
+            )
+            for english_row, chinese_row in zip(
+                english_table.rows, chinese_table.rows
+            ):
+                for english_cell, chinese_cell in zip(
+                    english_row.cells, chinese_row.cells
+                ):
+                    self.assertEqual(
+                        Counter(number_pattern.findall(english_cell.text)),
+                        Counter(number_pattern.findall(chinese_cell.text)),
+                        (english_cell.text, chinese_cell.text),
+                    )
+
+        report_text = report_md.read_text(encoding="utf-8")
+        self.assertIn("## 与另一对话框内容的合并", report_text)
+        self.assertIn("## 新增文献与适用范围核验", report_text)
+        self.assertIn("## 中文终稿专项前后对照", report_text)
+        self.assertIn("## 最终一致性与版式检查", report_text)
+        self.assertIn("未把句长、句式或排版特征当作作者身份证据", report_text)
+        changes = json.loads(changes_path.read_text(encoding="utf-8"))
+        self.assertEqual(changes["change_count"], len(changes["changes"]))
 
 
 if __name__ == "__main__":

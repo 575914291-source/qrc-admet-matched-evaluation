@@ -45,6 +45,9 @@ jobs:
           python -m src.update_paper
           python -m src.update_paper_en
           python -m src.augment_manuscript_analyses
+          python -m src.refine_manuscript_full
+          python -m src.finalize_bilingual_manuscript
+          python -m src.build_final_revision_report
           python -m src.build_supplement
           python -m src.audit_manuscript
           python -m src.build_jc_submission

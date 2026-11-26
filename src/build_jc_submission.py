@@ -14,6 +14,14 @@ from src.config import PROJECT_ROOT
 
 OUTPUT_ROOT = PROJECT_ROOT / "outputs"
 SOURCE = OUTPUT_ROOT / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
+REVISED_SOURCE = (
+    OUTPUT_ROOT
+    / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET_REVISED.docx"
+)
+FINAL_SOURCE = OUTPUT_ROOT / "Final_Manuscript_EN.docx"
+SOURCE = FINAL_SOURCE if FINAL_SOURCE.exists() else (
+    REVISED_SOURCE if REVISED_SOURCE.exists() else SOURCE
+)
 SUPPLEMENT = OUTPUT_ROOT / "Supplementary_Material_JCAMD.pdf"
 SUBMISSION_ROOT = OUTPUT_ROOT / "JCAMD_Submission"
 MANUSCRIPT = SUBMISSION_ROOT / "Manuscript.docx"

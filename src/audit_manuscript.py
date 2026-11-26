@@ -10,7 +10,18 @@ from src.config import PROJECT_ROOT
 
 
 OUTPUT_ROOT = PROJECT_ROOT / "outputs"
-MANUSCRIPT = OUTPUT_ROOT / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
+ORIGINAL = (
+    OUTPUT_ROOT
+    / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET.docx"
+)
+REVISED = (
+    OUTPUT_ROOT
+    / "Matched_Evaluation_Fixed_Quantum_Reservoir_TDC_ADMET_REVISED.docx"
+)
+FINAL = OUTPUT_ROOT / "Final_Manuscript_EN.docx"
+MANUSCRIPT = FINAL if FINAL.exists() else (
+    REVISED if REVISED.exists() else ORIGINAL
+)
 SUPPLEMENT = OUTPUT_ROOT / "Supplementary_Material_JCAMD.docx"
 
 
@@ -43,6 +54,13 @@ def audit_manuscript() -> dict[str, object]:
     english_text = "\n".join(paragraph.text for paragraph in document.paragraphs)
     abstract_words = len(document.paragraphs[3].text.split())
     citation_numbers = _citation_numbers(english_text)
+    reference_numbers = {
+        int(match.group(1))
+        for paragraph in document.paragraphs
+        if (match := re.match(r"^(\d+)\.\s", paragraph.text.strip()))
+    }
+    missing_references = sorted(citation_numbers - reference_numbers)
+    uncited_references = sorted(reference_numbers - citation_numbers)
     captions = [paragraph.text for paragraph in document.paragraphs if paragraph.text.strip()]
     figure_captions = {
         number: any(
@@ -82,12 +100,12 @@ def audit_manuscript() -> dict[str, object]:
         failures.append(f"Missing main figure captions: {figure_captions}")
     if not all(table_captions.values()):
         failures.append(f"Missing main table captions: {table_captions}")
-    if citation_numbers and (
-        min(citation_numbers) < 1 or max(citation_numbers) > 31
-    ):
-        failures.append(
-            f"Citation range outside 1-31: {min(citation_numbers)}-{max(citation_numbers)}"
-        )
+    if missing_references:
+        failures.append(f"Citations without reference entries: {missing_references}")
+    if uncited_references:
+        failures.append(f"Reference entries not cited: {uncited_references}")
+    if reference_numbers != set(range(1, len(reference_numbers) + 1)):
+        failures.append("Reference numbering is not contiguous from 1")
     if any(not value for value in image_alts):
         failures.append("One or more main images lack alt text")
     if placeholders:
@@ -111,6 +129,9 @@ def audit_manuscript() -> dict[str, object]:
                 min(citation_numbers) if citation_numbers else None,
                 max(citation_numbers) if citation_numbers else None,
             ],
+            "reference_count": len(reference_numbers),
+            "missing_references": missing_references,
+            "uncited_references": uncited_references,
             "figure_captions": figure_captions,
             "table_captions": table_captions,
             "image_alt_texts": image_alts,

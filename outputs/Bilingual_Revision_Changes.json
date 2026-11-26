@@ -1,0 +1,259 @@
+{
+  "english": "D:\\论文\\qrc_admet\\outputs\\Final_Manuscript_EN.docx",
+  "chinese": "D:\\论文\\qrc_admet\\outputs\\Final_Manuscript_ZH.docx",
+  "change_count": 36,
+  "changes": [
+    {
+      "document": "English",
+      "location": "Abstract",
+      "before": "Gating, joint correction ... main contribution is a TDC-wide audit ...",
+      "after": "Reported quantum-reservoir gains are difficult to interpret because matched classical controls, multiple random realizations, strong base models, and external transfer tests are rarely combined. We provide a signal-calibrated, TDC-wide evaluation of a fixed five-qubit amplitude-encoded feature map in the stateless quantum-extreme-learning limit, compared with real-orthogonal quadratic maps and Fourier features using Morgan-ExtraTrees and MapLight-CatBoost. Five scaffold splits and five maps per family control randomness. Ungated quantum features are better on 6 and worse on 16 ExtraTrees endpoints, and better on 3 and worse on 19 CatBoost endpoints. After Holm correction, none is significantly better and three are significantly worse. Joint gating, low-data scaling, finite shots, simulated noise, and a bounded reservoir-family search produce no cross-base advantage. External transfer is source-dependent: gated CatBoost-QRC exceeds its identically gated orthogonal control by 0.040 AUROC on 293 non-overlapping hERG molecules, but both bases degrade on 2,317 B3DB BBB molecules. The hERG difference includes an orthogonal-branch decrement. Continuous-label ranking and a scaffold-disjoint pIC50 sensitivity analysis do not survive joint multiplicity correction. Known-signal calibration recovered QRC and classical targets, with null false-positive rates of 2.0-4.7%. A Qiskit/Aer readout audit preserved rank under errors but attenuated amplitudes without retraining. Chemical-space analyses show no simple source effect. We contribute a signal-calibrated TDC audit and an open matched-evaluation protocol for this quantum feature family. The conclusion is bounded by five-qubit amplitude encoding, 15 Pauli readouts, a linear residual head, and exact state-vector simulation; it is not a general claim against other encodings, trainable circuits, larger reservoirs, or physical hardware.",
+      "reason": "Corrected joint gating terminology and narrowed the claimed method contribution to this benchmark and protocol."
+    },
+    {
+      "document": "English",
+      "location": "1 Introduction, paragraph 1",
+      "before": "The value of quantum features therefore cannot be inferred from a comparison with a single weak base model.",
+      "after": "A comparison with a single weak base model cannot isolate the value of quantum features.",
+      "reason": "Replaced a repeated connector with a direct comparison claim."
+    },
+    {
+      "document": "English",
+      "location": "2.2 Quantum Molecular Features and Structural Controls",
+      "before": "Beaulieu et al. studied fixed reservoirs and small-sample molecular activity learning [8]. Benson et al. concatenated Hamiltonian-derived readouts with classical descriptors before CatBoost, and Mansour et al. reported errors from quantum-inspired preprocessing on AqSolDB [9,10]. QCS-ADME focused on circuit search and simulator-to-hardware variation [11]. Jia et al. compared five-qubit amplitude-encoded residuals with real-orthogonal branches, but jointly trained the encoder and prediction head and did not address ADMET [12]. A recent 48-task potency benchmark found no global advantage for quantum classifiers over their classical comparators [27]. Floquet-QRC work has also used sequential graph events and driven reservoirs under a different input and dynamics setting [28]. Table 1 summarizes these studies and their relation to the present benchmark; their tasks, quantum components, and training protocols do not support a single-score ranking.",
+      "after": "Beaulieu et al. studied fixed reservoirs and small-sample molecular activity learning [8]. Benson et al. concatenated Hamiltonian-derived readouts with classical descriptors before CatBoost, and Mansour et al. reported errors from quantum-inspired preprocessing on AqSolDB [9,10]. QCS-ADME focused on circuit search and simulator-to-hardware variation [11]. Jia et al. compared five-qubit amplitude-encoded residuals with real-orthogonal branches, but jointly trained the encoder and prediction head and did not address ADMET [12]. A recent 48-task potency benchmark found no global advantage for quantum classifiers over their classical comparators [27]. Floquet-QRC work has also used sequential graph events and driven reservoirs under a different input and dynamics setting [28]. Table 1 summarizes these studies and their relation to the present benchmark; their tasks, quantum components, and training protocols do not support a single-score ranking. [paragraph break] Recent exact-simulation comparisons reached a similar interpretive constraint: two-point correlator features did not add information beyond a capacity-matched polynomial, and a feedback reservoir lost its apparent edge under a tuning-matched recurrent baseline [32]. A separate matched-complexity study found stable reservoir behaviour on chaotic forecasting, while emphasizing a narrow task class and an incomplete baseline panel [33]. Hardware reservoir learning has also been demonstrated at substantially larger neutral-atom scale, but not for ADMET [34].",
+      "reason": "Separated the reviewed molecular studies from the newer reservoir and hardware comparisons."
+    },
+    {
+      "document": "English",
+      "location": "3 Data, Splits, and Statistical Evaluation",
+      "before": "The primary effect was computed from unrounded predictions by scoring each seed and then averaging the five seeds. For AUROC, AUPRC, and Spearman, the effect is the new method minus the reference; for MAE, it is the reference minus the new method; positive values always indicate improvement. We used 1,000 paired scaffold bootstrap resamples for 95% intervals and 1,999 paired scaffold permutations for the primary tests, followed by Holm correction across the 22 endpoints [18-20]. Exploratory TOST analysis used a practical margin of 0.01 for AUROC, AUPRC, and Spearman and 2% of base MAE for MAE. These margins are benchmark interpretation thresholds, not clinical limits. TOST consists of two one-sided tests. We describe practical equivalence only when the 90% confidence interval lies inside the prespecified margin and the equivalence test is significant after Holm correction. Results are reported in three states: a Holm-significant negative difference indicates significant degradation, a Holm-significant positive difference indicates improvement, and a significant equivalence test indicates practical statistical equivalence; all other cases are unresolved. Equivalence does not imply identical mechanisms or identical per-molecule predictions. To interpret the exploratory TOST results, we added a post hoc seed-level power diagnostic. For unit-scaled endpoint metrics, the median sample standard deviation of the five QRC-minus-control seed effects was 0.0205. Using the design approximation of Knopov and Shvai [40] and ignoring the item-level variance term, 80% power to certify a +/-0.01 margin requires approximately 72 independent split seeds. The main five-split analysis therefore estimates the average effect but does not provide a high-power equivalence certificate for individual endpoints.",
+      "after": "The primary effect was computed from unrounded predictions by scoring each seed and then averaging the five seeds. For AUROC, AUPRC, and Spearman, the effect is the new method minus the reference; for MAE, it is the reference minus the new method; positive values always indicate improvement. We used 1,000 paired scaffold bootstrap resamples for 95% intervals and 1,999 paired scaffold permutations for the primary tests, followed by Holm correction across the 22 endpoints [18-20]. [paragraph break] Exploratory TOST analysis used a practical margin of 0.01 for AUROC, AUPRC, and Spearman and 2% of base MAE for MAE. These margins are benchmark interpretation thresholds, not clinical limits. TOST consists of two one-sided tests. We describe practical equivalence only when the 90% confidence interval lies inside the prespecified margin and the equivalence test is significant after Holm correction. Results are reported in three states: a Holm-significant negative difference indicates significant degradation, a Holm-significant positive difference indicates improvement, and a significant equivalence test indicates practical statistical equivalence; all other cases are unresolved. Equivalence does not imply identical mechanisms or identical per-molecule predictions. [paragraph break] A post hoc seed-level power diagnostic showed that five split seeds cannot provide a high-power equivalence certificate for individual endpoints at the +/-0.01 metric margin. These TOST results remain exploratory and are reported as counts rather than as confirmatory claims.",
+      "reason": "Separated effect estimation, TOST interpretation, and the power boundary. Removed ad hoc constants that were not part of the archived analysis outputs."
+    },
+    {
+      "document": "English",
+      "location": "3 Data, Splits, and Statistical Evaluation",
+      "before": "3 Data and Official Evaluation",
+      "after": "3 Data, Splits, and Statistical Evaluation",
+      "reason": "Made the section title match its data, split, and statistical contents."
+    },
+    {
+      "document": "English",
+      "location": "4.2 Five-Qubit Stateless Feature Map and Matched Classical Features, Proposition 1",
+      "before": "Proposition 1. For any fixed set of 15 diagonal Pauli observables D_j and any fixed unitary U, the readouts of a normalized 32-dimensional real input a satisfy q_j(a)=a^T A_j a, where A_j=Re(U^dagger D_j U). Therefore any intercept-free linear readout is a real quadratic form a^T M a+b: fixed five-qubit reservoir feature map with a linear residual head belongs to a model family constrained by at most 15 real quadratic forms. The proof follows by expanding (Ua)^dagger D_j (Ua). This does not make QRC equivalent to a particular real-orthogonal map; it defines the function class available under the current encoding and readout. This proposition defines the nominal function family; it does not imply equal decodability. Pauli-transfer and readout-orientation analyses show that equal rank or observable count can leave different task-relevant information accessible [37-39]. We therefore describe the real-orthogonal family as matched in input dimension, nominal readout dimension, fitted-parameter count, random-map budget, and tuning budget, not as having identical capacity. The primary analysis also fixes the readout family at five Z and all ten ZZ observables; optimized measurement operators and interaction ablations are outside the primary comparison.",
+      "after": "Proposition 1. For any fixed set of 15 diagonal Pauli observables D_j and any fixed unitary U, the readouts of a normalized 32-dimensional real input a satisfy q_j(a)=a^T A_j a, where A_j=Re(U^dagger D_j U). Any affine readout of these 15 features has the form a^T M a+b, with the intercept absorbed into b. A fixed five-qubit reservoir feature map with a linear residual head is an instance of this model family, constrained by at most 15 real quadratic forms. The proof follows by expanding (Ua)^dagger D_j (Ua). This does not make QRC equivalent to a particular real-orthogonal map; it defines the function class available under the current encoding and readout. This proposition defines the nominal function family and does not imply equal decodability. Pauli-transfer and readout-orientation analyses show that equal rank or observable count can leave different task-relevant information accessible [37-39]. The real-orthogonal family is described as matched in input dimension, nominal readout dimension, fitted-parameter count, random-map budget, and tuning budget, not as having identical capacity. The primary analysis also fixes the readout family at five Z and all ten ZZ observables; optimized measurement operators and interaction ablations are outside the primary comparison.",
+      "reason": "Removed the contradictory 'intercept-free' description and separated nominal function class from decodability."
+    },
+    {
+      "document": "English",
+      "location": "5.7 Bounded Reservoir-Family Search, paragraph 2",
+      "before": "Across the eight representative endpoints, the validation-selected QRC was selected QRC at 4 and the orthogonal search at 4 endpoints for ExtraTrees; CatBoost selected QRC at 2, orthogonal search at 5, and tied at 1 CatBoost relative to the matched orthogonal search. No endpoint was Holm-significantly positive. The baseline configuration remained the most frequently selected QRC setting (15/40 on ExtraTrees and 25/40 on CatBoost), indicating that the broader family did not reveal a new stable signal. Against the residual-free base, the counts were 4/4 and 2/5/1, respectively; VDss was significantly worse on both bases. This narrows the possibility that under-tuning explains the null result.",
+      "after": "Across the eight representative endpoints, ExtraTrees selected the QRC search for 4 endpoints and the matched orthogonal search for 4. CatBoost selected the QRC search for 2, the orthogonal search for 5, and a tie for 1. No endpoint was Holm-significantly positive. The baseline reservoir family remained the most frequently selected QRC setting (15/40 on ExtraTrees and 25/40 on CatBoost), indicating that the broader family did not reveal a new stable signal. Against the residual-free base, the corresponding counts remained 4/4 and 2/5/1; VDss was significantly worse on both bases. This narrows the possibility that under-tuning explains the null result.",
+      "reason": "Rewrote a circular selection sentence and clarified the counted objects without changing any count."
+    },
+    {
+      "document": "English",
+      "location": "5.8 Independent Continuous hERG Regression",
+      "before": "5.8 Independent Continuous pIC50 Regression and Circuit-Level Audit",
+      "after": "5.8 Independent Continuous hERG Regression",
+      "reason": "Separated the independent regression from the circuit-audit result."
+    },
+    {
+      "document": "English",
+      "location": "5.10 Benchmark Calibration and Source Diagnostics",
+      "before": "5.9 Benchmark Calibration and Source Diagnostics",
+      "after": "5.10 Benchmark Calibration and Source Diagnostics",
+      "reason": "Renumbered the calibration section after the split."
+    },
+    {
+      "document": "English",
+      "location": "5.10 Benchmark Calibration and Source Diagnostics",
+      "before": "The known-signal calibration recovered the intended geometry.",
+      "after": "The known-signal calibration separated the three feature families. For QRC-derived targets, QRC minus orthogonal test performance was +0.302 on ExtraTrees and +0.190 on CatBoost, and the expected QRC family ranked first in 150/150 simulations (100.0%) for both bases. For orthogonal-derived targets, the same contrast reversed to -0.332 and -0.238, and the expected orthogonal family ranked first in 149/150 simulations (99.3%) for ExtraTrees and 149/150 (99.3%) for CatBoost. For null targets, two-sided paired permutation tests were significant in 7/150 simulations (4.7%) on ExtraTrees and 3/150 (2.0%) on CatBoost.",
+      "reason": "Reported simulation denominators so the percentages can be audited."
+    },
+    {
+      "document": "English",
+      "location": "6.1 What the Constrained Quadratic Map Explains, paragraph 1",
+      "before": "With real amplitude inputs, every Z or ZZ expectation after fixed evolution can be computed exactly as a real symmetric quadratic form. Training-side standardization is an affine feature transform, so the linear readout only combines these quadratic forms and adds a fixed offset. Given the fitted parameters, the quantum residual can be reproduced by a real quadratic form and a constant. This structure applies to the normalized 32-dimensional latent input, not to the raw molecular graph. All five quantum maps had rank 15 and a median condition number of 1.210; the real-orthogonal maps had condition number 1.000. The nominal readout dimensions and fitted-parameter counts are matched, but the effective ranks, geometries, and task-relevant decodability need not be. Pauli-transfer and readout-orientation analyses show why rank alone is insufficient to establish equal capacity [37-39].",
+      "after": "With real amplitude inputs, every Z or ZZ expectation after fixed evolution is a real symmetric quadratic form. Training-side standardization is affine, so the linear readout combines these forms and adds a fixed offset. Given the fitted parameters, the QRC residual can be reproduced by a real quadratic form and a constant on the normalized 32-dimensional latent input. This statement applies to that latent space, not to the raw molecular graph. All five QRC readout matrices had rank 15 and a median condition number of 1.210; the real-orthogonal readout matrices had rank 15 and condition number 1.000. On held-out molecular features, effective rank was 14.10 versus 14.62 on ExtraTrees and 12.82 versus 14.25 on CatBoost, with linear centered-kernel alignments of 0.20 and 0.30. The branches had the same output dimension and fitted-parameter count, different geometry, and comparable but not identical effective feature capacity.",
+      "reason": "Kept readout-matrix rank distinct from held-out effective rank and CKA, and removed equal-capacity language."
+    },
+    {
+      "document": "English",
+      "location": "6.3 What the Strong Base and External Cohorts Reveal",
+      "before": "The strong-base comparison provides a direct stress test. MapLight-CatBoost outperformed Morgan-ExtraTrees on 21/22 endpoints, but QRC's relative advantage did not persist on the stronger base. Joint gating, finite shots, low-data scaling, and simulated noise did not reveal a transferable quantum correction. The circuit audit likewise showed readout attenuation without new advantage evidence.",
+      "after": "The strong-base comparison provides a direct stress test. MapLight-CatBoost outperformed Morgan-ExtraTrees on 21/22 endpoints, but QRC's relative advantage did not persist on the stronger base. Joint gating, finite shots, low-data scaling, and simulated noise did not reveal a transferable quantum correction. The circuit audit likewise showed readout attenuation without new advantage evidence. [paragraph break] The external results support only a source-specific candidate on hERG. The same direction appeared in pIC50 rank transfer and independent regression, but neither survived the joint multiplicity correction. B3DB logBB was near zero and B3DB BBB classification degraded significantly, so the hERG result cannot be generalized across sources. These findings support testing future quantum encodings on a strong classical base with matched input, nominal readout dimension, fitted-parameter count, and candidate budget. They do not establish a general ADMET descriptor. The two cohorts probe different chemistry and label regimes rather than a single deployment scenario [44].",
+      "reason": "Separated the strong-base stress test from the external transfer interpretation."
+    },
+    {
+      "document": "English",
+      "location": "6.4 Chemical-Space and Source Dependence, paragraph 1",
+      "before": "We added a descriptive chemical-space audit to determine whether the external cohort differences could be attributed to source proximity. Both cohorts were already free of exact canonical identities from their corresponding TDC archive. For hERG, 23 of 293 molecules (7.8%) retained a Bemis-Murcko scaffold present in TDC train/validation data; the median nearest Morgan Tanimoto similarity (radius 2, 2048 bits) to TDC train/validation molecules was 0.234 and the 90th percentile was 0.423. For B3DB BBB, 562 of 2,317 molecules (24.3%) shared a TDC train/validation scaffold, with a median nearest similarity of 0.346 and a 90th percentile of 0.722. B3DB contained 48.9% positives versus 76.4% in the full TDC BBB archive, whereas hERG contained 76.4% positives versus 68.9% in TDC. The two cohorts therefore differ from their TDC sources in both chemical proximity and label composition.",
+      "after": "A descriptive chemical-space audit tested whether cohort differences could reflect source proximity. Both cohorts were free of exact canonical identities from the corresponding TDC archive. For hERG, 23 of 293 molecules (7.8%) retained a Bemis-Murcko scaffold present in TDC train/validation data; the median nearest Morgan Tanimoto similarity (radius 2, 2048 bits) was 0.234 and the 90th percentile was 0.423. For B3DB BBB, 562 of 2,317 molecules (24.3%) shared a TDC train/validation scaffold, with a median nearest similarity of 0.346 and a 90th percentile of 0.722. B3DB had 48.9% positives versus 76.4% in the full TDC BBB archive, whereas hERG contained 76.4% versus 68.9% in TDC. The two cohorts differed from their TDC sources in both chemical proximity and label composition.",
+      "reason": "Turned the background facts into a direct source-proximity audit statement."
+    },
+    {
+      "document": "English",
+      "location": "6.4 Chemical-Space and Source Dependence, paragraph 2",
+      "before": "Re-scoring the existing held-out predictions by these chemical strata did not support a simple scaffold-overlap explanation for the hERG signal. For CatBoost, the hERG gated-QRC minus gated-orthogonal effect was -0.0026 AUROC among the 23 molecules with a shared train/validation scaffold and +0.0452 among the 270 molecules with a novel scaffold. The effect was +0.0196 in the highest nearest-similarity quartile and +0.0494 in the remaining three quartiles. In contrast, the BBB effect was negative across shared-scaffold, novel-scaffold, and similarity strata. Full source audits and hERG strata are reported in Supplementary Tables S5 and S6. These descriptive strata locate where an effect appears; they do not control source, assay batch, or label definition and cannot establish a causal chemical mechanism.",
+      "after": "Stratifying the held-out predictions did not support a simple scaffold-overlap or similarity explanation for the hERG signal. For CatBoost, the hERG gated-QRC minus gated-orthogonal effect was -0.0026 AUROC among the 23 molecules with a shared train/validation scaffold and +0.0452 among the 270 molecules with a novel scaffold. The earlier top-quartile split gave +0.0196 in the highest-similarity group and +0.0494 in the other three quartiles. The finer quartile analysis was non-monotonic: CatBoost and ExtraTrees were positive in Q3 but not in every adjacent quartile. B3DB effects were negative across shared-scaffold, novel-scaffold, and most similarity strata. Full source audits are reported in Supplementary Tables S5, S6, and S16. These descriptive strata locate where an effect appears; they do not control source, assay batch, or label definition and cannot establish a causal chemical mechanism.",
+      "reason": "Connected the similarity strata to the non-monotonic QRC-specific effect without claiming a chemical mechanism."
+    },
+    {
+      "document": "English",
+      "location": "6.5 Interpretation and Reuse",
+      "before": "The hERG point improvement is a candidate signal ... The contribution is a reusable minimum ... The contribution is a TDC-wide ...",
+      "after": "Neither the hERG candidate nor the B3DB negative transfer establishes a mechanistic or general quantum effect. The reviewed QML-ADMET studies use different fixed reservoirs, Hamiltonian-derived features, quantum-inspired preprocessing, circuit search, or jointly trained residuals. Their task counts, controls, and external transfer settings do not support like-for-like equivalence. Table 1 summarizes the design differences, and Supplementary Table S4 provides the expanded comparison. The empirical contribution is a TDC-wide, signal-calibrated audit of one fixed stateless quantum feature-map family. The methodological contribution is a reusable minimum evaluation protocol: prespecify the primary comparator, match candidate and map budgets, infer with scaffold clusters, correct across endpoints, interpret equivalence separately from superiority, and report both cross-base and cross-source results.",
+      "reason": "Removed repeated contribution statements and separated the empirical from the methodological contribution."
+    },
+    {
+      "document": "English",
+      "location": "7 Limitations",
+      "before": "Two long paragraphs mixed evaluation, execution, and auxiliary-analysis limits.",
+      "after": "Three evaluation limits constrain generalization. The public TDC test sets may have been reused by earlier studies and are not prospective cohorts; scaffold splits reduce, but do not eliminate, near analogues across laboratories, time, and chemical series. The low-data analysis covers eight endpoints, and its 96-record minimum changes the effective fraction for the smallest endpoints. The primary external comparison contains two classification cohorts that differ in assay source and label construction [3-5]. [paragraph break] The execution boundary is equally explicit. Exact state-vector calculation isolates the fixed circuit's expressive behavior but does not evaluate physical gate error, readout crosstalk, connectivity, or scheduling. Finite-shot analysis samples each Pauli expectation independently. The simplified depolarizing model omits gate-specific error, leakage, crosstalk, and physical scheduling. The Qiskit/Aer audit adds transpiled gate depolarization and readout flips, but uses fixed synthetic error parameters and does not retrain the full predictor on circuit-noisy features. Trainable circuits, task-conditioned amplitude encoding, and other PCA dimensions were not evaluated. [paragraph break] The auxiliary analyses have narrower scope. Continuous-label transfer ranks outputs from binary-trained models and is not an independently trained regression. The separate pIC50 regression uses 214 test molecules in 155 scaffolds under a fixed protocol and has limited statistical power. B3DB logBB was available for only 613/2,317 non-overlapping molecules and was strongly class-enriched. The chemical-space figure uses a linear fingerprint projection and three basic descriptors, not a complete applicability-domain model, and TOST margins are exploratory benchmark thresholds rather than clinical or regulatory limits [21]. Random-map sensitivity covers five realizations per family. The known-signal calibration uses synthetic targets drawn from the tested feature families; it establishes detectability for those designs, not coverage of every possible nonlinear signal. The reported comparison applies to five-qubit amplitude encoding, a fixed Hamiltonian reservoir, 15 Pauli readouts, a linear residual head, and exact simulation; other encodings, trainable circuits, larger reservoirs, and physical hardware require independent evaluation.",
+      "reason": "Grouped necessary limitations by the type of inference they constrain."
+    },
+    {
+      "document": "English",
+      "location": "8 Conclusion",
+      "before": "Across 22 official TDC ADMET endpoints, fixed five-qubit stateless reservoir residuals showed no stable increment over real-orthogonal quadratic maps matched in input dimension, nominal readout dimension, fitted-parameter count, random-map budget, and tuning budget. This result held on both Morgan-ExtraTrees and the stronger MapLight-CatBoost base. Validation gating pushed some harmful residuals back to the classical base but did not produce a stable advantage over the gated classical control. Joint gating, low-data scaling, finite shots, and simulated decoherence did not reverse this conclusion. External hERG transfer provided a CatBoost-specific candidate signal, whereas B3DB BBB showed significant negative transfer. Continuous-label rank transfer and the scaffold-disjoint pIC50 sensitivity analysis showed only uncorrected weak CatBoost/hERG directions, with no Holm-significant comparison and no corresponding BBB signal. The circuit-level audit showed high rank preservation under low and medium errors but marked readout attenuation and no new advantage evidence. Known-signal calibration recovered the synthetic QRC and classical targets, with null false-positive rates at or below 5%.",
+      "after": "Across 22 official TDC ADMET endpoints, fixed five-qubit stateless reservoir residuals showed no stable increment over real-orthogonal quadratic maps matched in input dimension, nominal readout dimension, fitted-parameter count, random-map budget, and tuning budget. This result held on both Morgan-ExtraTrees and the stronger MapLight-CatBoost base. Validation gating pushed some harmful residuals back to the classical base but did not produce a stable advantage over the gated classical control. Joint gating, low-data scaling, finite shots, and simulated decoherence did not reverse this conclusion. External hERG transfer provided a CatBoost-specific candidate signal, whereas B3DB BBB showed significant negative transfer. Continuous-label rank transfer and the scaffold-disjoint pIC50 sensitivity analysis showed only uncorrected weak CatBoost/hERG directions, with no Holm-significant comparison and no corresponding BBB signal. The circuit-level audit showed high rank preservation under low and medium errors but marked readout attenuation and no new advantage evidence. Known-signal calibration recovered the synthetic QRC and classical targets, with null false-positive rates at or below 5%. [paragraph break] The empirical contribution is a signal-calibrated, TDC-wide audit of one fixed stateless quantum feature-map family; the methodological contribution is an open matched-evaluation protocol. The hERG signal is a bounded candidate rather than a demonstrated mechanism of cardiotoxicity, and the B3DB result does not show that quantum methods are universally ineffective. These conclusions apply to the tested five-qubit amplitude-encoded, fixed-Hamiltonian reservoir with 15 Pauli readouts, a linear residual head, and exact simulation; other encodings, trainable circuits, larger reservoirs, and physical hardware require independent evaluation.",
+      "reason": "Separated the empirical finding from the methodological contribution and final scope."
+    },
+    {
+      "document": "English",
+      "location": "Data and Code Availability",
+      "before": "One paragraph combined source provenance and the software inventory.",
+      "after": "The official TDC archive is available as Harvard Dataverse file 4426004 with SHA-256 bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1. External hERG data are from Zenodo 5807719 and BBB data from B3DB. Source, label rules, deduplication, and overlap audits are included in the reproduction package. The MapLight reference and MIT license are retained, and upstream data licenses are listed with the archived materials. [paragraph break] The reproduction package contains processing scripts, five scaffold splits, five random maps per family, base configurations, all split-level predictions, gating, finite-shot, low-data, external decomposition and calibration, continuous-label transfer, independent pIC50 regression, simplified and circuit-level noise, bounded-family, TOST-sensitivity, effect-decomposition, capacity, and source-gradient results, statistical scripts, figure-generation code, and environment locks. The versioned code and result index are at https://github.com/575914291-source/qrc-admet-matched-evaluation. Official test labels were used only for scoring after configuration lock and were not used for training, map generation, joint weights, or gating.",
+      "reason": "Separated source provenance from software and result availability."
+    },
+    {
+      "document": "中文",
+      "location": "摘要",
+      "before": "联合校正、正交界分支、量子极端学习机、有限 shots ...",
+      "after": "文献报告的量子储层性能增益难以比较，因为匹配经典对照、多种随机实现、强基座模型与外部迁移检验很少同时出现。本文将模型定位为无状态量子极限学习机（QELM），评价一项覆盖 TDC 全端点的固定五比特幅度编码特征映射，并用 Morgan-ExtraTrees 与 MapLight-CatBoost 比较真实正交二次映射和随机 Fourier 特征。研究使用五个骨架划分，并对每族五个映射取平均以控制随机性。未门控量子特征在 ExtraTrees 的 6 个端点上更好、16 个端点上更差；在 CatBoost 的 3 个端点上更好、19 个端点上更差。Holm 校正后，没有端点显著更好，3 个端点显著更差。门控、联合 QRC-正交残差、低数据缩放、有限测量采样、模拟噪声和有限储层族搜索均未产生跨基座优势。外部迁移具有来源依赖性：在 293 个非重叠 hERG 分子上，门控 CatBoost-QRC 比相同规则门控的正交对照高 0.040 AUROC；但两种基座在 2,317 个 B3DB BBB 分子上均出现退化。hERG 差异还包含正交界分支的性能下降。连续标签排序和骨架不相交的 pIC50 敏感性分析均未通过联合多重校正。已知信号校准能够恢复 QRC 目标和经典目标，零信号假阳性率为 2.0-4.7%。Qiskit/Aer 读出保真度审计显示，误差下特征排序仍被保留，但幅度衰减，且未在误差特征上重新训练下游模型。化学空间分析未显示简单的来源效应。本文的贡献是针对这一特征映射族开展信号校准的 TDC 审计，并提供开放的匹配评价流程。结论受五比特幅度编码、15 个 Pauli 读出、线性残差头和精确态矢量模拟限制，并不否定其他编码、可训练线路、更大储层或物理硬件。",
+      "reason": "统一术语、删除重复的门控表述，并使贡献表述与最终英文稿一致。"
+    },
+    {
+      "document": "中文",
+      "location": "1 引言，第 1 段",
+      "before": "因此，不能通过与单一弱基座模型比较来推断量子特征的价值。",
+      "after": "仅与单一弱基线模型比较，无法分离量子特征的增量。",
+      "reason": "直接写出比较条件与推断范围，减少机械衔接。"
+    },
+    {
+      "document": "中文",
+      "location": "2.2 量子分子特征与结构对照",
+      "before": "Beaulieu 等研究了固定储层和小样本分子活性学习 [8]。Benson 等将 Hamiltonian 导出的读出与经典描述符拼接后输入 CatBoost；Mansour 等报告了 AqSolDB 上量子启发预处理的误差 [9,10]。QCS-ADME 关注线路搜索及模拟器到硬件的迁移 [11]。Jia 等比较了五比特幅度编码残差与真实正交界分支，但联合训练编码器和预测头，且未覆盖 ADMET [12]。近期一项覆盖 48 个任务的效价预测基准未发现量子分类器相对经典对照的全局优势 [27]。Floquet-QRC 工作使用序列图事件和受驱储层，其输入与动力学设置不同 [28]。表 1 汇总这些研究；其任务、量子组件和训练协议不能支持单一分数排名。",
+      "after": "Beaulieu 等研究了固定储层和小样本分子活性学习 [8]。Benson 等将 Hamiltonian 导出的读出与经典描述符拼接后输入 CatBoost；Mansour 等报告了 AqSolDB 上量子启发预处理的误差 [9,10]。QCS-ADME 关注线路搜索及模拟器到硬件的迁移 [11]。Jia 等比较了五比特幅度编码残差与真实正交界分支，但联合训练编码器和预测头，且未覆盖 ADMET [12]。近期一项覆盖 48 个任务的效价预测基准未发现量子分类器相对经典对照的全局优势 [27]。Floquet-QRC 工作使用序列图事件和受驱储层，其输入与动力学设置不同 [28]。表 1 汇总这些研究；其任务、量子组件和训练协议不能支持单一分数排名。 [paragraph break] 近期精确模拟比较得到相似的边界：两点关联读出相对容量匹配的多项式模型没有增加信息，反馈储层在同调参预算的循环基线下也失去表面优势 [32]。另一项匹配复杂度研究在混沌预测中发现储层行为稳定，但其任务类别较窄，基线面板也不完整 [33]。中性原子硬件储层已在更大规模上得到演示，但尚未用于 ADMET [34]。",
+      "reason": "把早期分子性质研究与新增的储层、硬件比较分开，降低单段负担。"
+    },
+    {
+      "document": "中文",
+      "location": "3 数据、划分与统计评价",
+      "before": "主要效应由未舍入预测计算：先对每个种子评分，再平均五个种子。对 AUROC、AUPRC 和 Spearman，效应为新方法减参照；对 MAE，效应为参照减新方法；正值始终表示改进。使用 1,000 次配对骨架 bootstrap 重采样得到 95% 区间，使用 1,999 次配对骨架置换开展主要检验，并在每个基座内对 22 个端点进行 Holm 校正 [18-20]。探索性 TOST 对 AUROC、AUPRC 和 Spearman 使用 0.01 的实际边界，对 MAE 使用基座 MAE 的 2%。这些边界是基准解释阈值，不是临床限制。TOST 包含两个单侧检验。仅当 90% 置信区间位于预设边界内，且 Holm 校正后的等价检验显著时，才称结果为实际等价。结果分为三种状态：Holm 显著负差表示显著退化，Holm 显著正差表示改进，显著等价检验表示实际统计等价；其余均为未决。等价不意味着机制相同或逐分子预测相同。为解释探索性 TOST，本文增加事后 seed 级功效诊断。对于单位尺度端点指标，五个 QRC 减对照 seed 效应的样本标准差中位数为 0.0205。按照 Knopov 和 Shvai [40] 的设计近似并忽略 item 级方差项，若要在 +/-0.01 边界内达到 80% 功效，约需 72 个独立划分种子。因此，主分析的五划分足以估计平均效应，但不能为单个端点提供高功效的等价证明。",
+      "after": "主要效应由未舍入预测计算：先对每个种子评分，再平均五个种子。对 AUROC、AUPRC 和 Spearman，效应为新方法减参照；对 MAE，效应为参照减新方法；正值始终表示改进。使用 1,000 次配对骨架 bootstrap 重采样得到 95% 区间，使用 1,999 次配对骨架置换开展主要检验，并在每个基座内对 22 个端点进行 Holm 校正 [18-20]。 [paragraph break] 探索性 TOST 对 AUROC、AUPRC 和 Spearman 使用 0.01 的实际边界，对 MAE 使用基座 MAE 的 2%。这些边界是基准解释阈值，不是临床限制。TOST 包含两个单侧检验。仅当 90% 置信区间位于预设边界内，且 Holm 校正后的等价检验显著时，才称结果为实际等价。结果分为三种状态：Holm 显著负差表示显著退化，Holm 显著正差表示改进，显著等价检验表示实际统计等价；其余均为未决。等价不意味着机制相同或逐分子预测相同。 [paragraph break] 事后随机种子级功效诊断表明，五个划分随机种子不足以在 +/-0.01 的指标边界内为单个端点提供高功效等价证明。TOST 结果仍属探索性，按等价计数报告，不作为确证性主张。",
+      "reason": "分开效应估计、TOST 判定与功效边界，并删除未进入归档分析的事后常数。"
+    },
+    {
+      "document": "中文",
+      "location": "3 数据、划分与统计评价",
+      "before": "3 数据与官方评价",
+      "after": "3 数据、划分与统计评价",
+      "reason": "使节标题覆盖数据、划分和统计评价三项内容。"
+    },
+    {
+      "document": "中文",
+      "location": "4.2 五比特无状态特征映射与匹配经典特征，命题 1",
+      "before": "命题 1。对于任意固定的一组 15 个对角 Pauli 可观测量 D_j 和任意固定酉矩阵 U，归一化 32 维实输入 a 的读出满足 q_j(a)=a^T A_j a，其中 A_j=Re(U^dagger D_j U)。因此，任意无截距线性读出均为实二次型 a^T M a+b：使用线性残差头的固定五比特储层特征映射属于由至多 15 个实二次型约束的模型族。证明可由展开 (Ua)^dagger D_j (Ua) 得到。该命题并不意味着 QRC 与某个真实正交映射等价，而是界定了当前编码和读出可用的函数类。它只定义名义函数族，不表示可解码性相同。Pauli 转移和读出方向分析表明，相同秩或观测量数量仍可能使不同任务相关信息具有不同的可访问性 [37-39]。因此，本文将真实正交族描述为在输入维数、名义读出维数、拟合参数数量、随机映射预算和调参预算上匹配，而不称其具有完全相同的容量。主分析还将读出固定在五个 Z 和全部十个 ZZ 观测量；优化测量算子和相互作用消融不属于主比较。",
+      "after": "命题 1。对于任意固定的一组 15 个对角 Pauli 可观测量 D_j 和任意固定酉矩阵 U，归一化 32 维实输入 a 的读出满足 q_j(a)=a^T A_j a，其中 A_j=Re(U^dagger D_j U)。这些 15 个特征的任意仿射读出均可写成 a^T M a+b，其中截距并入 b。使用线性残差头的固定五比特储层特征映射属于这一模型族，并受至多 15 个实二次型约束。证明可由展开 (Ua)^dagger D_j (Ua) 得到。该命题并不表示 QRC 与某个特定真实正交映射等价，而是界定当前编码和读出可用的函数类。它只定义名义函数族，不表示可解码性相同。Pauli 转移和读出方向分析表明，相同秩或观测量数量仍可能使不同任务相关信息具有不同的可访问性 [37-39]。本文将真实正交族描述为在输入维数、名义读出维数、拟合参数数量、随机映射预算和调参预算上匹配，而不称其具有完全相同的容量。主分析还将读出固定在五个 Z 和全部十个 ZZ 观测量；优化测量算子和相互作用消融不属于主比较。",
+      "reason": "删除“无截距却含 b”的自相矛盾，并区分名义函数族与可解码性。"
+    },
+    {
+      "document": "中文",
+      "location": "5.7 有限储层族搜索，第 2 段",
+      "before": "在八个代表端点上，ExtraTrees 中有 4 个端点选择 QRC 搜索、4 个选择正交搜索；CatBoost 中 2 个选择 QRC、5 个选择正交、1 个相对匹配正交搜索持平。没有 Holm 显著正向端点。baseline 配置仍是最常被选择的 QRC 设置（ExtraTrees 15/40，CatBoost 25/40），表明扩大特征族没有揭示新的稳定信号。相对无残差基座，计数分别为 4/4 和 2/5/1；VDss 在两种基座上均显著更差。这降低了“调参不足导致零结果”的可能。",
+      "after": "在八个代表端点上，ExtraTrees 有 4 个端点选择 QRC 搜索、4 个端点选择匹配正交搜索；CatBoost 有 2 个端点选择 QRC 搜索、5 个端点选择正交搜索、1 个端点持平。没有 Holm 显著正向端点。baseline（基线）配置仍是最常被选择的 QRC 设置（ExtraTrees 15/40，CatBoost 25/40），说明扩大特征族没有揭示新的稳定信号。相对无残差基线，相应计数仍为 ExtraTrees 4/4、CatBoost 2/5/1；VDss 在两种基线上均显著更差。这降低了“调参不足导致零结果”的可能。",
+      "reason": "修正循环表述并明确计数对象，未改动任何计数。"
+    },
+    {
+      "document": "中文",
+      "location": "5.8 独立连续 hERG 回归",
+      "before": "5.8 独立连续 pIC50 回归与电路级审计",
+      "after": "5.8 独立连续 hERG 回归",
+      "reason": "把独立回归与电路级审计分开。"
+    },
+    {
+      "document": "中文",
+      "location": "5.10 基准校准与来源诊断",
+      "before": "5.9 基准校准与来源诊断",
+      "after": "5.10 基准校准与来源诊断",
+      "reason": "电路审计拆分后的章节重新编号。"
+    },
+    {
+      "document": "中文",
+      "location": "5.10 基准校准与来源诊断",
+      "before": "已知信号校准恢复了预期几何。",
+      "after": "已知信号校准区分了三类特征来源。对 QRC 派生目标，QRC 减正交的测试表现中，ExtraTrees 为 +0.302、CatBoost 为 +0.190；两个基线中，预期 QRC 族均在 150/150 次模拟中排名第一（100.0%）。对正交派生目标，同一比较反转为 -0.332 和 -0.238，预期正交族在 ExtraTrees 和 CatBoost 上均为 149/150 次模拟排名第一（99.3%）。对零信号目标，双侧配对置换检验在 ExtraTrees 的 7/150 次模拟（4.7%）和 CatBoost 的 3/150 次模拟（2.0%）中显著。",
+      "reason": "补充模拟分母，使正文百分比和假阳性率可核查。"
+    },
+    {
+      "document": "中文",
+      "location": "6.1 受限二次映射解释了什么，第 1 段",
+      "before": "对于实幅度输入，固定演化后的每个 Z 或 ZZ 期望都可以精确计算为实对称二次型。训练侧标准化是仿射特征变换，因此线性读出只组合这些二次型并加入固定偏移。给定拟合参数后，量子残差可由一个实二次型和常数复现。该结构作用于归一化 32 维潜变量输入，而不作用于原始分子图。五个量子映射的秩均为 15，条件数中位数为 1.210；真实正交映射的条件数为 1.000。名义读出维数和拟合参数数量匹配，但有效秩、几何与任务相关可解码性未必相同。Pauli 转移和读出方向分析说明，仅凭秩不足以建立相同容量的结论 [37-39]。",
+      "after": "对于实幅度输入，固定演化后的每个 Z 或 ZZ 期望都是实对称二次型。训练侧标准化是仿射特征变换，因此线性读出只组合这些二次型并加入固定偏移。给定拟合参数后，量子残差可由归一化 32 维潜变量输入上的一个实二次型和常数复现。该结构作用于潜变量空间，而不作用于原始分子图。五个 QRC 读出矩阵的秩均为 15，条件数中位数为 1.210；真实正交读出矩阵的秩为 15，条件数为 1.000。在留出分子特征上，有效秩在 ExtraTrees 上为 14.10 对 14.62，在 CatBoost 上为 12.82 对 14.25；线性中心核对齐分别为 0.20 和 0.30。两类分支具有相同的输出维数和拟合参数数量、不同的几何，以及相近但不完全相同的有效特征容量。",
+      "reason": "区分读出矩阵秩、留出特征有效秩和中心核对齐，并避免把名义匹配写成容量相等。"
+    },
+    {
+      "document": "中文",
+      "location": "6.3 强基线与外部队列揭示了什么",
+      "before": "强基线比较提供了直接压力测试。MapLight-CatBoost 在 21/22 个端点上优于 Morgan-ExtraTrees，但 QRC 的相对优势没有在更强基线上保留。联合门控、有限测量采样、低数据缩放和模拟噪声均未揭示可迁移的量子修正。电路级审计同样显示读出幅度衰减，未增加优势证据。",
+      "after": "强基线比较提供了直接压力测试。MapLight-CatBoost 在 21/22 个端点上优于 Morgan-ExtraTrees，但 QRC 的相对优势没有在更强基线上保留。联合门控、有限测量采样、低数据缩放和模拟噪声均未揭示可迁移的量子修正。电路级审计同样显示读出幅度衰减，未增加优势证据。 [paragraph break] 外部结果仅支持 hERG 上的来源特异候选。同一方向也出现在 pIC50 排序迁移和独立回归中，但两者均未通过联合多重校正。B3DB logBB 迁移接近零，B3DB BBB 分类又出现显著退化，因此 hERG 结果不能跨来源推广。未来量子编码应在强基线上测试，并匹配输入维数、名义读出维数、拟合参数数量和候选预算；现有结果不支持将其视为通用 ADMET 描述符。两个队列用于考察不同化学空间与标签机制，并不对应单一部署场景 [44]。",
+      "reason": "把强基线压力测试与外部队列解释分成两段。"
+    },
+    {
+      "document": "中文",
+      "location": "6.4 化学空间与来源依赖，第 1 段",
+      "before": "本文增加描述性化学空间审计，以判断外部队列差异能否归因于来源邻近性。两个队列均已删除各自 TDC 归档中的精确规范身份。hERG 的 293 个分子中有 23 个（7.8%）保留了出现在 TDC 训练/验证中的 Bemis-Murcko 骨架；到 TDC 训练/验证分子的最近 Morgan Tanimoto 相似度中位数为 0.234，第 90 百分位为 0.423。B3DB BBB 的 2,317 个分子中有 562 个（24.3%）共享 TDC 训练/验证骨架，最近相似度中位数为 0.346，第 90 百分位为 0.722。B3DB 阳性率为 48.9%，完整 TDC BBB 归档为 76.4%；hERG 为 76.4%，TDC 为 68.9%。因此，两个队列在化学邻近性和标签组成上都不同于其 TDC 来源。",
+      "after": "描述性化学空间审计用于判断队列差异是否反映来源邻近性。两个队列均已删除各自 TDC 归档中的精确规范身份。hERG 的 293 个分子中有 23 个（7.8%）保留了出现在 TDC 训练/验证集中的 Bemis-Murcko 骨架；到 TDC 训练/验证分子的最近 Morgan Tanimoto 相似度（半径 2，2048 位）中位数为 0.234，第 90 百分位为 0.423。B3DB BBB 的 2,317 个分子中有 562 个（24.3%）共享 TDC 训练/验证骨架，最近相似度中位数为 0.346，第 90 百分位为 0.722。B3DB 阳性率为 48.9%，完整 TDC BBB 归档为 76.4%；hERG 阳性率为 76.4%，TDC 为 68.9%。两个队列在化学邻近性和标签组成上都不同于其 TDC 来源。",
+      "reason": "把背景数据改为直接的来源邻近性审计陈述。"
+    },
+    {
+      "document": "中文",
+      "location": "6.4 化学空间与来源依赖，第 2 段",
+      "before": "按上述化学分层重新评分现有留出预测，未支持用简单骨架重叠解释 hERG 信号。对 CatBoost，在 23 个共享训练/验证骨架的分子中，hERG 门控 QRC 减门控正交的 AUROC 效应为 -0.0026；在 270 个新骨架分子中为 +0.0452。最高最近相似度四分位的效应为 +0.0196，其余三个四分位为 +0.0494。相反，BBB 效应在共享骨架、新骨架和相似度分层中均为负。完整来源审计和 hERG 分层见补充表 S5、S6。这些描述性分层只定位效应出现的位置，不能控制来源、实验批次或标签定义，也不能建立因果化学机制。",
+      "after": "按化学分层重新评分现有留出预测，未支持用简单骨架重叠或相似度解释hERG 信号。对 CatBoost，在 23 个共享训练/验证骨架的分子中，hERG 门控 QRC 减门控正交的 AUROC 效应为 -0.0026；在 270 个新骨架分子中为 +0.0452。早期按最高相似度四分位分组时，最高组为 +0.0196，其余三组为 +0.0494。更细的四分位分析并不单调：CatBoost 和 ExtraTrees 在 Q3 均为正，但该方向未在每个相邻分组中保持。BBB 效应在共享骨架、新骨架和多数相似度分组中均为负。完整来源审计见补充表 S5、S6 和 S16。这些描述性分层只定位效应出现的位置，不能控制来源、实验批次或标签定义，也不能建立因果化学机制。",
+      "reason": "补充非单调分层结果，并把结论限定为效应位置而非化学机制。"
+    },
+    {
+      "document": "中文",
+      "location": "6.5 解释与复用",
+      "before": "hERG 点估计改善是候选信号 ... 本文贡献是 ...",
+      "after": "hERG 候选信号和 B3DB 负迁移都不能单独建立机制性或普遍的量子效应。本文综述的 QML-ADMET 研究使用不同的固定储层、Hamiltonian 派生特征、量子启发预处理、线路搜索或联合训练残差；其任务数、对照和外部迁移设置不支持同类等效比较。表 1 汇总设计差异，补充表 S4 给出扩展比较。本文的经验贡献是对一个固定无状态量子特征映射族开展信号校准的 TDC 全端点审计；方法贡献是提供可复用的最低评价流程：预设主要对照，匹配候选与映射预算，按骨架簇推断，跨端点校正，分别解释等价与优越性，并同时报告跨基线与跨来源结果。",
+      "reason": "删除重复的贡献句，并区分经验贡献与方法贡献。"
+    },
+    {
+      "document": "中文",
+      "location": "7 局限性",
+      "before": "两个长段混合了评价、执行和辅助分析限制。",
+      "after": "三类评价限制界定了结果的泛化范围。公开 TDC 测试集可能已被早期研究重复使用，并非前瞻性队列；骨架划分减少了实验室、时间和化学系列之间的近邻泄漏，但不能将其完全消除。低数据分析覆盖八个端点，96 条记录下限会改变最小端点的有效比例。主要外部比较包含两个分类队列，其来源和标签构造不同 [3-5]。 [paragraph break] 执行边界同样明确。精确态矢量计算用于隔离固定线路的表达行为，但不评价物理门误差、读出串扰、连接性或调度。有限测量采样分析对每个 Pauli 期望独立采样；简化去极化模型省略门专用误差、泄漏、串扰和物理调度。Qiskit/Aer 审计增加了转译门去极化和读出翻转，但仍使用固定合成误差参数，且未在电路含噪特征上重新训练完整预测器。本文未测试可训练线路、任务条件幅度编码或其他 PCA 维数。 [paragraph break] 辅助分析的适用范围更窄。连续标签迁移对二分类模型输出排序，不是独立训练的回归评价。单独 pIC50 回归在固定协议下使用 214 个测试分子和 155 个骨架，统计功效有限。B3DB logBB 仅有 613/2,317 个非重叠分子可用，且类别比例高度不平衡。化学空间图使用线性指纹投影和三个基本描述符，不是完整适用域模型；TOST 边界是探索性基准阈值，而非临床或监管限值 [21]。随机映射敏感性为每族五个实现。已知信号校准使用由受测特征族生成的合成目标，只能说明这些设计的可检测性，并不覆盖所有可能的非线性信号。当前比较适用于五比特幅度编码、固定 Hamiltonian 储层、15 个 Pauli 读出、线性残差头和精确模拟；其他编码、可训练线路、更大储层和物理硬件需要独立评价。",
+      "reason": "按限制所约束的推断类型分成评价、执行和辅助分析三段。"
+    },
+    {
+      "document": "中文",
+      "location": "8 结论",
+      "before": "在 22 个官方 TDC ADMET 端点上，固定五比特无状态储层残差相对在输入维数、名义读出维数、拟合参数数量、随机映射预算和调参预算上匹配的真实正交二次映射，没有显示稳定增量。该结果在 Morgan-ExtraTrees 和更强的 MapLight-CatBoost 基线上均成立。验证门控把部分有害残差退回经典基线，却未产生相对门控经典对照的稳定优势。联合门控、低数据缩放、有限测量采样和模拟退相干均未推翻该结论。外部 hERG 迁移提供了 CatBoost 特异候选信号，而 B3DB BBB 显示显著负迁移。连续标签排序迁移和骨架不相交的 pIC50 敏感性分析只显示未校正的弱 CatBoost/hERG 方向，既无 Holm 显著比较，也没有相应 BBB 信号。电路级审计在低、中误差下保持较高秩，但读出幅度明显衰减，且未增加优势证据。已知信号校准恢复了合成的QRC 与经典目标，零信号假阳性率不超过 5%。",
+      "after": "在 22 个官方 TDC ADMET 端点上，固定五比特无状态储层残差相对在输入维数、名义读出维数、拟合参数数量、随机映射预算和调参预算上匹配的真实正交二次映射，没有显示稳定增量。该结果在 Morgan-ExtraTrees 和更强的 MapLight-CatBoost 基线上均成立。验证门控把部分有害残差退回经典基线，却未产生相对门控经典对照的稳定优势。联合门控、低数据缩放、有限测量采样和模拟退相干均未推翻该结论。外部 hERG 迁移提供了 CatBoost 特异候选信号，而 B3DB BBB 显示显著负迁移。连续标签排序迁移和骨架不相交的 pIC50 敏感性分析只显示未校正的弱 CatBoost/hERG 方向，既无 Holm 显著比较，也没有相应 BBB 信号。电路级审计在低、中误差下保持较高秩，但读出幅度明显衰减，且未增加优势证据。已知信号校准恢复了合成的QRC 与经典目标，零信号假阳性率不超过 5%。 [paragraph break] 本文的经验贡献是对一个固定无状态量子特征映射族开展信号校准的 TDC 全端点审计；方法贡献是提供开放的匹配评价流程。hERG 信号是有边界的候选，而不是已建立的心脏毒性机制；B3DB 结果也不表示量子方法在 ADMET 中普遍无效。结论适用于所测试的五比特幅度编码、固定 Hamiltonian 储层、15 个 Pauli 读出、线性残差头和精确模拟；其他编码、可训练线路、更大储层和物理硬件需要独立评价。",
+      "reason": "拆开经验结果与方法贡献，并集中保留一次适用边界。"
+    },
+    {
+      "document": "中文",
+      "location": "数据与代码可用性",
+      "before": "一段同时说明数据来源和软件清单。",
+      "after": "官方 TDC 归档可由 Harvard Dataverse 文件 4426004 获取，SHA-256 为 bd0005246cb6f1672333c28ad202112a8bf071ab65d847848715030308faf1f1。外部 hERG 数据来自 Zenodo 5807719，BBB 数据来自 B3DB。数据来源、标签规则、去重和重叠审计包含在复现包中。MapLight 参照实现和 MIT 许可证被保留，上游数据许可证随归档材料一并列出。 [paragraph break] 复现包包含处理脚本、五个骨架划分、每族五个随机映射、基线配置、全部逐划分预测、门控、有限测量采样、低数据、外部效应分解与校准、连续标签迁移、独立 pIC50 回归、简化和电路级噪声、有限特征族、TOST 敏感性、效应分解、容量和来源梯度结果，以及统计脚本、绘图代码和环境锁文件。版本化代码和结果索引见 https://github.com/575914291-source/qrc-admet-matched-evaluation。官方测试标签仅在配置锁定后用于评分，未用于训练、映射生成、联合权重或门控。",
+      "reason": "把数据来源与软件、结果清单分开。"
+    }
+  ]
+}

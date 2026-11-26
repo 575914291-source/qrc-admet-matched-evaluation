@@ -125,7 +125,12 @@ def main() -> int:
             / "archives"
             / "admet_group_4426004.zip"
         ),
-        "manuscript": "论文修订稿_v2_TDC完整实验.docx",
+        "manuscript": "Final_Manuscript_EN.docx",
+        "translations": {
+            "en": "Final_Manuscript_EN.docx",
+            "zh": "Final_Manuscript_ZH.docx",
+        },
+        "revision_report": "Final_Revision_Report.docx",
         "repository": (
             "https://github.com/575914291-source/"
             "qrc-admet-matched-evaluation"
